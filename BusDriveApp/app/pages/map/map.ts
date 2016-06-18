@@ -26,7 +26,7 @@ export class MapPage {
         this.getLineStopsCoordinates();
         this.getLineStopsNames();
         this.events.subscribe("acceptedCustomStops", acceptedcustomstops => {
-            this.acceptedcustomstops = acceptedcustomstops[0];      // warum wird die liste nochmals in eine liste gepackt ????
+            this.acceptedcustomstops = acceptedcustomstops[0];
             this.map.loadCustomStops(this.acceptedcustomstops);
         })
         this.events.subscribe("mapLoaded", () => {

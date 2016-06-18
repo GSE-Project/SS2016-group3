@@ -82,7 +82,7 @@
                         <h2>Name: {{item[1]}}</h2>
                         <p>Abholzeit: {{item[2]}} </p>
                         <p>Anzahl: {{item[3]}}</p>
-                        <p>Adresse: {{item[4]}}</p>
+                        <p (click)="showAcceptedCustomStop(item)">Adresse: {{item[4]}}</p>
                         <p>
                             <img src="img/wheelchair.png" *ngIf="item[5][0]" width="10%" height="auto">
                             <img src="img/luggage.png" *ngIf="item[5][1]" width="10%" height="auto">

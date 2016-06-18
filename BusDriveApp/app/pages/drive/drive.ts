@@ -26,13 +26,25 @@ export class DrivePage {
 
     constructor(private nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, public events: Events) {
         this.selectedbusid = navParams.data[0]
-
         this.getBusSeatsNumber();
         this.getLineStopsNames();
         this.nextStop = this.linestopsnames[0];
         this.events.subscribe("newCustomStops", () => {
             this.getCustomStops();
-        })
+        });
+        this.events.subscribe("accept", customstop => {
+            this.acceptCustomStop(customstop[0])
+        });
+        this.events.subscribe("decline", customstop => {
+            this.declineCustomStop(customstop[0])
+        });
+        this.events.subscribe("complete", customstop => {
+            this.completeAcceptedCustomStop(customstop[0])
+        });
+        this.events.subscribe("noshow", customstop => {
+            this.noShowAcceptedCustomStop(customstop[0])
+        });
+
 
         //-----Language-----
         this.passengers = language.passengers;
@@ -138,7 +150,7 @@ export class DrivePage {
         this.busdriveinterface.postCustomStopStatus(customstop[0], "accepted");
         this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
     }
-    
+
     /**
      * @param customStop custom stop
      * declines a customStop
@@ -186,6 +198,22 @@ export class DrivePage {
             if (this.linecustomstopsall[index] == customstop) {
                 this.nav.push(CustomStopPage, {
                     showcustomstop: customstop,
+                    accepted: false
+                });
+            }
+        }
+    }
+
+    /**
+     * shows map fragment and all infromation of the accepted customstop
+     */
+    showAcceptedCustomStop(customstop) {
+        console.log("-> CustomStopPage");
+        for (let index = 0; index < this.acceptedcustomstops.length; index++) {
+            if (this.acceptedcustomstops[index] == customstop) {
+                this.nav.push(CustomStopPage, {
+                    showcustomstop: customstop,
+                    accepted: true
                 });
             }
         }

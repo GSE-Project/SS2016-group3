@@ -23,4 +23,20 @@
   <map></map>
 </ion-content>
 <ion-content>
+  <button primary *ngIf="accepted" (click)="completeAcceptedCustomStop()">
+    <ion-icon name="done-all"></ion-icon>
+    Ausgeführt
+  </button>
+  <button primary *ngIf="accepted" (click)="noShowAcceptedCustomStop()">
+    <ion-icon name="sad"></ion-icon>
+    Kein Erscheinen
+  </button>
+  <button primary *ngIf="!accepted" (click)="acceptCustomStop()">
+    <ion-icon name="checkmark"></ion-icon>
+    Akzeptieren
+  </button>
+  <button primary *ngIf="!accepted" (click)="declineCustomStop()">
+    <ion-icon name="close"></ion-icon>
+    Ablehnen
+  </button>
 </ion-content>
