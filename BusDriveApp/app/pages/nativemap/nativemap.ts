@@ -15,8 +15,7 @@ export class NativeMapPage {
     private linestopscoordinates = [];
     private linestopsnames = [];
     private lineroutecoordinates = [];
-    private linecustomstopscoordinates = [];
-    private linecustomstopsnames = [];
+    private acceptedcustomstops= [];
 
     //-----Language-----
     public title;
@@ -25,6 +24,10 @@ export class NativeMapPage {
         this.getLineRouteCoordinates();
         this.getLineStopsCoordinates();
         this.getLineStopsNames();
+        this.events.subscribe("acceptedCustomStops", acceptedcustomstops => {
+            this.acceptedcustomstops = acceptedcustomstops[0];
+            this.nativemap.loadCustomStops(this.acceptedcustomstops);
+        })
 
         //-----Language-----
         this.title = language.mapTitle;
@@ -45,20 +48,6 @@ export class NativeMapPage {
     }
 
     /**
-     * gets the coordinates of customstops
-     */
-    getLineCustomStopsCoordinates() {
-        this.linecustomstopscoordinates = this.busdriveinterface.getLineCustomStopsCoordinates();
-    }
-
-    /**
-     * gets the names of customstops
-     */
-    getLineCustomStopsNames() {
-        this.linecustomstopsnames = this.busdriveinterface.getLineCustomStopsNames();
-    }
-
-    /**
      * gets the coordinates of lineroute
      */
     getLineRouteCoordinates() {
@@ -69,6 +58,7 @@ export class NativeMapPage {
      * shows the line ( stops and route ) on the map 
      */
     showLine() {
+        this.nativemap.loadRoute(this.lineroutecoordinates);
         this.nativemap.loadStops(this.linestopscoordinates, this.linestopsnames);
     }
 

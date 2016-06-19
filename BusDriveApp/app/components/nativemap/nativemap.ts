@@ -85,7 +85,7 @@ export class NativeMap implements OnDestroy {
      */
     loadStops(linestopscoordinates, linestopsnames) {
         for (let index = 0; index < linestopscoordinates.length; index++) {
-            let stopLatLng = new GoogleMapsLatLng(linestopscoordinates[index][1].toString(), linestopscoordinates[index][0].toString());
+            let stopLatLng = new GoogleMapsLatLng(linestopscoordinates[index][1], linestopscoordinates[index][0]);
             this.map.addMarker({
                 'position': stopLatLng,
                 'title': linestopsnames[index]
@@ -93,7 +93,21 @@ export class NativeMap implements OnDestroy {
         };
     }
 
-
+    /**
+     * loads the custumstops and shows them as a marker on the map
+     * @param acceptedcustomstops list of accepted customstops
+     */
+    loadCustomStops(acceptedcustomstops) {
+        for (let index = 0; index < acceptedcustomstops.length; index++) {
+            let customstopLatLng = new GoogleMapsLatLng(acceptedcustomstops[index][6][1], acceptedcustomstops[index][6][0]);
+            let customstopmarker = {
+                'position':customstopLatLng,
+                'title': acceptedcustomstops[index][1],
+                'icon': 'blue',
+            }
+            this.map.addMarker(customstopmarker);
+        };
+    }
 
     ngOnDestroy() {
         while (this.mapElement.firstChild) {
