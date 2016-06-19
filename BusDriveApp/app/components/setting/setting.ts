@@ -1,4 +1,4 @@
-import {Page, Storage, LocalStorage, Events} from 'ionic-angular';
+import {Page, Storage, LocalStorage, Events, Alert, App} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {Insomnia, BackgroundMode} from 'ionic-native';
 import {language, de, en} from "../languages/languages";
@@ -24,7 +24,7 @@ export class SettingPage {
   public newServerAdressTrans;
   public settingTrans;
 
-  constructor(public events: Events) {
+  constructor(private app: App, public events: Events) {
     this.settings = window.localStorage;
     this.serverURL = this.getServerURL();
     this.lang = this.getLanguage();
@@ -40,6 +40,39 @@ export class SettingPage {
     this.newServerAdressTrans = language.newServerTrans;
     this.settingTrans = language.settingTrans;
 
+  }
+
+  /**
+   * creats prompt alert for new server URL
+   */
+  promptServerURL() {
+    let prompt = Alert.create({
+      title: this.newServerAdressTrans,
+      message: "Enter a url for the server",
+      inputs: [
+        {
+          name: 'URL',
+          placeholder: 'URL'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Add',
+          handler: data => {
+            this.addToServerURLList(data.URL);
+            console.log('Add clicked');
+          }
+        }
+      ]
+    });
+    let nav = this.app.getActiveNav();
+    nav.present(prompt);
   }
 
   /**

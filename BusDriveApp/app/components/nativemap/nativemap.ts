@@ -11,6 +11,7 @@ export class NativeMap implements OnDestroy {
     private map;
     private mapElement;
     private mapElementId;
+    private customstopsmarkers = [];
 
     constructor(private element: ElementRef) {
 
@@ -98,14 +99,20 @@ export class NativeMap implements OnDestroy {
      * @param acceptedcustomstops list of accepted customstops
      */
     loadCustomStops(acceptedcustomstops) {
+        for (let i = 0; i < this.customstopsmarkers.length; i++) {
+            this.customstopsmarkers[i].remove();
+            console.log("löschen "+ this.customstopsmarkers[i])
+        }
         for (let index = 0; index < acceptedcustomstops.length; index++) {
             let customstopLatLng = new GoogleMapsLatLng(acceptedcustomstops[index][6][1], acceptedcustomstops[index][6][0]);
-            let customstopmarker = {
-                'position':customstopLatLng,
+            this.map.addMarker({
+                'position': customstopLatLng,
                 'title': acceptedcustomstops[index][1],
-                'icon': 'blue',
-            }
-            this.map.addMarker(customstopmarker);
+                'icon': 'blue'
+            }, function(marker) {
+                this.customstopsmarkers.push(marker);
+            });
+                            console.log("marker "+ this.customstopsmarkers.length)
         };
     }
 

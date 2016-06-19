@@ -21,11 +21,7 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>{{newServerAdressTrans}}</ion-label>
-      <ion-input [(ngModel)]="url" type="url" id="serverURL">{{serverURL}}</ion-input>
-    </ion-item>
-    <ion-item>
-      <button large class="button button-block" (click)="addToServerURLList(url)">
+      <button large class="button button-block" (click)="promptServerURL()">
         <ion-icon name="add"></ion-icon>
       </button>
       </ion-item>

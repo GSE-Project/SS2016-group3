@@ -48,19 +48,21 @@
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
     "cordova-plugin-geolocation",
-    "ionic-plugin-keyboard",
     "cordova-plugin-inappbrowser",
     "cordova-plugin-appavailability",
     {
       "variables": {
         "API_KEY_FOR_ANDROID": "AIzaSyBuoI32XuVQR3B5e1F1Or4TQ0LA4739oSQ"
       },
-      "locator": "cordova-plugin-googlemaps",
-      "id": "plugin.google.maps"
+      "locator": "https://github.com/phonegap-googlemaps-plugin/cordova-plugin-googlemaps",
+      "id": "cordova-plugin-googlemaps"
     },
     "de.appplant.cordova.plugin.local-notification",
     "cordova-plugin-insomnia",
-    "cordova-plugin-background-mode"
+    "cordova-plugin-background-mode",
+    "cordova-plugin-compat",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-app-event"
   ],
   "cordovaPlatforms": []
 }
