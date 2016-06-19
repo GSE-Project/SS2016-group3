@@ -91,11 +91,13 @@
                             <img src="img/child.png" *ngIf="item[5][4]" width="10%" height="auto">
                         </p>
                     </ion-item>
-                    <ion-item-options>
+                    <ion-item-options side="right">
                         <button primary (click)="completeAcceptedCustomStop(item)">
                             <ion-icon name="done-all"></ion-icon>
                                  Ausgeführt
                         </button>
+                    </ion-item-options>
+                    <ion-item-options side="left">
                         <button primary (click)="noShowAcceptedCustomStop(item)">
                             <ion-icon name="sad"></ion-icon>
                                 Kein Erscheinen
@@ -103,8 +105,6 @@
                     </ion-item-options>
                 </ion-item-sliding>
             </ion-list>
-
-
 
         </form>
 
@@ -123,11 +123,13 @@
                         <img src="img/child.png" *ngIf="item[5][4]" width="10%" height="auto">
                     </p>
                 </ion-item>
-                <ion-item-options>
+                <ion-item-options side="right">
                     <button primary (click)="acceptCustomStop(item)">
                             <ion-icon name="checkmark"></ion-icon>
                                  Akzeptieren
                         </button>
+                </ion-item-options>
+                <ion-item-options side="left">
                     <button primary (click)="declineCustomStop(item)">
                             <ion-icon name="close"></ion-icon>
                                 Ablehnen
