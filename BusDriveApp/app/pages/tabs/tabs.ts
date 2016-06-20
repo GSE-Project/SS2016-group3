@@ -1,4 +1,4 @@
-import {Page, Alert, NavController, NavParams, MenuController, Events, Platform} from 'ionic-angular';
+import {Page, Alert, ActionSheet, NavController, NavParams, MenuController, Events, Platform} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {HomePage} from '../home/home';
 import {DrivePage} from '../drive/drive';
@@ -150,7 +150,7 @@ export class TabsPage {
      * alert when leaving, if you click "OK" GUI will change to HomePage and you will stop sending, if you click "Abbrechen" nothing will happen.
      */
     ionViewWillLeave() {
-        let alert = Alert.create({
+        let alert = ActionSheet.create({
             title: language.alertTitle,
             buttons: [
                 {

@@ -16,6 +16,7 @@ export class DrivePage {
     private drive: string = "driving";
     private totalbusseats: number;
     private newcustomstopscounter: number;
+    private newcustomstopsnumber: number;
     private linestopsnames = [];
     private linecustomstopsall = [];
     private acceptedcustomstops = [];
@@ -91,10 +92,7 @@ export class DrivePage {
         if (newlinecustomstopsall.length > 0) {
             if (this.linecustomstopsall.length > 0) {
                 let newcustomstopsid: number[] = [];
-                this.newcustomstopscounter = Math.abs(this.linecustomstopsall.length - newlinecustomstopsall.length);
-                if (this.newcustomstopscounter === 0) {
-                    this.newcustomstopscounter = undefined;
-                }
+                this.newcustomstopsnumber = Math.abs(this.linecustomstopsall.length - newlinecustomstopsall.length);
                 this.linecustomstopsall.push(...newlinecustomstopsall);
                 for (let i = 0; i < this.linecustomstopsall.length; i++) {
                     newcustomstopsid.push(this.linecustomstopsall[i][0])
@@ -110,28 +108,22 @@ export class DrivePage {
                     }
                 }
                 this.linecustomstopsall = newcustomstops;
+                this.newcustomstopscounter = this.linecustomstopsall.length;
             }
             else {
                 this.linecustomstopsall.push(...newlinecustomstopsall);
                 this.newcustomstopscounter = this.linecustomstopsall.length;
+                this.newcustomstopsnumber = this.linecustomstopsall.length;
             }
-            if (this.newcustomstopscounter > 0) {
+            if (this.newcustomstopsnumber > 0) {
                 LocalNotifications.schedule({
                     id: 1,
-                    text: this.newcustomstopscounter + ' new Custom Stops',
+                    text: this.newcustomstopsnumber + ' new Custom Stops',
                 });
-                this.nav.present(ActionSheet.create({
-                    title: this.newcustomstopscounter + ' new Custom Stops',
-                    buttons: [
-                        {
-                            text: 'Anzeigen',
-                            handler: () => {
-                                this.drive = "customstops";
-                                this.nav.parent.select(0);
-                                this.resetNewCustomStopsCounter();
-                                console.log('Anzeigen');
-                            }
-                        }]
+                this.nav.present(Toast.create({
+                    message: this.newcustomstopsnumber + ' new Custom Stops',
+                    duration: 7000,
+                    position: "top"
                 }))
             }
         }
@@ -147,6 +139,10 @@ export class DrivePage {
         if (posnumber > -1) {
             this.linecustomstopsall.splice(posnumber, 1)
         }
+        this.newcustomstopscounter = this.linecustomstopsall.length;
+        if (this.newcustomstopscounter === 0) {
+            this.newcustomstopscounter = undefined;
+        }
         this.busdriveinterface.postCustomStopStatus(customstop[0], "accepted");
         this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
     }
@@ -159,6 +155,10 @@ export class DrivePage {
         let posnumber = this.linecustomstopsall.indexOf(customstop);
         if (posnumber > -1) {
             this.linecustomstopsall.splice(posnumber, 1)
+        }
+        this.newcustomstopscounter = this.linecustomstopsall.length;
+        if (this.newcustomstopscounter === 0) {
+            this.newcustomstopscounter = undefined;
         }
         this.busdriveinterface.postCustomStopStatus(customstop[0], "rejected");
     }
@@ -222,8 +222,7 @@ export class DrivePage {
     /**
      * reset newcustomstops counter
      */
-    resetNewCustomStopsCounter() {
-        this.newcustomstopscounter = undefined;
+    resetLocalNotifications() {
         LocalNotifications.clear(1);
     }
 
