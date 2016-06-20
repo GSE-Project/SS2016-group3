@@ -1,5 +1,5 @@
 import {Events} from 'ionic-angular';
-import {Component, ElementRef, AfterViewInit} from '@angular/core';
+import {Component, ElementRef, AfterViewInit, OnDestroy} from '@angular/core';
 import {Geolocation} from 'ionic-native';
 
 @Component({
@@ -7,7 +7,7 @@ import {Geolocation} from 'ionic-native';
     templateUrl: 'build/components/map/map.html'
 })
 
-export class Map implements AfterViewInit {
+export class Map implements AfterViewInit, OnDestroy {
     private map: google.maps.Map;
     private mapElement;
     private customstopsmarkers = [];
@@ -146,5 +146,11 @@ export class Map implements AfterViewInit {
      */
     ngAfterViewInit() {
         this.loadMap();
+    }
+
+    ngOnDestroy() {
+        while (this.mapElement.firstChild) {
+            this.mapElement.removeChild(this.mapElement.firstChild);
+        }
     }
 }

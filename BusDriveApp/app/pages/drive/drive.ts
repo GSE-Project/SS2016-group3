@@ -46,12 +46,11 @@ export class DrivePage {
             this.noShowAcceptedCustomStop(customstop[0])
         });
 
-
         //-----Language-----
         this.passengers = language.passengers;
         this.title = language.driveTitle;
-
     }
+    
     /**
      * increases the counter of the passengers
      */
@@ -123,7 +122,10 @@ export class DrivePage {
                 this.nav.present(Toast.create({
                     message: this.newcustomstopsnumber + ' new Custom Stops',
                     duration: 7000,
-                    position: "top"
+                    position: "top",
+                    showCloseButton: true,
+                    closeButtonText: "Ok",
+                    dismissOnPageChange: true
                 }))
             }
         }

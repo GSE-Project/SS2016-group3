@@ -66,4 +66,3 @@ export class MapPage {
         this.map.loadStops(this.linestopscoordinates, this.linestopsnames);
     }
 }
-

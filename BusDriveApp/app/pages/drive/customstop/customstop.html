@@ -9,6 +9,7 @@
 </ion-content>
 
 <ion-content>
+  <ion-item>
     <h2>{{customstop[1]}}</h2>
     <p>Abholzeit: {{customstop[2]}} </p>
     <p>Anzahl: {{customstop[3]}}</p>
@@ -20,6 +21,7 @@
       <img src="img/baby.png" *ngIf="customstop[5][3]" width="10%" height="auto">
       <img src="img/child.png" *ngIf="customstop[5][4]" width="10%" height="auto">
     </p>
+  </ion-item>
   <button primary *ngIf="accepted" (click)="completeAcceptedCustomStop()">
     <ion-icon name="done-all"></ion-icon>
     Ausgeführt

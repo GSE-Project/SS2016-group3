@@ -28,6 +28,9 @@ export class NativeMapPage {
             this.acceptedcustomstops = acceptedcustomstops[0];
             this.nativemap.loadCustomStops(this.acceptedcustomstops);
         })
+        this.events.subscribe("mapLoaded", () => {
+            this.showLine();
+        });
 
         //-----Language-----
         this.title = language.mapTitle;
@@ -62,14 +65,4 @@ export class NativeMapPage {
         this.nativemap.loadStops(this.linestopscoordinates, this.linestopsnames);
     }
 
-    onPageDidEnter() {
-        setTimeout(() => {
-            this.nativemap.loadMap();
-        }, 250);
-        setTimeout(() => {
-            this.nativemap.loadStops(this.linestopscoordinates, this.linestopsnames);
-            this.nativemap.loadRoute(this.lineroutecoordinates);
-        }, 2500);
-    }
 }
-

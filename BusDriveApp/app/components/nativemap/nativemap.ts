@@ -1,19 +1,19 @@
 import {Component, ElementRef, AfterViewInit, OnDestroy} from '@angular/core';
-import {Geolocation} from 'ionic-native';
-import {GoogleMap, GoogleMapsEvent, GoogleMapsMarker, GoogleMapsLatLng, GoogleMapsPolyline} from 'ionic-native';
+import {Events} from 'ionic-angular';
+import {Geolocation, GoogleMap, GoogleMapsEvent, GoogleMapsMarker, GoogleMapsLatLng, GoogleMapsPolyline} from 'ionic-native';
 
 @Component({
     selector: 'nativemap',
     templateUrl: 'build/components/nativemap/nativemap.html'
 })
 
-export class NativeMap implements OnDestroy {
+export class NativeMap implements OnDestroy, AfterViewInit {
     private map;
     private mapElement;
     private mapElementId;
     private customstopsmarkers = [];
 
-    constructor(private element: ElementRef) {
+    constructor(private element: ElementRef, public events: Events) {
 
     }
 
@@ -22,25 +22,29 @@ export class NativeMap implements OnDestroy {
      */
     loadMap() {
         this.mapElementId = 'map' + new Date().getTime();
-        this.mapElement = this.element.nativeElement.children[0];
+        this.mapElement = this.element.nativeElement;
         this.mapElement.setAttribute('id', this.mapElementId);
-        this.map = new GoogleMap(this.mapElementId);
-        this.map.setOptions({
+        let mapoptions = {
             'backgroundColor': 'white',
             'controls': {
                 'compass': true,
                 'myLocationButton': true,
-                'zoom': true // Only for Android
+                'zoom': true
             },
             'gestures': {
                 'scroll': true,
                 'tilt': true,
                 'rotate': true,
                 'zoom': true
-            },
+            }
+        }
+        this.map = new GoogleMap(this.mapElementId, mapoptions);
+        this.map.clear();
+        this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
+            this.centerCamera();
+            this.events.publish("mapLoaded");
+            console.log("successfully loaded map");
         });
-        this.centerCamera();
-        console.log("successfully loaded map");
     }
 
     /**
@@ -101,7 +105,7 @@ export class NativeMap implements OnDestroy {
     loadCustomStops(acceptedcustomstops) {
         for (let i = 0; i < this.customstopsmarkers.length; i++) {
             this.customstopsmarkers[i].remove();
-            console.log("löschen "+ this.customstopsmarkers[i])
+            console.log("löschen " + this.customstopsmarkers[i])
         }
         for (let index = 0; index < acceptedcustomstops.length; index++) {
             let customstopLatLng = new GoogleMapsLatLng(acceptedcustomstops[index][6][1], acceptedcustomstops[index][6][0]);
@@ -109,10 +113,10 @@ export class NativeMap implements OnDestroy {
                 'position': customstopLatLng,
                 'title': acceptedcustomstops[index][1],
                 'icon': 'blue'
-            }, function(marker) {
+            }, function (marker) {
                 this.customstopsmarkers.push(marker);
             });
-                            console.log("marker "+ this.customstopsmarkers.length)
+            console.log("marker " + this.customstopsmarkers.length)
         };
     }
 
@@ -120,5 +124,9 @@ export class NativeMap implements OnDestroy {
         while (this.mapElement.firstChild) {
             this.mapElement.removeChild(this.mapElement.firstChild);
         }
+    }
+
+    ngAfterViewInit() {
+        this.loadMap();
     }
 }
