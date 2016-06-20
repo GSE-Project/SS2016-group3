@@ -39,6 +39,7 @@ export class CustomStops {
         for (let i = 0; i < this.customstops.length; i++) {
             let assistance = [false, false, false, false, false];
             if (this.customstops[i].info.assistance.length > 0) {
+                this.customstops[i].info.assistance.sort();
                 for (let j = 0; j < this.customstops[i].info.assistance.length; j++) {
                     if (this.customstops[i].info.assistance[j] === 1) {
                         assistance.splice(0, 1, true);

@@ -2,91 +2,85 @@
     <ion-title>{{title}}</ion-title>
 </ion-navbar>
 
-
-
-
-
-
-
 <ion-pane primary class="drive">
-    
-            <table width="100%">
-                <colgroup>
-                    <col width="20%">
-                    <col width="60%">
-                    <col width="20%">
-                </colgroup>
 
-                <tr>
-                    <td colspan="3" class="text" align="center"  style="height:15px">
-                        <p>{{passengers}}</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="left">
-                        <div class="buttonleft">
-                            <button large (click)="decreasePassengers()" class="button_drive">
+    <table width="100%">
+        <colgroup>
+            <col width="20%">
+            <col width="60%">
+            <col width="20%">
+        </colgroup>
+
+        <tr>
+            <td colspan="3" class="text" align="center" style="height:15px">
+                <p>{{passengers}}</p>
+            </td>
+        </tr>
+        <tr>
+            <td align="left">
+                <div class="buttonleft">
+                    <button large (click)="decreasePassengers()" class="button_drive">
                                     <ion-icon name="remove"></ion-icon>
                                 </button>
-                        </div>
-                    </td>
-                    <td class="text">
-                        <h2>{{counter}} / {{totalbusseats}}</h2>
-                    </td>
-                    <td align="right">
-                        <div class="buttonright">
-                            <button large (click)="increasePassengers()" class="button_drive">
+                </div>
+            </td>
+            <td class="text">
+                <h2>{{counter}} / {{totalbusseats}}</h2>
+            </td>
+            <td align="right">
+                <div class="buttonright">
+                    <button large (click)="increasePassengers()" class="button_drive">
                                      <ion-icon name="add"></ion-icon>
                                 </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3" class="text">
-                        <h5 margin="0px">Nächste Haltestelle:</h5>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="left">
-                        <div class="buttonleft">
-                            <button large (click)="showPrevioustStop()" class="button_drive">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="text">
+                <h5 margin="0px">Nächste Haltestelle:</h5>
+            </td>
+        </tr>
+        <tr>
+            <td align="left">
+                <div class="buttonleft">
+                    <button large (click)="showPrevioustStop()" class="button_drive">
                                     <ion-icon name="arrow-back"></ion-icon>
                                 </button>
-                        </div>
-                    </td>
-                    <td class="text">
-                        <h2>{{nextStop}} </h2>
-                    </td>
-                    <td align="right">
-                        <div class="buttonright">
-                            <button large (click)="showNextStop()" class="button_drive">
+                </div>
+            </td>
+            <td class="text">
+                <h2>{{nextStop}} </h2>
+            </td>
+            <td align="right">
+                <div class="buttonright">
+                    <button large (click)="showNextStop()" class="button_drive">
                                     <ion-icon name="arrow-forward"></ion-icon>
                                 </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3" class="text">
-                       <ion-toolbar>
-    <ion-segment [(ngModel)]="drive">
-        <ion-segment-button value="driving">
-            Accepted custom stops
-        </ion-segment-button>
-        <ion-segment-button value="customstops" (click)="resetNewCustomStopsCounter()">
-            <ion-badge secondary>{{newcustomstopscounter}}</ion-badge>
-            New Custom Stops
-        </ion-segment-button>
-    </ion-segment>
-</ion-toolbar>
-                    </td>
-                </tr>
-            </table>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="text">
+                <ion-toolbar>
+                    <ion-segment [(ngModel)]="drive">
+                        <ion-segment-button value="driving">
+                            Accepted custom stops
+                        </ion-segment-button>
+                        <ion-segment-button value="customstops" (click)="clearLocalNotifications()">
+                            <ion-badge secondary>{{newcustomstopscounter}}</ion-badge>
+                            New Custom Stops
+                        </ion-segment-button>
+                    </ion-segment>
+                </ion-toolbar>
+            </td>
+        </tr>
+    </table>
 
 
 
 </ion-pane>
 <ion-content class="stops">
-<div [ngSwitch]="drive">
+    <div [ngSwitch]="drive">
         <form *ngSwitchWhen="'driving'">
 
             <ion-list>

@@ -5,7 +5,10 @@
 </ion-navbar>
 
 <ion-content>
-  <ion-item>
+  <map></map>
+</ion-content>
+
+<ion-content>
     <h2>{{customstop[1]}}</h2>
     <p>Abholzeit: {{customstop[2]}} </p>
     <p>Anzahl: {{customstop[3]}}</p>
@@ -17,12 +20,6 @@
       <img src="img/baby.png" *ngIf="customstop[5][3]" width="10%" height="auto">
       <img src="img/child.png" *ngIf="customstop[5][4]" width="10%" height="auto">
     </p>
-  </ion-item>
-</ion-content>
-<ion-content>
-  <map></map>
-</ion-content>
-<ion-content>
   <button primary *ngIf="accepted" (click)="completeAcceptedCustomStop()">
     <ion-icon name="done-all"></ion-icon>
     Ausgeführt

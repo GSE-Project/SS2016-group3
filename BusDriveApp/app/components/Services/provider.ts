@@ -56,7 +56,6 @@ export class Provider {
     postCustomStopStatus(customstopID, status, serverURL) {
         let customStopStatus = JSON.stringify(
             {
-                "customstopId": customstopID,
                 "status": status
             })
         let senddata = new XMLHttpRequest();

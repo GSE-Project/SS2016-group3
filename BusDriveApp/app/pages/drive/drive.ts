@@ -220,9 +220,9 @@ export class DrivePage {
     }
 
     /**
-     * reset newcustomstops counter
+     * clears local notification
      */
-    resetLocalNotifications() {
+    clearLocalNotifications() {
         LocalNotifications.clear(1);
     }
 
