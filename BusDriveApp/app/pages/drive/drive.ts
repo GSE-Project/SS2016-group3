@@ -24,6 +24,16 @@ export class DrivePage {
     //-----Language-----
     public passengers;
     public title;
+    public nextStopTrans;
+    public acceptedStopsTrans;
+    public newStopsTrans
+    public time;
+    public numberTrans;
+    public done; 
+    public noAppearance;
+    public accept;
+    public decline;
+    public addressTrans
 
     constructor(private nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events) {
         this.selectedbusid = navParams.data[0]
@@ -51,6 +61,15 @@ export class DrivePage {
         //-----Language-----
         this.passengers = language.passengers;
         this.title = language.driveTitle;
+        this.nextStopTrans=language.nextStop;
+        this.acceptedStopsTrans=language.acceptedStops;
+        this.newStopsTrans=language.newStops;
+        this.time=language.time;
+        this.numberTrans=language.numberTrans;
+        this.noAppearance=language.noAppearance;
+        this.accept=language.accept;
+        this.decline=language.decline;
+        this.addressTrans=language.addressTrans;
     }
 
     /**
