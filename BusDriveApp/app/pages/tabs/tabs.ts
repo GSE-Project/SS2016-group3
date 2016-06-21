@@ -48,8 +48,12 @@ export class TabsPage {
         this.updateBusStatus();
         this.getLineRoute();
         this.getLineStops();
-        this.requestintervalID = setInterval(this.getLineCustomStops.bind(this),60000);
+        this.requestintervalID = setInterval(this.getLineCustomStops.bind(this),5000);
         this.sendintervalID = setInterval(this.sendrealTimeData.bind(this), 5000);
+
+        this.events.subscribe("EndTour", () =>{
+            this.endTour();
+        })
 
         //-----Language-----
         this.map = language.mapTitle;
@@ -149,7 +153,7 @@ export class TabsPage {
     /**
      * alert when leaving, if you click "OK" GUI will change to HomePage and you will stop sending, if you click "Abbrechen" nothing will happen.
      */
-    ionViewWillLeave() {
+    endTour() {
         let alert = ActionSheet.create({
             title: language.alertTitle,
             buttons: [

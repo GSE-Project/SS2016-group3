@@ -1,4 +1,4 @@
-import {Page, NavParams, Events, Toast, Alert, ActionSheet, NavController} from 'ionic-angular';
+import {Page, NavParams, Events, Toast, Alert, Platform, ActionSheet, NavController} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {LocalNotifications} from 'ionic-native';
 import {language} from "../../components/languages/languages";
@@ -25,7 +25,7 @@ export class DrivePage {
     public passengers;
     public title;
 
-    constructor(private nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, public events: Events) {
+    constructor(private nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events) {
         this.selectedbusid = navParams.data[0]
         this.getBusSeatsNumber();
         this.getLineStopsNames();
@@ -46,11 +46,13 @@ export class DrivePage {
             this.noShowAcceptedCustomStop(customstop[0])
         });
 
+        this.platform.registerBackButtonAction(this.endTour.bind(this));
+
         //-----Language-----
         this.passengers = language.passengers;
         this.title = language.driveTitle;
     }
-    
+
     /**
      * increases the counter of the passengers
      */
@@ -244,5 +246,12 @@ export class DrivePage {
         this.linestopsnames.unshift(this.linestopsnames.pop());
         this.nextStop = this.linestopsnames[0];
         console.log("next stop: " + this.linestopsnames[0]);
+    }
+
+   /**
+    * ends the tour if confirmed
+    */
+    endTour() {
+        this.events.publish("EndTour");
     }
 }

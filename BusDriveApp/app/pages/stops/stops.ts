@@ -1,4 +1,4 @@
-import {Page, NavParams, Platform} from 'ionic-angular';
+import {Page, NavParams, Platform, Events} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {language} from "../../components/languages/languages";
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
@@ -13,8 +13,10 @@ export class StopsPage {
   //-----Language-----
   public title;
 
-  constructor(navParams: NavParams, private busdriveinterface: BusDriveInterface, platform: Platform) {
+  constructor(navParams: NavParams, private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events) {
     this.getLineStopsNames();
+    
+    this.platform.registerBackButtonAction(this.endTour.bind(this));
 
     //-----Language-----
     this.title = language.stopTitle;
@@ -25,5 +27,12 @@ export class StopsPage {
    */
   getLineStopsNames() {
     this.linestopsnames = this.busdriveinterface.getLineStopsNames();
+  }
+
+  /**
+   * ends the tour if confirmed
+   */
+  endTour() {
+    this.events.publish("EndTour");
   }
 }

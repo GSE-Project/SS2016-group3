@@ -1,4 +1,4 @@
-import {Page, NavParams, Events} from 'ionic-angular';
+import {Page, NavParams, Platform, Events} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {Component, ViewChild} from  '@angular/core';
 import {Map} from '../../components/map/map';
@@ -21,7 +21,7 @@ export class MapPage {
     //-----Language-----
     public title;
 
-    constructor(private busdriveinterface: BusDriveInterface, public events: Events) {
+    constructor(private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events) {
         this.getLineRouteCoordinates();
         this.getLineStopsCoordinates();
         this.getLineStopsNames();
@@ -32,6 +32,8 @@ export class MapPage {
         this.events.subscribe("mapLoaded", () => {
             this.showLine();
         });
+
+        this.platform.registerBackButtonAction(this.endTour.bind(this));
 
         //-----Language-----
         this.title = language.mapTitle;
@@ -65,4 +67,11 @@ export class MapPage {
         this.map.loadRoute(this.lineroutecoordinates);
         this.map.loadStops(this.linestopscoordinates, this.linestopsnames);
     }
+    
+   /**
+    * ends the tour if confirmed
+    */
+    endTour() {
+        this.events.publish("EndTour");
+    }   
 }
