@@ -22,20 +22,42 @@
       <img src="img/child.png" *ngIf="customstop[5][4]" width="10%" height="auto">
     </p>
   </ion-item>
-  <button primary *ngIf="accepted" (click)="completeAcceptedCustomStop()">
-    <ion-icon name="done-all"></ion-icon>
-    Ausgeführt
-  </button>
-  <button primary *ngIf="accepted" (click)="noShowAcceptedCustomStop()">
+
+  <table width="100%">
+    <colgroup>
+            <col width="50%">
+            <col width="50%">
+        </colgroup>
+    <tr>
+      <td align ="center">
+        <button primary *ngIf="accepted" (click)="completeAcceptedCustomStop()" width="200px">
+        <ion-icon name="done-all"></ion-icon>
+        {{done}}
+       </button>
+      </td>
+      <td align ="center">
+        <button primary *ngIf="accepted" (click)="noShowAcceptedCustomStop()" width="200px">
     <ion-icon name="sad"></ion-icon>
-    Kein Erscheinen
+    {{noAppearance}}
   </button>
-  <button primary *ngIf="!accepted" (click)="acceptCustomStop()">
-    <ion-icon name="checkmark"></ion-icon>
-    Akzeptieren
-  </button>
-  <button primary *ngIf="!accepted" (click)="declineCustomStop()">
-    <ion-icon name="close"></ion-icon>
-    Ablehnen
-  </button>
+      </td>
+    </tr>
+  </table>
+  <table width="100%">
+    <tr>
+      <td align ="center">
+        <button primary *ngIf="!accepted" (click)="acceptCustomStop()" width="200px">
+          <ion-icon name="checkmark"></ion-icon>
+          {{accept}}
+        </button>
+      </td>
+      <td align ="center">
+        <button primary *ngIf="!accepted" (click)="declineCustomStop()" width="200px">
+          <ion-icon name="close"></ion-icon>
+          {{decline}}
+        </button>
+      </td>
+    </tr>
+  </table>
+
 </ion-content>

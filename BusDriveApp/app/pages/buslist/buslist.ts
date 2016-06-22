@@ -15,6 +15,7 @@ export class BusListPage {
     //-----Language-----
     public numberplate;
     public title
+    public seatsTrans;
 
     constructor(nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private menu: MenuController) {
         this.nav = nav;
@@ -25,6 +26,7 @@ export class BusListPage {
         //-----Language-----
         this.numberplate = language.numberplate;
         this.title = language.chooseBus;
+        this.seatsTrans=language.seatsTrans;
     }
 
     /**

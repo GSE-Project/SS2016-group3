@@ -3,7 +3,7 @@ export class Language {
     //name:string;
     //passengers:string;
 
-    constructor(public id: number, public name: string, public driveTitle: string, public passengers: string, public numberplate: string,
+    constructor(public id: number, public name: string, public driveTitle: string, public passengers: string, public numberplate: string,public seatsTrans:string,
         public chooseBus: string, public lineTitle: string, public lineName: string, public mapTitle: string, public stopTitle: string,
         public alertTitle: string, public alertCancel: string,public nextStop:string,public acceptedStops:string,public newStops:string,
         public time:string,public numberTrans:string, public done:string, public noAppearance:string,public accept:string,public decline:string,
@@ -16,6 +16,7 @@ export class Language {
         this.driveTitle = driveTitle;
         this.passengers = passengers;
         this.numberplate = numberplate;
+        this.seatsTrans=seatsTrans;
         this.chooseBus = chooseBus;
         this.lineTitle = lineTitle;
         this.mapTitle = mapTitle;
@@ -57,13 +58,13 @@ export class Language {
 }
 
 
-export var en = new Language(0, "EN", "Drive", "Seats taken:", "Numberplate:",
+export var en = new Language(0, "EN", "Drive", "Seats taken:", "Numberplate:","Seats",
     "Choose bus", "Choose line", "Line", "Map", "Schedule", "End tour?", "Cancel","Next stop:","Accepted custom stops","New custom stops" ,
     "Time","Number","Done","No appearance","Accept","Decline","Address","Find us on", "Your opinion",
     "Disclaimer", "Imprint", "Privacy Policy", "License", "Version Info", "Start Tour","Language","Serveraddress","New serveraddress","Settings","About");
 
 
-export var de = new Language(1, "DE", "Fahren", "Belegte Plätze:", "Nummernschild",
+export var de = new Language(1, "DE", "Fahren", "Belegte Plätze:", "Nummernschild","Sitzplätze",
     "Wähle Bus aus", "Wähle Linie aus", "Linie", "Karte", "Fahrplan", "Fahrt beenden?", "Abbrechen", "Nächster Halt:","Angenommene Haltestellen","Neue Halstestellen",
     "Zeit","Anzahl","Ausgeführt","Kein Erscheinen","Akzeptieren","Abblehnen","Adresse", "Sie finden uns auf", "Ihre Meinung",
     "Rechtliches", "Impressum", "Datenschutzerklärung", "Lizenz", "Versionsinfo", "Tour starten","Sprache","Serveradresse","Neue Serveradresse","Einstellungen","Über uns");
