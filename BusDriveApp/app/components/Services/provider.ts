@@ -60,7 +60,7 @@ export class Provider {
                 "status": status
             })
         let senddata = new XMLHttpRequest();
-        senddata.open('POST', serverURL + "/customStops/{" + customstopID + "}");
+        senddata.open('POST', serverURL + "/customStops/" + customstopID );
         senddata.setRequestHeader("Content-Type", "application/json");
         senddata.send(customStopStatus);
         console.log("Senden: " + " CustomstopID: " + customstopID, "Status: " + status);

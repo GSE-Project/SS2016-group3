@@ -17,7 +17,7 @@ export class CustomStops {
     requestCustomStops(serverURL) {
         this.http.get(serverURL + "/customstops").map(res => res.json()).subscribe(
             data => {
-                this.customstops = data["customstops"];
+                this.customstops = data;
             },
             err => console.error("requestCustomStops failed"),
             () => console.log('requestCustomStops completed')
