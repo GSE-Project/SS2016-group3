@@ -28,6 +28,7 @@ export class TabsPage {
     private lng = 0;
     private lat = 0;
     private lastSendTime = undefined;
+    private passangerscounter = 0;
 
     //-----Language-----
     public map;
@@ -54,6 +55,9 @@ export class TabsPage {
         this.events.subscribe("EndTour", () =>{
             this.endTour();
         })
+        this.events.subscribe("Passneger", (counter) => {
+            this.passangerscounter = counter[0];
+        });
 
         //-----Language-----
         this.map = language.mapTitle;
@@ -119,7 +123,7 @@ export class TabsPage {
             let longitude = resp.coords.longitude;
             let busspeed = resp.coords.speed;
             if ((this.distance(this.lat, this.lng, latitude, longitude) > 75) || (currenTime - this.lastSendTime > 56000)) {
-                this.busdriveinterface.postRealTimeData(this.selectedbus, longitude, latitude)
+                this.busdriveinterface.postRealTimeData(this.selectedbus, longitude, latitude, this.passangerscounter)
                 this.lat = latitude;
                 this.lng = longitude;
                 this.lastSendTime = new Date();

@@ -62,7 +62,8 @@
     "cordova-plugin-background-mode",
     "cordova-plugin-compat",
     "ionic-plugin-keyboard",
-    "cordova-plugin-app-event"
+    "cordova-plugin-app-event",
+    "cordova-plugin-network-information"
   ],
   "cordovaPlatforms": []
 }

@@ -60,10 +60,10 @@
             <td colspan="3" class="text">
                 <ion-toolbar>
                     <ion-segment [(ngModel)]="drive">
-                        <ion-segment-button value="driving">
+                        <ion-segment-button value="customstops">
                             {{acceptedStopsTrans}}
                         </ion-segment-button>
-                        <ion-segment-button value="customstops" (click)="clearLocalNotifications()">
+                        <ion-segment-button value="newcustomstops" (click)="clearLocalNotifications()">
                             <ion-badge secondary>{{newcustomstopscounter}}</ion-badge>
                             {{newStopsTrans}}
                         </ion-segment-button>
@@ -78,7 +78,7 @@
 </ion-pane>
 <ion-content class="stops">
     <div [ngSwitch]="drive">
-        <form *ngSwitchWhen="'driving'">
+        <form *ngSwitchWhen="'customstops'">
 
             <ion-list>
                 <ion-item-sliding *ngFor="let item of acceptedcustomstops">
@@ -112,7 +112,7 @@
 
         </form>
 
-        <ion-list *ngSwitchWhen="'customstops'">
+        <ion-list *ngSwitchWhen="'newcustomstops'">
             <ion-item-sliding *ngFor="let item of linecustomstopsall">
                 <ion-item>
                     <h2>Name: {{item[1]}}</h2>
