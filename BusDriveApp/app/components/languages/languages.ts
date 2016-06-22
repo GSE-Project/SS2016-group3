@@ -9,6 +9,8 @@ export class Language {
         public time:string,public numberTrans:string, public done:string, public noAppearance:string,public accept:string,public decline:string,
         public addressTrans,public findUs: string, public opinion: string, public disclaimer: string,
         public imprint: string, public privacyPolicy: string, public license: string, public versionInfo: string, public beginTour: string,
+        public backgroundModeTrans:string, public preventSleepTrans:string,public sendDist:string, public sendperiodTrans:string, public addTrans:string,
+         public newServerTrans2:string,
         public langTrans:string,public serveradressTrans,public newServerTrans:string, public settingTrans:string, public about:string) {
 
         this.id = id;
@@ -27,6 +29,8 @@ export class Language {
         this.nextStop=nextStop;
         this.acceptedStops=acceptedStops;
         this.newStops=newStops;
+       
+       //------- Custom Stops
         this.time=time;
         this.numberTrans=numberTrans;
         this.done=done;
@@ -46,6 +50,12 @@ export class Language {
         //----------home screen------
         this.beginTour = beginTour;
         //------Settingspage-------
+        this.backgroundModeTrans=backgroundModeTrans;
+        this.preventSleepTrans=preventSleepTrans;
+        this.sendDist=sendDist;
+        this.sendperiodTrans=sendperiodTrans;
+        this.addTrans=addTrans;
+        this.newServerTrans2=newServerTrans2;
         this.langTrans=langTrans;
         this.serveradressTrans=serveradressTrans;
         this.newServerTrans=newServerTrans;
@@ -61,13 +71,15 @@ export class Language {
 export var en = new Language(0, "EN", "Drive", "Seats taken:", "Numberplate:","Seats",
     "Choose bus", "Choose line", "Line", "Map", "Schedule", "End tour?", "Cancel","Next stop:","Accepted custom stops","New custom stops" ,
     "Time","Number","Done","No appearance","Accept","Decline","Address","Find us on", "Your opinion",
-    "Disclaimer", "Imprint", "Privacy Policy", "License", "Version Info", "Start Tour","Language","Serveraddress","New serveraddress","Settings","About");
+    "Disclaimer", "Imprint", "Privacy Policy", "License", "Version Info", "Start Tour",
+    "Background mode","Prevent sleeping","Sending distance","Sending period","Add","Enter a url for the server","Language","Serveraddress","New serveraddress","Settings","About");
 
 
 export var de = new Language(1, "DE", "Fahren", "Belegte Plätze:", "Nummernschild","Sitzplätze",
     "Wähle Bus aus", "Wähle Linie aus", "Linie", "Karte", "Fahrplan", "Fahrt beenden?", "Abbrechen", "Nächster Halt:","Angenommene Haltestellen","Neue Halstestellen",
     "Zeit","Anzahl","Ausgeführt","Kein Erscheinen","Akzeptieren","Abblehnen","Adresse", "Sie finden uns auf", "Ihre Meinung",
-    "Rechtliches", "Impressum", "Datenschutzerklärung", "Lizenz", "Versionsinfo", "Tour starten","Sprache","Serveradresse","Neue Serveradresse","Einstellungen","Über uns");
+    "Rechtliches", "Impressum", "Datenschutzerklärung", "Lizenz", "Versionsinfo", "Tour starten",
+    "Hintergrundmodus","Schlafen verhindern","Sendedistanz","Sendeperiode","Hinzufügen","Geben sie eine Server-URL ein","Sprache","Serveradresse","Neue Serveradresse","Einstellungen","Über uns");
 
 export var language;
 let settings = window.localStorage;

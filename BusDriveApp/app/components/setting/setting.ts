@@ -23,6 +23,13 @@ export class SettingPage {
   public serverAdressTrans;
   public newServerAdressTrans;
   public settingTrans;
+  public backgroundModeTrans;
+  public preventSleepTrans;
+  public sendDistTrans;
+  public sendperiodTrans;
+  public addTrans;
+  public newServerTrans2
+
 
   constructor(private app: App, public events: Events) {
     this.settings = window.localStorage;
@@ -32,6 +39,7 @@ export class SettingPage {
     this.serverURLListStorage = this.getServerURLList();
     this.insomnia = this.getInsomnia();
     this.mode = this.getBackgroundMode();
+   
 
     //-----Language-----
     this.langTrans = language.langTrans;
@@ -39,6 +47,13 @@ export class SettingPage {
     this.serverAdressTrans = language.serveradressTrans;
     this.newServerAdressTrans = language.newServerTrans;
     this.settingTrans = language.settingTrans;
+    this.backgroundModeTrans=language.backgroundModeTrans;
+    this.preventSleepTrans=language.preventSleepTrans;
+    this.sendDistTrans=language.sendDist;
+    this.sendperiodTrans=language.sendperiodTrans;
+    this.addTrans=language.addTrans;
+    this.newServerTrans2=language.newServerTrans2;
+
 
   }
 
@@ -48,7 +63,7 @@ export class SettingPage {
   promptServerURL() {
     let prompt = Alert.create({
       title: this.newServerAdressTrans,
-      message: "Enter a url for the server",
+      message: this.newServerTrans2,
       inputs: [
         {
           name: 'URL',
@@ -57,13 +72,13 @@ export class SettingPage {
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: this.cancelAlert,
           handler: data => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Add',
+          text: this.addTrans,
           handler: data => {
             this.addToServerURLList(data.URL);
             console.log('Add clicked');
@@ -152,6 +167,12 @@ export class SettingPage {
     this.serverAdressTrans = language.serveradressTrans;
     this.newServerAdressTrans = language.newServerTrans;
     this.settingTrans = language.settingTrans;
+    this.backgroundModeTrans=language.backgroundModeTrans;
+    this.preventSleepTrans=language.preventSleepTrans;
+    this.sendDistTrans=language.sendDist;
+    this.sendperiodTrans=language.sendperiodTrans;
+    this.addTrans=language.addTrans;
+    this.newServerTrans2=language.newServerTrans2;
     console.log("ChangeLanguage: " + lang);
   }
 
