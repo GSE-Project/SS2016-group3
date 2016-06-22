@@ -13,7 +13,7 @@ export class Provider {
      * @param longitude Longitude of current position
      * @param latitude Latitude of current position
      */
-    postRealTimeData(busID, longitude, latitude, serverURL) {
+    postRealTimeData(busID, longitude, latitude, passangerscounter, serverURL) {
         let realTimeData = JSON.stringify(
             {
                 "busId": busID,
@@ -21,13 +21,14 @@ export class Provider {
                     "type": "Point",
                     "coordinates": [longitude, latitude]
                 },
+                "takenSeats": passangerscounter,
                 "timeStamp": Date.now()
             })
         let senddata = new XMLHttpRequest();
         senddata.open('POST', serverURL + "/realTimeData");
         senddata.setRequestHeader('Content-Type', 'application/json');
         senddata.send(realTimeData);
-        console.log("Senden: " + "Bus: " + busID, " Latitude: " + latitude, " Longitude: " + longitude);
+        console.log("Senden: " + "Bus: " + busID, " Latitude: " + latitude, " Longitude: " + longitude, "takenSeats: " + passangerscounter);
     }
 
     /**

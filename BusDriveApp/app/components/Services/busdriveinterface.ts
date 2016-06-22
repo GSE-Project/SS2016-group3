@@ -203,8 +203,8 @@ export class BusDriveInterface {
      * @param longitude Longitude of current position
      * @param latitude Latitude of current position
      */
-    postRealTimeData(busID, longitude, latitude) {
-        this.provider.postRealTimeData(busID, longitude, latitude, this.serverURL);
+    postRealTimeData(busID, longitude, latitude, passangerscounter) {
+        this.provider.postRealTimeData(busID, longitude, latitude, passangerscounter, this.serverURL);
     }
 
     /**

@@ -108,7 +108,23 @@ export class Map implements AfterViewInit, OnDestroy {
             let customstopmarker = new google.maps.Marker({
                 position: customstopLatLng,
                 map: this.map,
-                label: acceptedcustomstops[index][1]
+                icon: "img/marker.png",
+                title: acceptedcustomstops[index][1]
+            });
+            let customstopinfo = new google.maps.InfoWindow({
+                content:
+                '<div id="content">' +
+                '<div id="siteNotice">' +
+                '</div>' +
+                '<h2>' + acceptedcustomstops[index][1] + '</h2>' +
+                '<p> Abholzeit:' + acceptedcustomstops[index][2] + '</p>' +
+                '<p> Anzahl:' + acceptedcustomstops[index][3] + '</p>' +
+                '<p> Adresse:' + acceptedcustomstops[index][4] + '</p>' +
+                '</div>' +
+                '</div>'
+            });
+            customstopmarker.addListener('click', function () {
+                customstopinfo.open(this.map, customstopmarker);
             });
             this.customstopsmarkers.push(customstopmarker);
         };

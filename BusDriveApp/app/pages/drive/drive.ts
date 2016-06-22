@@ -13,7 +13,7 @@ export class DrivePage {
     private selectedbusid;
     private counter: number = 0;
     private nextStop: string;
-    private drive: string = "driving";
+    private drive: string = "customstops";
     private totalbusseats: number;
     private newcustomstopscounter: number;
     private newcustomstopsnumber: number;
@@ -78,6 +78,7 @@ export class DrivePage {
     increasePassengers() {
         if (this.counter < this.totalbusseats) {
             this.counter++
+            this.events.publish("Passneger", this.counter);
         }
     }
 
@@ -87,6 +88,7 @@ export class DrivePage {
     decreasePassengers() {
         if (this.counter > 0) {
             this.counter--;
+            this.events.publish("Passneger", this.counter);
         }
     }
 
