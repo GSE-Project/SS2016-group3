@@ -18,7 +18,7 @@ module.exports = function(config) {
       'node_modules/traceur/bin/traceur-runtime.js',         // TypeError: undefined is not a constructor (evaluating 'new exports.Map()')
       'node_modules/reflect-metadata/Reflect.js',
       'node_modules/zone.js/dist/zone.js',
-      'test/**/*Spec.ts',
+      'test/**/testSpec.ts',
 	    'app/*.ts',
 	    'typings/browser.d.ts',
 	    'app/**/*.ts'
