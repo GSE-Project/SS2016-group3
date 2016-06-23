@@ -16,7 +16,8 @@ export class MapPage {
     private linestopscoordinates = [];
     private linestopsnames = [];
     private lineroutecoordinates = [];
-    private acceptedcustomstops= [];
+    private acceptedcustomstops = [];
+    private backbuttoncounter: number = 0;
 
     //-----Language-----
     public title;
@@ -34,7 +35,9 @@ export class MapPage {
         });
 
         this.platform.registerBackButtonAction(this.endTour.bind(this));
-
+        this.events.subscribe("endTourAborted", () => {
+            this.backbuttoncounter = 0;
+        })
         //-----Language-----
         this.title = language.mapTitle;
     }
@@ -67,11 +70,14 @@ export class MapPage {
         this.map.loadRoute(this.lineroutecoordinates);
         this.map.loadStops(this.linestopscoordinates, this.linestopsnames);
     }
-    
-   /**
-    * ends the tour if confirmed
-    */
+
+    /**
+     * ends the tour if confirmed
+     */
     endTour() {
-        this.events.publish("EndTour");
-    }   
+        if (this.backbuttoncounter === 0) {
+            this.events.publish("EndTour");
+        }
+        this.backbuttoncounter = 1;
+    }
 }

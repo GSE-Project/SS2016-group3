@@ -160,11 +160,13 @@ export class TabsPage {
     endTour() {
         let alert = ActionSheet.create({
             title: language.alertTitle,
+            enableBackdropDismiss: false,
             buttons: [
                 {
                     text: language.alertCancel,
                     handler: () => {
                         console.log('alert aborted');
+                         this.events.publish("endTourAborted");
                     }
                 },
                 {
@@ -172,6 +174,7 @@ export class TabsPage {
                     handler: () => {
                         console.log('alert confirmed');
                         this.nav.setRoot(HomePage);
+                        this.events.publish("endTourConfirmed");
                         clearInterval(this.sendintervalID);
                         clearInterval(this.requestintervalID);
                     }

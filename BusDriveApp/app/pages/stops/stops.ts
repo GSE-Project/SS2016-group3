@@ -9,14 +9,18 @@ import {BusDriveInterface} from '../../components/Services/busdriveinterface';
 
 export class StopsPage {
   private linestopsnames = [];
+  private backbuttoncounter: number = 0;
 
   //-----Language-----
   public title;
 
   constructor(navParams: NavParams, private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events) {
     this.getLineStopsNames();
-    
+
     this.platform.registerBackButtonAction(this.endTour.bind(this));
+    this.events.subscribe("endTourAborted", () => {
+      this.backbuttoncounter = 0;
+    })
 
     //-----Language-----
     this.title = language.stopTitle;
@@ -33,6 +37,9 @@ export class StopsPage {
    * ends the tour if confirmed
    */
   endTour() {
-    this.events.publish("EndTour");
+    if (this.backbuttoncounter === 0) {
+      this.events.publish("EndTour");
+    }
+    this.backbuttoncounter = 1;
   }
 }

@@ -20,6 +20,7 @@ export class DrivePage {
     private linestopsnames = [];
     private linecustomstopsall = [];
     private acceptedcustomstops = [];
+    private backbuttoncounter: number = 0;
 
     //-----Language-----
     public passengers;
@@ -29,7 +30,7 @@ export class DrivePage {
     public newStopsTrans
     public time;
     public numberTrans;
-    public done; 
+    public done;
     public noAppearance;
     public accept;
     public decline;
@@ -57,19 +58,23 @@ export class DrivePage {
         });
 
         this.platform.registerBackButtonAction(this.endTour.bind(this));
+        this.events.subscribe("endTourAborted", () => {
+            this.backbuttoncounter = 0;
+        })
 
         //-----Language-----
         this.passengers = language.passengers;
         this.title = language.driveTitle;
-        this.nextStopTrans=language.nextStop;
-        this.acceptedStopsTrans=language.acceptedStops;
-        this.newStopsTrans=language.newStops;
-        this.time=language.time;
-        this.numberTrans=language.numberTrans;
-        this.noAppearance=language.noAppearance;
-        this.accept=language.accept;
-        this.decline=language.decline;
-        this.addressTrans=language.addressTrans;
+        this.nextStopTrans = language.nextStop;
+        this.acceptedStopsTrans = language.acceptedStops;
+        this.newStopsTrans = language.newStops;
+        this.time = language.time;
+        this.numberTrans = language.numberTrans;
+        this.done = language.done;
+        this.noAppearance = language.noAppearance;
+        this.accept = language.accept;
+        this.decline = language.decline;
+        this.addressTrans = language.addressTrans;
     }
 
     /**
@@ -168,7 +173,7 @@ export class DrivePage {
         if (this.newcustomstopscounter === 0) {
             this.newcustomstopscounter = undefined;
         }
-        this.busdriveinterface.postCustomStopStatus(customstop[0], "accepted");
+        this.busdriveinterface.postCustomStopStatus(customstop[0], 2);
         this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
     }
 
@@ -185,7 +190,7 @@ export class DrivePage {
         if (this.newcustomstopscounter === 0) {
             this.newcustomstopscounter = undefined;
         }
-        this.busdriveinterface.postCustomStopStatus(customstop[0], "rejected");
+        this.busdriveinterface.postCustomStopStatus(customstop[0], 3);
     }
 
     /**
@@ -197,7 +202,7 @@ export class DrivePage {
         if (posnumber > -1) {
             this.acceptedcustomstops.splice(posnumber, 1)
         }
-        this.busdriveinterface.postCustomStopStatus(customstop[0], "completed");
+        this.busdriveinterface.postCustomStopStatus(customstop[0], 4);
         this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
     }
 
@@ -210,7 +215,7 @@ export class DrivePage {
         if (posnumber > -1) {
             this.acceptedcustomstops.splice(posnumber, 1)
         }
-        this.busdriveinterface.postCustomStopStatus(customstop[0], "noshow");
+        this.busdriveinterface.postCustomStopStatus(customstop[0], 5);
         this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
     }
 
@@ -269,10 +274,13 @@ export class DrivePage {
         console.log("next stop: " + this.linestopsnames[0]);
     }
 
-   /**
-    * ends the tour if confirmed
-    */
+    /**
+     * ends the tour if confirmed
+     */
     endTour() {
-        this.events.publish("EndTour");
+        if (this.backbuttoncounter === 0) {
+            this.events.publish("EndTour");
+        }
+        this.backbuttoncounter = 1;
     }
 }

@@ -15,7 +15,8 @@ export class NativeMapPage {
     private linestopscoordinates = [];
     private linestopsnames = [];
     private lineroutecoordinates = [];
-    private acceptedcustomstops= [];
+    private acceptedcustomstops = [];
+    private backbuttoncounter: number = 0;
 
     //-----Language-----
     public title;
@@ -32,7 +33,10 @@ export class NativeMapPage {
             this.showLine();
         });
 
-         this.platform.registerBackButtonAction(this.endTour.bind(this));
+        this.platform.registerBackButtonAction(this.endTour.bind(this));
+        this.events.subscribe("endTourAborted", () => {
+            this.backbuttoncounter = 0;
+        })
 
         //-----Language-----
         this.title = language.mapTitle;
@@ -66,11 +70,15 @@ export class NativeMapPage {
         this.nativemap.loadRoute(this.lineroutecoordinates);
         this.nativemap.loadStops(this.linestopscoordinates, this.linestopsnames);
     }
-    
-   /**
-    * ends the tour if confirmed
-    */
+
+    /**
+     * ends the tour if confirmed
+     */
     endTour() {
-        this.events.publish("EndTour");
+        if (this.backbuttoncounter === 0) {
+            this.events.publish("EndTour");
+            this.nativemap.disableInteraction();
+        }
+        this.backbuttoncounter = 1;
     }
 }

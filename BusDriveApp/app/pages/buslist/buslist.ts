@@ -26,7 +26,7 @@ export class BusListPage {
         //-----Language-----
         this.numberplate = language.numberplate;
         this.title = language.chooseBus;
-        this.seatsTrans=language.seatsTrans;
+        this.seatsTrans = language.seatsTrans;
     }
 
     /**
@@ -47,6 +47,9 @@ export class BusListPage {
                 this.nav.push(LineListPage, {
                     selectedbus: bus[0],
                 });
+                if (document.getElementById('linelist')) {
+                    document.getElementById('linelist').style.visibility = '';
+                }
             }
         }
     }
