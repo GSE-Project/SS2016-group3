@@ -1,7 +1,12 @@
 <ion-navbar primary *navbar>
+    <ion-buttons left>
+        <button  (click)="endTour()">
+      <ion-icon name="arrow-back" ></ion-icon>
+    </button>
+    </ion-buttons>
     <ion-title>
         {{title}}
-    </ion-title>
+    </ion-title>      
 </ion-navbar>
 
 <ion-content class="map">

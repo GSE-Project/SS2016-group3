@@ -1,4 +1,4 @@
-import {Page, NavParams, Events} from 'ionic-angular';
+import {Page, NavParams, Platform, Events} from 'ionic-angular';
 import {Geolocation} from 'ionic-native';
 import {Component, ViewChild} from  '@angular/core';
 import {Map} from '../../components/map/map';
@@ -16,12 +16,13 @@ export class MapPage {
     private linestopscoordinates = [];
     private linestopsnames = [];
     private lineroutecoordinates = [];
-    private acceptedcustomstops= [];
+    private acceptedcustomstops = [];
+    private backbuttoncounter: number = 0;
 
     //-----Language-----
     public title;
 
-    constructor(private busdriveinterface: BusDriveInterface, public events: Events) {
+    constructor(private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events) {
         this.getLineRouteCoordinates();
         this.getLineStopsCoordinates();
         this.getLineStopsNames();
@@ -33,6 +34,10 @@ export class MapPage {
             this.showLine();
         });
 
+        this.platform.registerBackButtonAction(this.endTour.bind(this));
+        this.events.subscribe("endTourAborted", () => {
+            this.backbuttoncounter = 0;
+        })
         //-----Language-----
         this.title = language.mapTitle;
     }
@@ -65,5 +70,14 @@ export class MapPage {
         this.map.loadRoute(this.lineroutecoordinates);
         this.map.loadStops(this.linestopscoordinates, this.linestopsnames);
     }
-}
 
+    /**
+     * ends the tour if confirmed
+     */
+    endTour() {
+        if (this.backbuttoncounter === 0) {
+            this.events.publish("EndTour");
+        }
+        this.backbuttoncounter = 1;
+    }
+}

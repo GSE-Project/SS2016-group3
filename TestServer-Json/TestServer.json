@@ -284,106 +284,113 @@
     ],
     "timestamp": 2
   },
-  "customstops": {
-    "customstops": [
-      {
-        "lineId": 1,
-        "id": 1,
-        "pickUpTime": 1500,
-        "location": {
-          "type": "Point",
-          "coordinates": [
-            7.606974,
-            49.206611
-          ]
-        },
-        "numberOfPersons": 3,
-        "deviceID": 85757,
-        "info": {
-          "name": "Sascha",
-          "address": "Uni Ost",
-          "assistance": [
-            2
-          ]
-        }
+  "customstops": [
+    {
+      "lineId": 1,
+      "id": 1,
+      "pickUpTime": 1500,
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          7.606974,
+          49.206611
+        ]
       },
-      {
-        "lineId": 1,
-        "id": 2,
-        "pickUpTime": 1200,
-        "location": {
-          "type": "Point",
-          "coordinates": [
-            7.603509,
-            49.207039
-          ]
-        },
-        "numberOfPersons": 1,
-        "deviceID": 857547,
-        "info": {
-          "name": "Charel",
-          "address": "Uni Sporthalle",
-          "assistance": [
-            2,
-            1
-          ]
-        }
-      },
-      {
-        "lineId": 1,
-        "id": 3,
-        "pickUpTime": 1430,
-        "location": {
-          "type": "Point",
-          "coordinates": [
-            7.600365,
-            49.209681
-          ]
-        },
-        "numberOfPersons": 2,
-        "deviceID": 8578547,
-        "info": {
-          "name": "Patrick",
-          "address": "Uni West",
-          "assistance": [
-            4,5
-          ]
-        }
-      },
-      {
-        "lineId": 1,
-        "id": 4,
-        "pickUpTime": 1730,
-        "location": {
-          "type": "Point",
-          "coordinates": [
-            7.600365,
-            49.209681
-          ]
-        },
-        "numberOfPersons": 5,
-        "deviceID": 8578547,
-        "info": {
-          "name": "Erik",
-          "address": "Uni Süd",
-          "assistance": [
-            1,2,3,4,5
-          ]
-        }
+      "numberOfPersons": 3,
+      "deviceID": 85757,
+      "info": {
+        "name": "Sascha",
+        "address": "Uni Ost",
+        "assistance": [
+          2
+        ]
       }
-    ],
-    "timestamp": 2
-  },
+    },
+    {
+      "lineId": 1,
+      "id": 2,
+      "pickUpTime": 1200,
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          7.603509,
+          49.207039
+        ]
+      },
+      "numberOfPersons": 1,
+      "deviceID": 857547,
+      "info": {
+        "name": "Charel",
+        "address": "Uni Sporthalle",
+        "assistance": [
+          2,
+          1
+        ]
+      }
+    },
+    {
+      "lineId": 1,
+      "id": 3,
+      "pickUpTime": 1430,
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          7.600365,
+          49.209681
+        ]
+      },
+      "numberOfPersons": 2,
+      "deviceID": 8578547,
+      "info": {
+        "name": "Patrick",
+        "address": "Uni West",
+        "assistance": [
+          4,
+          5
+        ]
+      }
+    },
+    {
+      "lineId": 1,
+      "id": 4,
+      "pickUpTime": 1730,
+      "location": {
+        "type": "Point",
+        "coordinates": [
+          7.600365,
+          49.209681
+        ]
+      },
+      "numberOfPersons": 5,
+      "deviceID": 8578547,
+      "info": {
+        "name": "Erik",
+        "address": "Uni Süd",
+        "assistance": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    }
+  ],
   "updateBusStatus": {
     "lineId": 1,
-    "busId": 2
+    "busId": 1
   },
   "realTimeData": {
-    "busId": 2,
+    "busId": 1,
     "position": {
       "type": "Point",
-      "coordinates": []
-    }
+      "coordinates": [
+        7.752281399999999,
+        49.4252294
+      ]
+    },
+    "takenSeats": 0,
+    "timeStamp": 1466600014846
   },
   "routes": {
     "routes": [

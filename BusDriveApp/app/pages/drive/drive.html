@@ -1,88 +1,92 @@
 <ion-navbar primary *navbar>
-    <ion-title>{{title}}</ion-title>
+    <ion-buttons left>
+        <button (click)="endTour()">
+      <ion-icon name="arrow-back" ></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-title>
+        {{title}}
+    </ion-title>
 </ion-navbar>
 
-<ion-toolbar>
-    <ion-segment [(ngModel)]="drive">
-        <ion-segment-button value="driving">
-            Drive
-        </ion-segment-button>
-        <ion-segment-button value="customstops" (click)="resetNewCustomStopsCounter()">
-            <ion-badge secondary>{{newcustomstopscounter}}</ion-badge>
-            New Custom Stops
-        </ion-segment-button>
-    </ion-segment>
-</ion-toolbar>
+<ion-pane primary class="drive">
 
-<ion-content class="drive">
-    <div [ngSwitch]="drive">
-        <form *ngSwitchWhen="'driving'">
-
-            <table width="100%">
-                <colgroup>
-                    <col width="20%">
-                    <col width="60%">
-                    <col width="20%">
-                </colgroup>
-
-                <tr>
-                    <td colspan="3" class="text" align="center">
-                        <h3>{{passengers}}</h3>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="left">
-                        <div class="buttonleft">
-                            <button large (click)="decreasePassengers()" class="button_drive">
+    <table width="100%">
+        <colgroup>
+            <col width="20%">
+            <col width="60%">
+            <col width="20%">
+        </colgroup>
+        <tr>
+            <td align="left">
+                <div class="buttonleft">
+                    <button large (click)="decreasePassengers()" class="button_drive">
                                     <ion-icon name="remove"></ion-icon>
                                 </button>
-                        </div>
-                    </td>
-                    <td class="text">
-                        <h2>{{counter}} / {{totalbusseats}}</h2>
-                    </td>
-                    <td align="right">
-                        <div class="buttonright">
-                            <button large (click)="increasePassengers()" class="button_drive">
+                </div>
+            </td>
+            <td class="text"><p>{{passengers}}</p>
+                <h2>{{counter}} / {{totalbusseats}}</h2>
+            </td>
+            <td align="right">
+                <div class="buttonright">
+                    <button large (click)="increasePassengers()" class="button_drive">
                                      <ion-icon name="add"></ion-icon>
                                 </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3" class="text">
-                        <h3>Nächste Haltestelle:</h3>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="left">
-                        <div class="buttonleft">
-                            <button large (click)="showPrevioustStop()" class="button_drive">
-                                    <ion-icon name="arrow-back"></ion-icon>
-                                </button>
-                        </div>
-                    </td>
-                    <td class="text">
-                        <h2>{{nextStop}} </h2>
-                    </td>
-                    <td align="right">
-                        <div class="buttonright">
-                            <button large (click)="showNextStop()" class="button_drive">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td align="left">
+                <div class="buttonleft">
+                    <button large (click)="showPrevioustStop()" class="button_drive">
+                            <ion-icon name="arrow-back"></ion-icon>
+                     </button>
+                </div>
+            </td>
+            <td class="text">
+                <p>{{nextStopTrans}}
+                <h2>{{nextStop}}</h2>
+            </td>
+            <td align="right">
+                <div class="buttonright">
+                    <button large (click)="showNextStop()" class="button_drive">
                                     <ion-icon name="arrow-forward"></ion-icon>
                                 </button>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="text">
+                <ion-toolbar>
+                    <ion-segment [(ngModel)]="drive">
+                        <ion-segment-button value="customstops">
+                            {{acceptedStopsTrans}}
+                        </ion-segment-button>
+                        <ion-segment-button value="newcustomstops" (click)="clearLocalNotifications()">
+                            <ion-badge secondary>{{newcustomstopscounter}}</ion-badge>
+                            {{newStopsTrans}}
+                        </ion-segment-button>
+                    </ion-segment>
+                </ion-toolbar>
+            </td>
+        </tr>
+    </table>
 
+
+
+</ion-pane>
+<ion-content class="stops">
+    <div [ngSwitch]="drive">
+        <form *ngSwitchWhen="'customstops'">
 
             <ion-list>
                 <ion-item-sliding *ngFor="let item of acceptedcustomstops">
                     <ion-item>
                         <h2>Name: {{item[1]}}</h2>
-                        <p>Abholzeit: {{item[2]}} </p>
-                        <p>Anzahl: {{item[3]}}</p>
-                        <p (click)="showAcceptedCustomStop(item)">Adresse: {{item[4]}}</p>
+                        <p>{{time}}: {{item[2]}} </p>
+                        <p>{{numberTrans}}: {{item[3]}}</p>
+                        <p (click)="showAcceptedCustomStop(item)">{{addressTrans}}: {{item[4]}}</p>
                         <p>
                             <img src="img/wheelchair.png" *ngIf="item[5][0]" width="10%" height="auto">
                             <img src="img/luggage.png" *ngIf="item[5][1]" width="10%" height="auto">
@@ -94,13 +98,13 @@
                     <ion-item-options side="right">
                         <button primary (click)="completeAcceptedCustomStop(item)">
                             <ion-icon name="done-all"></ion-icon>
-                                 Ausgeführt
+                                 {{done}}
                         </button>
                     </ion-item-options>
                     <ion-item-options side="left">
                         <button primary (click)="noShowAcceptedCustomStop(item)">
                             <ion-icon name="sad"></ion-icon>
-                                Kein Erscheinen
+                                {{noAppearance}}
                         </button>
                     </ion-item-options>
                 </ion-item-sliding>
@@ -108,13 +112,13 @@
 
         </form>
 
-        <ion-list *ngSwitchWhen="'customstops'">
+        <ion-list *ngSwitchWhen="'newcustomstops'">
             <ion-item-sliding *ngFor="let item of linecustomstopsall">
                 <ion-item>
                     <h2>Name: {{item[1]}}</h2>
-                    <p>Abholzeit: {{item[2]}} </p>
-                    <p>Anzahl: {{item[3]}}</p>
-                    <p (click)="showCustomStop(item)">Adresse: {{item[4]}}</p>
+                    <p>{{time}}: {{item[2]}} </p>
+                    <p>{{numberTrans}}: {{item[3]}}</p>
+                    <p (click)="showCustomStop(item)">{{addressTrans}}: {{item[4]}}</p>
                     <p>
                         <img src="img/wheelchair.png" *ngIf="item[5][0]" width="10%" height="auto">
                         <img src="img/luggage.png" *ngIf="item[5][1]" width="10%" height="auto">
@@ -126,13 +130,13 @@
                 <ion-item-options side="right">
                     <button primary (click)="acceptCustomStop(item)">
                             <ion-icon name="checkmark"></ion-icon>
-                                 Akzeptieren
+                                 {{accept}}
                         </button>
                 </ion-item-options>
                 <ion-item-options side="left">
                     <button primary (click)="declineCustomStop(item)">
                             <ion-icon name="close"></ion-icon>
-                                Ablehnen
+                                {{decline}}
                         </button>
                 </ion-item-options>
             </ion-item-sliding>

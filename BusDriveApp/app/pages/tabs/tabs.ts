@@ -1,4 +1,4 @@
-import {Page, Alert, NavController, NavParams, MenuController, Events, Platform} from 'ionic-angular';
+import {Page, Alert, ActionSheet, NavController, NavParams, MenuController, Events, Platform} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {HomePage} from '../home/home';
 import {DrivePage} from '../drive/drive';
@@ -28,6 +28,7 @@ export class TabsPage {
     private lng = 0;
     private lat = 0;
     private lastSendTime = undefined;
+    private passangerscounter = 0;
 
     //-----Language-----
     public map;
@@ -48,8 +49,15 @@ export class TabsPage {
         this.updateBusStatus();
         this.getLineRoute();
         this.getLineStops();
-        this.requestintervalID = setInterval(this.getLineCustomStops.bind(this),60000);
+        this.requestintervalID = setInterval(this.getLineCustomStops.bind(this),5000);
         this.sendintervalID = setInterval(this.sendrealTimeData.bind(this), 5000);
+
+        this.events.subscribe("EndTour", () =>{
+            this.endTour();
+        })
+        this.events.subscribe("Passneger", (counter) => {
+            this.passangerscounter = counter[0];
+        });
 
         //-----Language-----
         this.map = language.mapTitle;
@@ -115,7 +123,7 @@ export class TabsPage {
             let longitude = resp.coords.longitude;
             let busspeed = resp.coords.speed;
             if ((this.distance(this.lat, this.lng, latitude, longitude) > 75) || (currenTime - this.lastSendTime > 56000)) {
-                this.busdriveinterface.postRealTimeData(this.selectedbus, longitude, latitude)
+                this.busdriveinterface.postRealTimeData(this.selectedbus, longitude, latitude, this.passangerscounter)
                 this.lat = latitude;
                 this.lng = longitude;
                 this.lastSendTime = new Date();
@@ -149,14 +157,16 @@ export class TabsPage {
     /**
      * alert when leaving, if you click "OK" GUI will change to HomePage and you will stop sending, if you click "Abbrechen" nothing will happen.
      */
-    ionViewWillLeave() {
-        let alert = Alert.create({
+    endTour() {
+        let alert = ActionSheet.create({
             title: language.alertTitle,
+            enableBackdropDismiss: false,
             buttons: [
                 {
                     text: language.alertCancel,
                     handler: () => {
                         console.log('alert aborted');
+                         this.events.publish("endTourAborted");
                     }
                 },
                 {
@@ -164,6 +174,7 @@ export class TabsPage {
                     handler: () => {
                         console.log('alert confirmed');
                         this.nav.setRoot(HomePage);
+                        this.events.publish("endTourConfirmed");
                         clearInterval(this.sendintervalID);
                         clearInterval(this.requestintervalID);
                     }

@@ -17,6 +17,13 @@ export class CustomStopPage {
 
     //-----Language-----
     public title;
+    public timeTrans;
+    public addressTrans;
+    public numberTrans;
+    public decline;
+    public accept;
+    public done;
+    public noAppearance;
 
     constructor(navParams: NavParams, private nav: NavController, public events: Events) {
         this.customstop = navParams.get("showcustomstop");
@@ -30,6 +37,14 @@ export class CustomStopPage {
 
         //-----Language-----
         this.title = language.stopTitle;
+        this.timeTrans=language.time;
+        this.addressTrans=language.addressTrans;
+        this.numberTrans=language.numberTrans;
+        this.decline=language.decline;
+        this.accept=language.accept;
+        this.done=language.done;
+        this.noAppearance=language.noAppearance;
+
     }
 
     /**

@@ -1,4 +1,4 @@
-import {Page, NavParams, Events} from 'ionic-angular';
+import {Page, NavParams, Platform, Events} from 'ionic-angular';
 import {Component, ViewChild} from  '@angular/core';
 import {NativeMap} from '../../components/nativemap/nativemap';
 import {language} from "../../components/languages/languages";
@@ -15,18 +15,27 @@ export class NativeMapPage {
     private linestopscoordinates = [];
     private linestopsnames = [];
     private lineroutecoordinates = [];
-    private acceptedcustomstops= [];
+    private acceptedcustomstops = [];
+    private backbuttoncounter: number = 0;
 
     //-----Language-----
     public title;
 
-    constructor(private busdriveinterface: BusDriveInterface, public events: Events) {
+    constructor(private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events) {
         this.getLineRouteCoordinates();
         this.getLineStopsCoordinates();
         this.getLineStopsNames();
         this.events.subscribe("acceptedCustomStops", acceptedcustomstops => {
             this.acceptedcustomstops = acceptedcustomstops[0];
             this.nativemap.loadCustomStops(this.acceptedcustomstops);
+        })
+        this.events.subscribe("mapLoaded", () => {
+            this.showLine();
+        });
+
+        this.platform.registerBackButtonAction(this.endTour.bind(this));
+        this.events.subscribe("endTourAborted", () => {
+            this.backbuttoncounter = 0;
         })
 
         //-----Language-----
@@ -62,14 +71,14 @@ export class NativeMapPage {
         this.nativemap.loadStops(this.linestopscoordinates, this.linestopsnames);
     }
 
-    onPageDidEnter() {
-        setTimeout(() => {
-            this.nativemap.loadMap();
-        }, 250);
-        setTimeout(() => {
-            this.nativemap.loadStops(this.linestopscoordinates, this.linestopsnames);
-            this.nativemap.loadRoute(this.lineroutecoordinates);
-        }, 2500);
+    /**
+     * ends the tour if confirmed
+     */
+    endTour() {
+        if (this.backbuttoncounter === 0) {
+            this.events.publish("EndTour");
+            this.nativemap.disableInteraction();
+        }
+        this.backbuttoncounter = 1;
     }
 }
-

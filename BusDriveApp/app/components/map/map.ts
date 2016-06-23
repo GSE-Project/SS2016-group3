@@ -1,5 +1,5 @@
 import {Events} from 'ionic-angular';
-import {Component, ElementRef, AfterViewInit} from '@angular/core';
+import {Component, ElementRef, AfterViewInit, OnDestroy} from '@angular/core';
 import {Geolocation} from 'ionic-native';
 
 @Component({
@@ -7,7 +7,7 @@ import {Geolocation} from 'ionic-native';
     templateUrl: 'build/components/map/map.html'
 })
 
-export class Map implements AfterViewInit {
+export class Map implements AfterViewInit, OnDestroy {
     private map: google.maps.Map;
     private mapElement;
     private customstopsmarkers = [];
@@ -108,7 +108,23 @@ export class Map implements AfterViewInit {
             let customstopmarker = new google.maps.Marker({
                 position: customstopLatLng,
                 map: this.map,
-                label: acceptedcustomstops[index][1]
+                icon: "img/marker.png",
+                title: acceptedcustomstops[index][1]
+            });
+            let customstopinfo = new google.maps.InfoWindow({
+                content:
+                '<div id="content">' +
+                '<div id="siteNotice">' +
+                '</div>' +
+                '<h2>' + acceptedcustomstops[index][1] + '</h2>' +
+                '<p> Abholzeit:' + acceptedcustomstops[index][2] + '</p>' +
+                '<p> Anzahl:' + acceptedcustomstops[index][3] + '</p>' +
+                '<p> Adresse:' + acceptedcustomstops[index][4] + '</p>' +
+                '</div>' +
+                '</div>'
+            });
+            customstopmarker.addListener('click', function () {
+                customstopinfo.open(this.map, customstopmarker);
             });
             this.customstopsmarkers.push(customstopmarker);
         };
@@ -146,5 +162,11 @@ export class Map implements AfterViewInit {
      */
     ngAfterViewInit() {
         this.loadMap();
+    }
+
+    ngOnDestroy() {
+        while (this.mapElement.firstChild) {
+            this.mapElement.removeChild(this.mapElement.firstChild);
+        }
     }
 }

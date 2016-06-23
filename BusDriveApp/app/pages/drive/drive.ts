@@ -1,4 +1,4 @@
-import {Page, NavParams, Events, Toast, Alert, ActionSheet, NavController} from 'ionic-angular';
+import {Page, NavParams, Events, Toast, Alert, Platform, ActionSheet, NavController} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {LocalNotifications} from 'ionic-native';
 import {language} from "../../components/languages/languages";
@@ -13,18 +13,30 @@ export class DrivePage {
     private selectedbusid;
     private counter: number = 0;
     private nextStop: string;
-    private drive: string = "driving";
+    private drive: string = "customstops";
     private totalbusseats: number;
     private newcustomstopscounter: number;
+    private newcustomstopsnumber: number;
     private linestopsnames = [];
     private linecustomstopsall = [];
     private acceptedcustomstops = [];
+    private backbuttoncounter: number = 0;
 
     //-----Language-----
     public passengers;
     public title;
+    public nextStopTrans;
+    public acceptedStopsTrans;
+    public newStopsTrans
+    public time;
+    public numberTrans;
+    public done;
+    public noAppearance;
+    public accept;
+    public decline;
+    public addressTrans
 
-    constructor(private nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, public events: Events) {
+    constructor(private nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events) {
         this.selectedbusid = navParams.data[0]
         this.getBusSeatsNumber();
         this.getLineStopsNames();
@@ -45,18 +57,33 @@ export class DrivePage {
             this.noShowAcceptedCustomStop(customstop[0])
         });
 
+        this.platform.registerBackButtonAction(this.endTour.bind(this));
+        this.events.subscribe("endTourAborted", () => {
+            this.backbuttoncounter = 0;
+        })
 
         //-----Language-----
         this.passengers = language.passengers;
         this.title = language.driveTitle;
-
+        this.nextStopTrans = language.nextStop;
+        this.acceptedStopsTrans = language.acceptedStops;
+        this.newStopsTrans = language.newStops;
+        this.time = language.time;
+        this.numberTrans = language.numberTrans;
+        this.done = language.done;
+        this.noAppearance = language.noAppearance;
+        this.accept = language.accept;
+        this.decline = language.decline;
+        this.addressTrans = language.addressTrans;
     }
+
     /**
      * increases the counter of the passengers
      */
     increasePassengers() {
         if (this.counter < this.totalbusseats) {
             this.counter++
+            this.events.publish("Passneger", this.counter);
         }
     }
 
@@ -66,6 +93,7 @@ export class DrivePage {
     decreasePassengers() {
         if (this.counter > 0) {
             this.counter--;
+            this.events.publish("Passneger", this.counter);
         }
     }
 
@@ -91,10 +119,7 @@ export class DrivePage {
         if (newlinecustomstopsall.length > 0) {
             if (this.linecustomstopsall.length > 0) {
                 let newcustomstopsid: number[] = [];
-                this.newcustomstopscounter = Math.abs(this.linecustomstopsall.length - newlinecustomstopsall.length);
-                if (this.newcustomstopscounter === 0) {
-                    this.newcustomstopscounter = undefined;
-                }
+                this.newcustomstopsnumber = Math.abs(this.linecustomstopsall.length - newlinecustomstopsall.length);
                 this.linecustomstopsall.push(...newlinecustomstopsall);
                 for (let i = 0; i < this.linecustomstopsall.length; i++) {
                     newcustomstopsid.push(this.linecustomstopsall[i][0])
@@ -110,28 +135,25 @@ export class DrivePage {
                     }
                 }
                 this.linecustomstopsall = newcustomstops;
+                this.newcustomstopscounter = this.linecustomstopsall.length;
             }
             else {
                 this.linecustomstopsall.push(...newlinecustomstopsall);
                 this.newcustomstopscounter = this.linecustomstopsall.length;
+                this.newcustomstopsnumber = this.linecustomstopsall.length;
             }
-            if (this.newcustomstopscounter > 0) {
+            if (this.newcustomstopsnumber > 0) {
                 LocalNotifications.schedule({
                     id: 1,
-                    text: this.newcustomstopscounter + ' new Custom Stops',
+                    text: this.newcustomstopsnumber + ' new Custom Stops',
                 });
-                this.nav.present(ActionSheet.create({
-                    title: this.newcustomstopscounter + ' new Custom Stops',
-                    buttons: [
-                        {
-                            text: 'Anzeigen',
-                            handler: () => {
-                                this.drive = "customstops";
-                                this.nav.parent.select(0);
-                                this.resetNewCustomStopsCounter();
-                                console.log('Anzeigen');
-                            }
-                        }]
+                this.nav.present(Toast.create({
+                    message: this.newcustomstopsnumber + ' new Custom Stops',
+                    duration: 7000,
+                    position: "top",
+                    showCloseButton: true,
+                    closeButtonText: "Ok",
+                    dismissOnPageChange: true
                 }))
             }
         }
@@ -147,7 +169,11 @@ export class DrivePage {
         if (posnumber > -1) {
             this.linecustomstopsall.splice(posnumber, 1)
         }
-        this.busdriveinterface.postCustomStopStatus(customstop[0], "accepted");
+        this.newcustomstopscounter = this.linecustomstopsall.length;
+        if (this.newcustomstopscounter === 0) {
+            this.newcustomstopscounter = undefined;
+        }
+        this.busdriveinterface.postCustomStopStatus(customstop[0], 2);
         this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
     }
 
@@ -160,7 +186,11 @@ export class DrivePage {
         if (posnumber > -1) {
             this.linecustomstopsall.splice(posnumber, 1)
         }
-        this.busdriveinterface.postCustomStopStatus(customstop[0], "rejected");
+        this.newcustomstopscounter = this.linecustomstopsall.length;
+        if (this.newcustomstopscounter === 0) {
+            this.newcustomstopscounter = undefined;
+        }
+        this.busdriveinterface.postCustomStopStatus(customstop[0], 3);
     }
 
     /**
@@ -172,7 +202,7 @@ export class DrivePage {
         if (posnumber > -1) {
             this.acceptedcustomstops.splice(posnumber, 1)
         }
-        this.busdriveinterface.postCustomStopStatus(customstop[0], "completed");
+        this.busdriveinterface.postCustomStopStatus(customstop[0], 4);
         this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
     }
 
@@ -185,7 +215,7 @@ export class DrivePage {
         if (posnumber > -1) {
             this.acceptedcustomstops.splice(posnumber, 1)
         }
-        this.busdriveinterface.postCustomStopStatus(customstop[0], "noshow");
+        this.busdriveinterface.postCustomStopStatus(customstop[0], 5);
         this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
     }
 
@@ -220,10 +250,9 @@ export class DrivePage {
     }
 
     /**
-     * reset newcustomstops counter
+     * clears local notification
      */
-    resetNewCustomStopsCounter() {
-        this.newcustomstopscounter = undefined;
+    clearLocalNotifications() {
         LocalNotifications.clear(1);
     }
 
@@ -243,5 +272,15 @@ export class DrivePage {
         this.linestopsnames.unshift(this.linestopsnames.pop());
         this.nextStop = this.linestopsnames[0];
         console.log("next stop: " + this.linestopsnames[0]);
+    }
+
+    /**
+     * ends the tour if confirmed
+     */
+    endTour() {
+        if (this.backbuttoncounter === 0) {
+            this.events.publish("EndTour");
+        }
+        this.backbuttoncounter = 1;
     }
 }

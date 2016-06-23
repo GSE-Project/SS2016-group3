@@ -1,4 +1,4 @@
-import {Page, Storage, LocalStorage, Events} from 'ionic-angular';
+import {Page, Storage, LocalStorage, Events, Alert, App} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {Insomnia, BackgroundMode} from 'ionic-native';
 import {language, de, en} from "../languages/languages";
@@ -23,8 +23,15 @@ export class SettingPage {
   public serverAdressTrans;
   public newServerAdressTrans;
   public settingTrans;
+  public backgroundModeTrans;
+  public preventSleepTrans;
+  public sendDistTrans;
+  public sendperiodTrans;
+  public addTrans;
+  public newServerTrans2
 
-  constructor(public events: Events) {
+
+  constructor(private app: App, public events: Events) {
     this.settings = window.localStorage;
     this.serverURL = this.getServerURL();
     this.lang = this.getLanguage();
@@ -32,6 +39,7 @@ export class SettingPage {
     this.serverURLListStorage = this.getServerURLList();
     this.insomnia = this.getInsomnia();
     this.mode = this.getBackgroundMode();
+   
 
     //-----Language-----
     this.langTrans = language.langTrans;
@@ -39,7 +47,47 @@ export class SettingPage {
     this.serverAdressTrans = language.serveradressTrans;
     this.newServerAdressTrans = language.newServerTrans;
     this.settingTrans = language.settingTrans;
+    this.backgroundModeTrans=language.backgroundModeTrans;
+    this.preventSleepTrans=language.preventSleepTrans;
+    this.sendDistTrans=language.sendDist;
+    this.sendperiodTrans=language.sendperiodTrans;
+    this.addTrans=language.addTrans;
+    this.newServerTrans2=language.newServerTrans2;
 
+
+  }
+
+  /**
+   * creats prompt alert for new server URL
+   */
+  promptServerURL() {
+    let prompt = Alert.create({
+      title: this.newServerAdressTrans,
+      message: this.newServerTrans2,
+      inputs: [
+        {
+          name: 'URL',
+          placeholder: 'URL'
+        },
+      ],
+      buttons: [
+        {
+          text: this.cancelAlert,
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: this.addTrans,
+          handler: data => {
+            this.addToServerURLList(data.URL);
+            console.log('Add clicked');
+          }
+        }
+      ]
+    });
+    let nav = this.app.getActiveNav();
+    nav.present(prompt);
   }
 
   /**
@@ -119,6 +167,12 @@ export class SettingPage {
     this.serverAdressTrans = language.serveradressTrans;
     this.newServerAdressTrans = language.newServerTrans;
     this.settingTrans = language.settingTrans;
+    this.backgroundModeTrans=language.backgroundModeTrans;
+    this.preventSleepTrans=language.preventSleepTrans;
+    this.sendDistTrans=language.sendDist;
+    this.sendperiodTrans=language.sendperiodTrans;
+    this.addTrans=language.addTrans;
+    this.newServerTrans2=language.newServerTrans2;
     console.log("ChangeLanguage: " + lang);
   }
 
