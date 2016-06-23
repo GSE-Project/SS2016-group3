@@ -128,18 +128,11 @@ export class BusDriveInterface {
     }
 
     /**
-     * requests stops from server
-     */
-    requestCustomStops() {
-        this.customstops.requestCustomStops(this.serverURL);
-    }
-
-    /**
+     * requests linecustomstops from server 
      * @param LineId id of the selected line
-     * @retruns list of customstops of the line
      */
-    getLineCustomStops(LineId) {
-        return this.customstops.getLineCustomStops(LineId);
+    requestLineCustomStops(LineId) {
+        this.customstops.requestLineCustomStops(this.serverURL, LineId);
     }
 
     /**

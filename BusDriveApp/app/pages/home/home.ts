@@ -20,8 +20,6 @@ export class HomePage {
         this.platform = platform;
         this.nav = nav;
 
-        this.requestData();
-
         //-----Language-----
         this.beginTour = language.beginTour;
         this.getMobileOperatingSystem();
@@ -30,12 +28,11 @@ export class HomePage {
     /**
      * requests data from server via services component
      */
-    requestData(){
+    ionViewDidEnter(){
         this.busdriveinterface.requestBusses();
         this.busdriveinterface.requestLines();
         this.busdriveinterface.requestStops();
         this.busdriveinterface.requestRoutes();
-        this.busdriveinterface.requestCustomStops();
     }
 
     /**

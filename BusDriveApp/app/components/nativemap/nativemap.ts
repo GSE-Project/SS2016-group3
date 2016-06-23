@@ -67,8 +67,9 @@ export class NativeMap implements OnDestroy, AfterViewInit {
             this.map.animateCamera({
                 'target': new GoogleMapsLatLng(latitude, longitude),
                 'tilt': 10,
-                'zoom': 18,
-                'bearing': 0
+                'zoom': 15,
+                'bearing': 0,
+                'duration': 6000
             });
         })
     }
@@ -132,6 +133,8 @@ export class NativeMap implements OnDestroy, AfterViewInit {
             this.map.addMarker({
                 'position': customstopLatLng,
                 'title': acceptedcustomstops[index][1],
+                'snippet': 
+                    'Abholzeit: ' + acceptedcustomstops[index][2] + '\nAnzahl: ' + acceptedcustomstops[index][3] + '\nAdresse: ' + acceptedcustomstops[index][4],
                 'icon': 'blue'
             }).then((marker) => {
                 this.customstopsmarkers.push(marker);

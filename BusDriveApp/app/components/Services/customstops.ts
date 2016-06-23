@@ -5,60 +5,47 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CustomStops {
-    private customstops = [];
     private linecustomstops = [];
 
     constructor(private http: Http) {
     }
 
     /**
-      * requests customstops from server
-      */
-    requestCustomStops(serverURL) {
-        this.http.get(serverURL + "/customstops").map(res => res.json()).subscribe(
-            data => {
-                this.customstops = data;
-            },
-            err => console.error("requestCustomStops failed"),
-            () => console.log('requestCustomStops completed')
-        );
-
-    }
-
-    /**
+     * @param serverURL URL of the server
      * @param LineId id of the selected line
      * @retruns list of customstops of the line
      */
-    getLineCustomStops(LineId) {
-        this.linecustomstops = [];
-        for (let i = 0; i < this.customstops.length; i++) {
-            if (LineId === this.customstops[i].lineId) {
-                this.linecustomstops.push(this.customstops[i]);
-            }
-        }
-        for (let i = 0; i < this.customstops.length; i++) {
+    requestLineCustomStops(serverURL, LineId) {
+        this.http.get(serverURL + "/customStops?lineId=" + LineId).map(res => res.json()).subscribe(
+            data => {
+                this.linecustomstops = data;
+            },
+            err => console.error("requestLineCustomStops failed"),
+            () => console.log('requestLineCustomStops completed')
+        );
+        for (let i = 0; i < this.linecustomstops.length; i++) {
             let assistance = [false, false, false, false, false];
-            if (this.customstops[i].info.assistance.length > 0) {
-                this.customstops[i].info.assistance.sort();
-                for (let j = 0; j < this.customstops[i].info.assistance.length; j++) {
-                    if (this.customstops[i].info.assistance[j] === 1) {
+            if (this.linecustomstops[i].userAssistance.length > 0) {
+                this.linecustomstops[i].userAssistance.sort();
+                for (let j = 0; j < this.linecustomstops[i].userAssistance.length; j++) {
+                    if (this.linecustomstops[i].userAssistance[j] === 1) {
                         assistance.splice(0, 1, true);
                     }
-                    else if (this.customstops[i].info.assistance[j] === 2) {
+                    else if (this.linecustomstops[i].userAssistance[j] === 2) {
                         assistance.splice(1, 1, true);
                     }
-                    else if (this.customstops[i].info.assistance[j] === 3) {
+                    else if (this.linecustomstops[i].userAssistance[j] === 3) {
                         assistance.splice(2, 1, true);
                     }
-                    else if (this.customstops[i].info.assistance[j] === 4) {
+                    else if (this.linecustomstops[i].userAssistance[j] === 4) {
                         assistance.splice(3, 1, true);
                     }
-                    else if (this.customstops[i].info.assistance[j] === 5) {
+                    else if (this.linecustomstops[i].userAssistance[j] === 5) {
                         assistance.splice(4, 1, true);
                     }
                 }
             }
-            this.customstops[i].info.assistance = assistance;
+            this.linecustomstops[i].userAssistance = assistance;
         }
         return this.linecustomstops;
     }
@@ -80,7 +67,7 @@ export class CustomStops {
     getLineCustomStopsNames() {
         let linecustomstopsnames = [];
         for (let i = 0; i < this.linecustomstops.length; i++) {
-            linecustomstopsnames.push(this.linecustomstops[i].info.name);
+            linecustomstopsnames.push(this.linecustomstops[i].userName);
         }
         return linecustomstopsnames;
     }
@@ -124,7 +111,7 @@ export class CustomStops {
     getLineCustomStopsAddresses() {
         let linecustomstopsaddresses = [];
         for (let i = 0; i < this.linecustomstops.length; i++) {
-            linecustomstopsaddresses.push(this.linecustomstops[i].info.address);
+            linecustomstopsaddresses.push(this.linecustomstops[i].userAddress);
         }
         return linecustomstopsaddresses;
     }
@@ -135,7 +122,7 @@ export class CustomStops {
     getLineCustomStopsAssistances() {
         let linecustomstopsassistances = [];
         for (let i = 0; i < this.linecustomstops.length; i++) {
-            linecustomstopsassistances.push(this.linecustomstops[i].info.assistance);
+            linecustomstopsassistances.push(this.linecustomstops[i].userAssistance);
         }
         return linecustomstopsassistances;
     }
@@ -146,7 +133,7 @@ export class CustomStops {
     getLineCustomStopsAll() {
         let linecustomstopsall = [];
         for (let i = 0; i < this.linecustomstops.length; i++) {
-            linecustomstopsall.push([this.linecustomstops[i].id, this.linecustomstops[i].info.name, this.linecustomstops[i].pickUpTime, this.linecustomstops[i].numberOfPersons, this.linecustomstops[i].info.address, this.linecustomstops[i].info.assistance, this.linecustomstops[i].location.coordinates]);
+            linecustomstopsall.push([this.linecustomstops[i].id, this.linecustomstops[i].userName, this.linecustomstops[i].pickUpTime, this.linecustomstops[i].numberOfPersons, this.linecustomstops[i].userAddress, this.linecustomstops[i].userAssistance, this.linecustomstops[i].location.coordinates]);
         }
         return linecustomstopsall;
     }

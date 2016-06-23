@@ -284,7 +284,7 @@
     ],
     "timestamp": 2
   },
-  "customstops": [
+  "customStops": [
     {
       "lineId": 1,
       "id": 1,
@@ -298,13 +298,13 @@
       },
       "numberOfPersons": 3,
       "deviceID": 85757,
-      "info": {
-        "name": "Sascha",
-        "address": "Uni Ost",
-        "assistance": [
-          2
-        ]
-      }
+      "userName": "Sascha",
+      "userAddress": "Uni Ost",
+      "userAssistance": [
+        1,
+        2,
+        5
+      ]
     },
     {
       "lineId": 1,
@@ -319,14 +319,12 @@
       },
       "numberOfPersons": 1,
       "deviceID": 857547,
-      "info": {
-        "name": "Charel",
-        "address": "Uni Sporthalle",
-        "assistance": [
-          2,
-          1
-        ]
-      }
+      "userName": "Charel",
+      "userAddress": "Uni Sporthalle",
+      "userAssistance": [
+        1,
+        2
+      ]
     },
     {
       "lineId": 1,
@@ -341,14 +339,12 @@
       },
       "numberOfPersons": 2,
       "deviceID": 8578547,
-      "info": {
-        "name": "Patrick",
-        "address": "Uni West",
-        "assistance": [
-          4,
-          5
-        ]
-      }
+      "userName": "Patrick",
+      "userAddress": "Uni West",
+      "userAssistance": [
+        1,
+        5
+      ]
     },
     {
       "lineId": 1,
@@ -363,17 +359,15 @@
       },
       "numberOfPersons": 5,
       "deviceID": 8578547,
-      "info": {
-        "name": "Erik",
-        "address": "Uni Süd",
-        "assistance": [
-          1,
-          2,
-          3,
-          4,
-          5
-        ]
-      }
+      "userName": "Erik",
+      "userAddress": "Uni Süd",
+      "userAssistance": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
     }
   ],
   "updateBusStatus": {
@@ -385,12 +379,12 @@
     "position": {
       "type": "Point",
       "coordinates": [
-        7.752281399999999,
-        49.4252294
+        7.608701399999998,
+        49.210522999999995
       ]
     },
     "takenSeats": 0,
-    "timeStamp": 1466600014846
+    "timeStamp": 1466723035438
   },
   "routes": {
     "routes": [
