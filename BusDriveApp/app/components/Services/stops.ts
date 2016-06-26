@@ -12,7 +12,15 @@ export class Stops {
     }
 
     /**
-      * requests stops from server
+     * clears all lists
+     */
+    clearLists() {
+        this.stops = [];
+        this.linestops = [];
+    }
+
+    /**
+      * requests stops from server 
       */
     requestStops(serverURL) {
         this.http.get(serverURL + "/stops").map(res => res.json()).subscribe(
@@ -22,7 +30,13 @@ export class Stops {
             err => console.error("requestStops failed"),
             () => console.log('requestStops completed')
         );
+    }
 
+    /**
+     * @returns JSON of lines
+     */
+    getStops() {
+        return this.stops;
     }
 
     /**
@@ -56,7 +70,7 @@ export class Stops {
     /**
      * @returns coordinates of linestops
      */
-    getLineStopsCoordinates(){
+    getLineStopsCoordinates() {
         let linestopscoordinates = [];
         for (let i = 0; i < this.linestops.length; i++) {
             linestopscoordinates.push(this.linestops[i].location.coordinates);

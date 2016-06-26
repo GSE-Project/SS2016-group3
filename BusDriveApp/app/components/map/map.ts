@@ -110,9 +110,10 @@ export class Map implements AfterViewInit, OnDestroy {
                 }, 500);
 
             if (navigator.geolocation) {
-                navigator.geolocation.watchPosition(function (position) {
+                navigator.geolocation.getCurrentPosition(function (position) {
                     var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                     map.setCenter(latlng);
+                    map.setZoom(15);
                     clearInterval(animationInterval);
                     secondChild.style['background-position'] = '-144px 0';
                 });

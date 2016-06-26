@@ -79,6 +79,7 @@ export class NativeMap implements OnDestroy, AfterViewInit {
      * @param lineroutecoordinates list of coordinates of the lineroute
      */
     loadRoute(lineroutecoordinates) {
+        this.map.clear(); // übergangslösung
         this.lineroutecoordinates = lineroutecoordinates;
         let routepath = [];
         for (let i = 0; i < lineroutecoordinates.length; i++) {

@@ -11,14 +11,22 @@ import {SettingPage} from '../../components/setting/setting';
 
 @Injectable()
 export class BusDriveInterface {
-        private serverURL;
+    private serverURL;
 
     constructor(private http: Http, private setting: SettingPage, public events: Events, private busses: Busses, private lines: Lines, private stops: Stops, private routes: Routes, private provider: Provider, private customstops: CustomStops) {
         this.serverURL = setting.getServerURL();
-        this.events.subscribe("newServerURL", (URL) =>{
+        this.events.subscribe("newServerURL", (URL) => {
             this.serverURL = URL;
-            console.log("serverURl changed interface:" + URL)
         })
+    }
+
+    clearLists() {
+        this.busses.clearLists();
+        this.lines.clearLists();
+        this.stops.clearLists();
+        this.routes.clearLists();
+        this.customstops.clearLists();
+        console.log("lists cleared");
     }
 
     /**
@@ -27,6 +35,7 @@ export class BusDriveInterface {
     requestBusses() {
         this.busses.requestBusses(this.serverURL);
     }
+
     /**
      * @returns JSON of busses
      */
@@ -45,7 +54,7 @@ export class BusDriveInterface {
      * @param busId id of the selected bus
      * @returns number of total seats of the selected busses
      */
-    getBusSeatsNumber(busId){
+    getBusSeatsNumber(busId) {
         return this.busses.getBusSeatsNumber(busId);
     }
 
@@ -55,6 +64,7 @@ export class BusDriveInterface {
     requestLines() {
         this.lines.requestLines(this.serverURL);
     }
+
     /**
      * @returns JSON of lines
      */
@@ -76,6 +86,12 @@ export class BusDriveInterface {
         this.stops.requestStops(this.serverURL);
     }
 
+    /**
+     * @returns JSON of stops
+     */
+    getStops() {
+        return this.stops.getStops();
+    }
     /**
      * @param LineId id of the selected line
      * @retruns stops of the line
@@ -105,6 +121,12 @@ export class BusDriveInterface {
         this.routes.requestRoutes(this.serverURL);
     }
 
+    /**
+     * @returns JSON of routes
+     */
+    getRoutes() {
+        return this.routes.getRoutes();
+    }
     /**
      * @param LineId id of the selected line
      * @retruns route of the line
@@ -140,7 +162,7 @@ export class BusDriveInterface {
      */
     getLineCustomStopsIds() {
         return this.customstops.getLineCustomStopsIds();
-    }   
+    }
 
     /**
      * @returns list of names of linecustomstops
@@ -152,7 +174,7 @@ export class BusDriveInterface {
     /**
      * @returns list of pick up times of the linecustomstops
      */
-    getLineCustomStopPickUpTimes(){
+    getLineCustomStopPickUpTimes() {
         return this.customstops.getLineCustomStopPickUpTimes();
     }
 
@@ -166,30 +188,30 @@ export class BusDriveInterface {
     /**
      * @returns list of number of persons of the linecustomstops
      */
-    getLineCustomStopsNumberOfPersons(){
+    getLineCustomStopsNumberOfPersons() {
         return this.customstops.getLineCustomStopsNumberOfPersons();
     }
 
     /**
      * @returns list of addresses of the linecustomstops
      */
-    getLineCustomStopsAddresses(){
+    getLineCustomStopsAddresses() {
         return this.customstops.getLineCustomStopsAddresses();
-    } 
+    }
 
     /**
      * @returns list of assistance of the linecustomstops
      */
-    getLineCustomStopsAssistances(){
+    getLineCustomStopsAssistances() {
         return this.customstops.getLineCustomStopsAssistances();
-    }       
+    }
 
     /**
      * @returns lits of all information of the linecustomstops
      */
-    getLineCustomStopsAll(){
+    getLineCustomStopsAll() {
         return this.customstops.getLineCustomStopsAll();
-    } 
+    }
     /**
      * posts realTimeData to server
      * @param busID ID of the selected bus
@@ -214,7 +236,7 @@ export class BusDriveInterface {
      * @param customstopID ID of the customstop
      * @param status status of the customstop 
      */
-    postCustomStopStatus(customstopID, status){
+    postCustomStopStatus(customstopID, status) {
         this.provider.postCustomStopStatus(customstopID, status, this.serverURL);
     }
 }

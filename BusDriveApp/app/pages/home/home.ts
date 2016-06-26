@@ -9,26 +9,28 @@ import {BusDriveInterface} from '../../components/Services/busdriveinterface';
 })
 
 export class HomePage {
-    private platform;
-    private nav;
     private os;
 
     //-----Language-----
     public beginTour;
 
-    constructor(platform: Platform, nav: NavController, private busdriveinterface: BusDriveInterface) {
-        this.platform = platform;
-        this.nav = nav;
+    constructor(private platform: Platform, private nav: NavController, private busdriveinterface: BusDriveInterface) {
+        this.getMobileOperatingSystem();
+        this.requestData();
 
         //-----Language-----
         this.beginTour = language.beginTour;
-        this.getMobileOperatingSystem();
+    }
+
+    ionViewWillEnter() {
+        this.requestData();
     }
 
     /**
      * requests data from server via services component
      */
-    ionViewDidEnter(){
+    requestData() {
+        this.busdriveinterface.clearLists();
         this.busdriveinterface.requestBusses();
         this.busdriveinterface.requestLines();
         this.busdriveinterface.requestStops();

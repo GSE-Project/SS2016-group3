@@ -11,6 +11,13 @@ export class Busses {
     }
 
     /**
+     * clears all lists
+     */
+    clearLists() {
+        this.busses = [];
+    }
+
+    /**
      * requests busses from server
      */
     requestBusses(serverURL) {
@@ -36,8 +43,8 @@ export class Busses {
      * @param busId id of the selected bus
      * @returns number of total seats of the selected busses 
      */
-    getBusSeatsNumber(busId){
-        return this.busses[busId-1].totalSeats;
+    getBusSeatsNumber(busId) {
+        return this.busses[busId - 1].totalSeats;
     }
 
     /**
