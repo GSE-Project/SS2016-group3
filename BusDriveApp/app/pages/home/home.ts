@@ -22,9 +22,11 @@ export class HomePage {
         this.beginTour = language.beginTour;
     }
 
-    ionViewWillEnter() {
+    /*
+     ionViewWillEnter() {
         this.requestData();
-    }
+    } 
+    */
 
     /**
      * requests data from server via services component
