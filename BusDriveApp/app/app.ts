@@ -46,8 +46,8 @@ export class MyApp {
     });
     let settings = window.localStorage;
     if (!(settings["serverURL"])) {
-      settings.setItem("serverURL", "http://localhost:3000");
-      settings.setItem("serverURLList", "http://localhost:3000");
+      settings.setItem("serverURL", "https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1");
+      settings.setItem("serverURLList", "https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1");
       settings.setItem("insomnia", "true");
       settings.setItem("BackgroundMode", "true");
     }
