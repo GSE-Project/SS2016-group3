@@ -150,4 +150,9 @@ describe("the process of getting available line entries from the server",functio
       customStopsMock.requestLineCustomStops("", 1);
       expect(customStopsMock.getLineCustomStopsAll()).not.toEqual([]);
     });
+
+    it('should add a zero to times < 10', function() {
+      let customStopsMock:CustomStops = new CustomStops(http);
+      expect(customStopsMock.addZero(3)).toEqual("03");
+    })
 })
