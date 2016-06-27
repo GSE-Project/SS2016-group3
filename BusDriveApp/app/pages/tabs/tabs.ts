@@ -49,7 +49,7 @@ export class TabsPage {
         this.updateBusStatus();
         this.getLineRoute();
         this.getLineStops();
-        this.requestintervalID = setInterval(this.getLineCustomStops.bind(this),5000);
+        this.requestintervalID = setInterval(this.requestLineCustomStops.bind(this),5000);
         this.sendintervalID = setInterval(this.sendrealTimeData.bind(this), 5000);
 
         this.events.subscribe("EndTour", () =>{
@@ -98,11 +98,10 @@ export class TabsPage {
     }
 
     /**
-     * gets linecustomstops
+     * requests linecustomstops
      */
-    getLineCustomStops(){
-        this.busdriveinterface.requestCustomStops();
-        this.busdriveinterface.getLineCustomStops(this.selectedline);
+    requestLineCustomStops(){
+        this.busdriveinterface.requestLineCustomStops(this.selectedline);
         this.events.publish("newCustomStops");
     }
 

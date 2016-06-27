@@ -11,9 +11,9 @@
 <ion-content>
   <ion-item>
     <h2>{{customstop[1]}}</h2>
-    <p>Abholzeit: {{customstop[2]}} </p>
-    <p>Anzahl: {{customstop[3]}}</p>
-    <p>Adresse: {{customstop[4]}}</p>
+    <p>{{timeTrans}}: {{customstop[2]}} </p>
+    <p>{{numberTrans}}: {{customstop[3]}}</p>
+    <p>{{addressTrans}}: {{customstop[4]}}</p>
     <p>
       <img src="img/wheelchair.png" *ngIf="customstop[5][0]" width="10%" height="auto">
       <img src="img/luggage.png" *ngIf="customstop[5][1]" width="10%" height="auto">
@@ -25,17 +25,17 @@
 
   <table width="100%">
     <colgroup>
-            <col width="50%">
-            <col width="50%">
-        </colgroup>
+      <col width="50%">
+      <col width="50%">
+    </colgroup>
     <tr>
-      <td align ="center">
+      <td align="center">
         <button primary *ngIf="accepted" (click)="completeAcceptedCustomStop()" width="200px">
         <ion-icon name="done-all"></ion-icon>
         {{done}}
        </button>
       </td>
-      <td align ="center">
+      <td align="center">
         <button primary *ngIf="accepted" (click)="noShowAcceptedCustomStop()" width="200px">
     <ion-icon name="sad"></ion-icon>
     {{noAppearance}}
@@ -45,13 +45,13 @@
   </table>
   <table width="100%">
     <tr>
-      <td align ="center">
+      <td align="center">
         <button primary *ngIf="!accepted" (click)="acceptCustomStop()" width="200px">
           <ion-icon name="checkmark"></ion-icon>
           {{accept}}
         </button>
       </td>
-      <td align ="center">
+      <td align="center">
         <button primary *ngIf="!accepted" (click)="declineCustomStop()" width="200px">
           <ion-icon name="close"></ion-icon>
           {{decline}}

@@ -5,62 +5,68 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CustomStops {
-    private customstops = [];
     private linecustomstops = [];
 
     constructor(private http: Http) {
     }
 
     /**
-      * requests customstops from server
-      */
-    requestCustomStops(serverURL) {
-        this.http.get(serverURL + "/customstops").map(res => res.json()).subscribe(
-            data => {
-                this.customstops = data;
-            },
-            err => console.error("requestCustomStops failed"),
-            () => console.log('requestCustomStops completed')
-        );
-
+     * clears all lists
+     */
+    clearLists() {
+        this.linecustomstops = [];
+        console.log("customstops" + this.linecustomstops.length)
     }
 
     /**
+     * @param serverURL URL of the server
      * @param LineId id of the selected line
      * @retruns list of customstops of the line
      */
-    getLineCustomStops(LineId) {
-        this.linecustomstops = [];
-        for (let i = 0; i < this.customstops.length; i++) {
-            if (LineId === this.customstops[i].lineId) {
-                this.linecustomstops.push(this.customstops[i]);
-            }
+    requestLineCustomStops(serverURL, LineId) {
+        this.http.get(serverURL + "/customStops?lineId=" + LineId).map(res => res.json()).subscribe(
+            data => {
+                this.linecustomstops = data;
+            },
+            err => console.error("requestLineCustomStops failed"),
+            () => console.log('requestLineCustomStops completed')
+        );
+        for (let i = 0; i < this.linecustomstops.length; i++) {
+            let picuptime = new Date(this.linecustomstops[i].pickUpTime)
+            let hours = this.addZero(picuptime.getHours());
+            let minutes = this.addZero(picuptime.getMinutes());
+            let day = this.addZero(picuptime.getDate());
+            let month = this.addZero(picuptime.getMonth());
+            let year = this.addZero(picuptime.getFullYear());
+            let time = hours + ":" + minutes + " " + day + "." + month + "." + year;
+            this.linecustomstops[i].pickUpTime = time;
         }
-        for (let i = 0; i < this.customstops.length; i++) {
+
+        for (let i = 0; i < this.linecustomstops.length; i++) {
             let assistance = [false, false, false, false, false];
-            if (this.customstops[i].info.assistance.length > 0) {
-                this.customstops[i].info.assistance.sort();
-                for (let j = 0; j < this.customstops[i].info.assistance.length; j++) {
-                    if (this.customstops[i].info.assistance[j] === 1) {
+            if (this.linecustomstops[i].info.assistance.length > 0) {
+                this.linecustomstops[i].info.assistance.sort();
+                for (let j = 0; j < this.linecustomstops[i].info.assistance.length; j++) {
+                    if (this.linecustomstops[i].info.assistance[j] === 1) {
                         assistance.splice(0, 1, true);
                     }
-                    else if (this.customstops[i].info.assistance[j] === 2) {
+                    else if (this.linecustomstops[i].info.assistance[j] === 2) {
                         assistance.splice(1, 1, true);
                     }
-                    else if (this.customstops[i].info.assistance[j] === 3) {
+                    else if (this.linecustomstops[i].info.assistance[j] === 3) {
                         assistance.splice(2, 1, true);
                     }
-                    else if (this.customstops[i].info.assistance[j] === 4) {
+                    else if (this.linecustomstops[i].info.assistance[j] === 4) {
                         assistance.splice(3, 1, true);
                     }
-                    else if (this.customstops[i].info.assistance[j] === 5) {
+                    else if (this.linecustomstops[i].info.assistance[j] === 5) {
                         assistance.splice(4, 1, true);
                     }
                 }
             }
-            this.customstops[i].info.assistance = assistance;
+            this.linecustomstops[i].info.assistance = assistance;
         }
-        return this.linecustomstops;
+        console.log("customstops" + this.linecustomstops.length)
     }
 
     /**
@@ -145,9 +151,22 @@ export class CustomStops {
      */
     getLineCustomStopsAll() {
         let linecustomstopsall = [];
+
         for (let i = 0; i < this.linecustomstops.length; i++) {
             linecustomstopsall.push([this.linecustomstops[i].id, this.linecustomstops[i].info.name, this.linecustomstops[i].pickUpTime, this.linecustomstops[i].numberOfPersons, this.linecustomstops[i].info.address, this.linecustomstops[i].info.assistance, this.linecustomstops[i].location.coordinates]);
         }
         return linecustomstopsall;
+    }
+
+    /**
+     * adds 0 to times
+     * @param time number
+     * @returns time
+     */
+    addZero(time) {
+        if (time < 10) {
+            time = "0" + time;
+        }
+        return time;
     }
 }

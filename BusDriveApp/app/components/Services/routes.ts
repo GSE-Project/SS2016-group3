@@ -12,6 +12,14 @@ export class Routes {
     }
 
     /**
+     * clears all lists
+     */
+    clearLists() {
+        this.routes = [];
+        this.lineroute = [];
+    }
+
+    /**
      * requests routes from server
      */
     requestRoutes(serverURL) {
@@ -25,8 +33,14 @@ export class Routes {
     }
 
     /**
+     * @returns JSON of routes
+     */
+    getRoutes() {
+        return this.routes;
+    }
+    /**
      * @param id of the selected line
-     * @retruns route of the line
+     * @returns route of the line
      */
     getLineRoute(LineId) {
         this.lineroute = [];
@@ -36,7 +50,7 @@ export class Routes {
     }
 
     /**
-     * @retruns coordinates of the lineroute
+     * @returns coordinates of the lineroute
      */
     getLineRouteCoordinates() {
         let lineroutecoordinates = [];
@@ -51,7 +65,7 @@ export class Routes {
     }
 
     /**
-     * @retruns coordinates of the lineroute
+     * @returns coordinates of the lineroute
      */
     getLineRouteCoordinatesNative() {
         let lineroutecoordinates = [];

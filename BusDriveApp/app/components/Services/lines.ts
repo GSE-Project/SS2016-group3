@@ -12,6 +12,13 @@ export class Lines {
     }
 
     /**
+     * clears all lists
+     */
+    clearLists() {
+        this.lines = [];
+    }
+
+    /**
      * requests lines from server
      */
     requestLines(serverURL) {
