@@ -154,7 +154,7 @@ export class BusDriveInterface {
      * @param LineId id of the selected line
      */
     requestLineCustomStops(LineId) {
-        this.customstops.requestLineCustomStops(this.serverURL, LineId);
+        return this.customstops.requestLineCustomStops(this.serverURL, LineId);
     }
 
     /**

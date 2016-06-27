@@ -41,8 +41,8 @@ export class DrivePage {
         this.getBusSeatsNumber();
         this.getLineStopsNames();
         this.nextStop = this.linestopsnames[0];
-        this.events.subscribe("newCustomStops", () => {
-            this.getCustomStops();
+        this.events.subscribe("newCustomStops", (linecustomstopsall) => {
+            this.getCustomStops(linecustomstopsall[0]);
         });
         this.events.subscribe("accept", customstop => {
             this.acceptCustomStop(customstop[0])
@@ -113,9 +113,10 @@ export class DrivePage {
 
     /**
      * gets customstops and creates a notification
+     * @param linecustomstopsall customstops of the lines
      */
-    getCustomStops() {
-        let newlinecustomstopsall = this.busdriveinterface.getLineCustomStopsAll();
+    getCustomStops(linecustomstopsall) {
+        let newlinecustomstopsall = linecustomstopsall;
         if (newlinecustomstopsall.length > 0) {
             if (this.linecustomstopsall.length > 0) {
                 let newcustomstopsid: number[] = [];
