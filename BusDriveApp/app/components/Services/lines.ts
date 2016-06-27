@@ -22,13 +22,16 @@ export class Lines {
      * requests lines from server
      */
     requestLines(serverURL) {
-        this.http.get(serverURL + "/lines").map(res => res.json()).subscribe(
-            data => {
-                this.lines = data["lines"];
-            },
-            err => console.error('requestLines failed'),
-            () => console.log('requestLines completed')
-        );
+        return new Promise(resolve => {
+            this.http.get(serverURL + "/lines").map(res => res.json()).subscribe(
+                data => {
+                    this.lines = data["lines"];
+                    resolve(this.lines);
+                },
+                err => console.error('requestLines failed'),
+                () => console.log('requestLines completed')
+            );
+        })
     }
 
     /**

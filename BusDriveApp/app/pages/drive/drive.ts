@@ -45,16 +45,16 @@ export class DrivePage {
             this.getCustomStops(linecustomstopsall[0]);
         });
         this.events.subscribe("accept", customstop => {
-            this.acceptCustomStop(customstop[0])
+            this.acceptCustomStop(customstop[0]);
         });
         this.events.subscribe("decline", customstop => {
-            this.declineCustomStop(customstop[0])
+            this.declineCustomStop(customstop[0]);
         });
         this.events.subscribe("complete", customstop => {
             this.completeAcceptedCustomStop(customstop[0])
         });
         this.events.subscribe("noshow", customstop => {
-            this.noShowAcceptedCustomStop(customstop[0])
+            this.noShowAcceptedCustomStop(customstop[0]);
         });
 
         this.platform.registerBackButtonAction(this.endTour.bind(this));
@@ -158,6 +158,7 @@ export class DrivePage {
                 }))
             }
         }
+        this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
     }
 
     /**

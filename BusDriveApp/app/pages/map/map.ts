@@ -1,5 +1,4 @@
-import {Page, NavParams, Platform, Events} from 'ionic-angular';
-import {Geolocation} from 'ionic-native';
+import {Page, NavParams, Platform, NavController, Events} from 'ionic-angular';
 import {Component, ViewChild} from  '@angular/core';
 import {Map} from '../../components/map/map';
 import {language} from "../../components/languages/languages";
@@ -29,7 +28,7 @@ export class MapPage {
         this.events.subscribe("acceptedCustomStops", acceptedcustomstops => {
             this.acceptedcustomstops = acceptedcustomstops[0];
             this.map.loadCustomStops(this.acceptedcustomstops);
-        })
+        });
         this.events.subscribe("mapLoaded", () => {
             this.showLine();
         });
@@ -38,6 +37,7 @@ export class MapPage {
         this.events.subscribe("endTourAborted", () => {
             this.backbuttoncounter = 0;
         })
+        
         //-----Language-----
         this.title = language.mapTitle;
     }

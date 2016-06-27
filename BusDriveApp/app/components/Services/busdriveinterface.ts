@@ -33,7 +33,7 @@ export class BusDriveInterface {
      * requests busses from server
      */
     requestBusses() {
-        this.busses.requestBusses(this.serverURL);
+        return this.busses.requestBusses(this.serverURL);
     }
 
     /**
@@ -62,7 +62,7 @@ export class BusDriveInterface {
      * requests lines from server
      */
     requestLines() {
-        this.lines.requestLines(this.serverURL);
+        return this.lines.requestLines(this.serverURL);
     }
 
     /**
@@ -83,7 +83,7 @@ export class BusDriveInterface {
      * requests stops from server
      */
     requestStops() {
-        this.stops.requestStops(this.serverURL);
+        return this.stops.requestStops(this.serverURL);
     }
 
     /**
@@ -118,7 +118,7 @@ export class BusDriveInterface {
      * requests routes from server
      */
     requestRoutes() {
-        this.routes.requestRoutes(this.serverURL);
+        return this.routes.requestRoutes(this.serverURL);
     }
 
     /**

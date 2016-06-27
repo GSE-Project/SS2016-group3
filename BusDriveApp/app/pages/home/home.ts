@@ -1,4 +1,4 @@
-import {Page, Platform, NavController} from 'ionic-angular';
+import {Page, Platform, NavController, Alert} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {BusListPage} from '../buslist/buslist';
 import {language} from "../../components/languages/languages";
@@ -10,9 +10,12 @@ import {BusDriveInterface} from '../../components/Services/busdriveinterface';
 
 export class HomePage {
     private os;
+    private recievedalldata = [false, false, false, false];
+    private recieveddata = false;
 
     //-----Language-----
     public beginTour;
+    public recieveddataTrans;
 
     constructor(private platform: Platform, private nav: NavController, private busdriveinterface: BusDriveInterface) {
         this.getMobileOperatingSystem();
@@ -20,32 +23,61 @@ export class HomePage {
 
         //-----Language-----
         this.beginTour = language.beginTour;
+        this.recieveddataTrans = language.recieveddata;
     }
-
-    /*
-     ionViewWillEnter() {
-        this.requestData();
-    } 
-    */
 
     /**
      * requests data from server via services component
      */
     requestData() {
         this.busdriveinterface.clearLists();
-        this.busdriveinterface.requestBusses();
-        this.busdriveinterface.requestLines();
-        this.busdriveinterface.requestStops();
-        this.busdriveinterface.requestRoutes();
+        this.busdriveinterface.requestBusses().then(() => {
+            this.recievedalldata[0] = true;
+        });
+        this.busdriveinterface.requestLines().then(() => {
+            this.recievedalldata[1] = true;
+        });;
+        this.busdriveinterface.requestStops().then(() => {
+            this.recievedalldata[2] = true;
+        });;
+        this.busdriveinterface.requestRoutes().then(() => {
+            this.recievedalldata[3] = true;
+        });;
     }
 
     /**
      * switches the GUI on BusListPage and passes the url of the server
      */
     navigate() {
-        console.log("-> BusListPage");
-        this.nav.push(BusListPage, {
+        for (let i = 0; i < this.recievedalldata.length; i++) {
+            if (this.recievedalldata[i]) {
+                this.recieveddata = true;
+            }
+            else {
+                this.recieveddata = false;
+            }
+        }
+        if (this.recieveddata) {
+            console.log("-> BusListPage");
+            this.nav.push(BusListPage, {
+            });
+        }
+        else {
+            let alert = Alert.create({
+            title: this.recieveddataTrans,
+            enableBackdropDismiss: false,
+            buttons: [
+                {
+                    text: 'OK',
+                    handler: () => {
+                        console.log('alert confirmed');
+                        this.requestData();
+                    }
+                }]
         });
+        this.nav.present(alert);
+
+        }
     }
 
     /**

@@ -23,13 +23,16 @@ export class Stops {
       * requests stops from server 
       */
     requestStops(serverURL) {
-        this.http.get(serverURL + "/stops").map(res => res.json()).subscribe(
-            data => {
-                this.stops = data["stops"];
-            },
-            err => console.error("requestStops failed"),
-            () => console.log('requestStops completed')
-        );
+        return new Promise(resolve => {
+            this.http.get(serverURL + "/stops").map(res => res.json()).subscribe(
+                data => {
+                    this.stops = data["stops"];
+                    resolve(this.stops);
+                },
+                err => console.error("requestStops failed"),
+                () => console.log('requestStops completed')
+            );
+        })
     }
 
     /**

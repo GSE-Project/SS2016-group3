@@ -11,7 +11,7 @@ export class Language {
         public imprint: string, public privacyPolicy: string, public license: string, public versionInfo: string, public beginTour: string,
         public backgroundModeTrans: string, public preventSleepTrans: string, public sendDist: string, public sendperiodTrans: string, public addTrans: string,
         public newServerTrans2: string,
-        public langTrans: string, public serveradressTrans, public newServerTrans: string, public settingTrans: string, public about: string) {
+        public langTrans: string, public serveradressTrans, public newServerTrans: string, public settingTrans: string, public about: string, public recieveddata: string) {
 
         this.id = id;
         this.name = name;
@@ -49,6 +49,7 @@ export class Language {
         this.versionInfo = versionInfo;
         //----------home screen------
         this.beginTour = beginTour;
+        this.recieveddata = recieveddata;
         //------Settingspage-------
         this.backgroundModeTrans = backgroundModeTrans;
         this.preventSleepTrans = preventSleepTrans;
@@ -72,14 +73,14 @@ export let en = new Language(0, "EN", "Drive", "Seats taken:", "Numberplate:", "
     "Choose bus", "Choose line", "Line", "Map", "Schedule", "End tour?", "Cancel", "Next stop:", "Accepted custom stops", "New custom stops",
     "Time", "Number", "Done", "No appearance", "Accept", "Decline", "Address", "Find us on", "Your opinion",
     "Disclaimer", "Imprint", "Privacy Policy", "License", "Version Info", "Start Tour",
-    "Background mode", "Prevent sleeping", "Sending distance", "Sending period", "Add", "Enter a url for the server", "Language", "Serveraddress", "New serveraddress", "Settings", "About");
+    "Background mode", "Prevent sleeping", "Sending distance", "Sending period", "Add", "Enter a url for the server", "Language", "Serveraddress", "New serveraddress", "Settings", "About", "Communication problems: no received data");
 
 
 export let de = new Language(1, "DE", "Fahren", "Belegte Plätze:", "Nummernschild", "Sitzplätze",
     "Wähle Bus aus", "Wähle Linie aus", "Linie", "Karte", "Fahrplan", "Fahrt beenden?", "Abbrechen", "Nächster Halt:", "Angenommene Haltestellen", "Neue Halstestellen",
     "Zeit", "Anzahl", "Ausgeführt", "Kein Erscheinen", "Akzeptieren", "Abblehnen", "Adresse", "Sie finden uns auf", "Ihre Meinung",
     "Rechtliches", "Impressum", "Datenschutzerklärung", "Lizenz", "Versionsinfo", "Tour starten",
-    "Hintergrundmodus", "Schlafen verhindern", "Sendedistanz", "Sendeperiode", "Hinzufügen", "Geben sie eine Server-URL ein", "Sprache", "Serveradresse", "Neue Serveradresse", "Einstellungen", "Über uns");
+    "Hintergrundmodus", "Schlafen verhindern", "Sendedistanz", "Sendeperiode", "Hinzufügen", "Geben sie eine Server-URL ein", "Sprache", "Serveradresse", "Neue Serveradresse", "Einstellungen", "Über uns", "Kommunikationsprobleme: keine empfangenen Daten");
 
 export let language;
 

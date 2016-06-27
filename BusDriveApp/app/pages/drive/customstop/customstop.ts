@@ -25,9 +25,10 @@ export class CustomStopPage {
     public done;
     public noAppearance;
 
-    constructor(navParams: NavParams, private nav: NavController, public events: Events) {
+    constructor(navParams: NavParams, private nav: NavController, public events: Events, private platform: Platform) {
         this.customstop = navParams.get("showcustomstop");
         this.accepted = navParams.get("accepted");
+        this.platform.registerBackButtonAction(this.nav.pop.bind(this));
         this.events.subscribe("mapLoaded", () => {
             let customstoplat = this.customstop[6][1];
             let customstoplng = this.customstop[6][0];

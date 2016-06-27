@@ -15,7 +15,6 @@ export class CustomStops {
      */
     clearLists() {
         this.linecustomstops = [];
-        console.log("customstops" + this.linecustomstops.length)
     }
 
     /**
@@ -33,7 +32,6 @@ export class CustomStops {
                 err => console.error("requestLineCustomStops failed"),
                 () => console.log('requestLineCustomStops completed')
             );
-            console.log("customstops" + this.linecustomstops.length);
         })
     }
 

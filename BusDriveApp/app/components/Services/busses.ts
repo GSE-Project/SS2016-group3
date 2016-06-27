@@ -21,15 +21,16 @@ export class Busses {
      * requests busses from server
      */
     requestBusses(serverURL) {
-        console.log("requestBusses called");
-        console.log(this.http)
-        this.http.get(serverURL + "/busses").map(res => res.json()).subscribe(
-            data => {
-                this.busses = data["busses"];
-            },
-            err => console.error('requestBusses failed'),
-            () => console.log('requestBusses completed')
-        );
+        return new Promise(resolve => {
+            this.http.get(serverURL + "/busses").map(res => res.json()).subscribe(
+                data => {
+                    this.busses = data["busses"];
+                    resolve(this.busses);
+                },
+                err => console.error('requestBusses failed'),
+                () => console.log('requestBusses completed')
+            );
+        })
     }
 
     /**
