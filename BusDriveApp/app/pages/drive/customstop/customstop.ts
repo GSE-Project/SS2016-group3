@@ -38,13 +38,13 @@ export class CustomStopPage {
 
         //-----Language-----
         this.title = language.stopTitle;
-        this.timeTrans=language.time;
-        this.addressTrans=language.addressTrans;
-        this.numberTrans=language.numberTrans;
-        this.decline=language.decline;
-        this.accept=language.accept;
-        this.done=language.done;
-        this.noAppearance=language.noAppearance;
+        this.timeTrans = language.time;
+        this.addressTrans = language.addressTrans;
+        this.numberTrans = language.numberTrans;
+        this.decline = language.decline;
+        this.accept = language.accept;
+        this.done = language.done;
+        this.noAppearance = language.noAppearance;
 
     }
 
