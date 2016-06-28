@@ -17,7 +17,7 @@ export class StopsPage {
   constructor(navParams: NavParams, private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events) {
     this.getLineStopsNames();
 
-    this.platform.registerBackButtonAction(this.endTour.bind(this));
+    this.platform.registerBackButtonAction(this.endTour.bind(this), 10);
     this.events.subscribe("endTourAborted", () => {
       this.backbuttoncounter = 0;
     })

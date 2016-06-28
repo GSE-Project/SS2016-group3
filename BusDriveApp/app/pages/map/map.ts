@@ -33,7 +33,7 @@ export class MapPage {
             this.showLine();
         });
 
-        this.platform.registerBackButtonAction(this.endTour.bind(this));
+        this.platform.registerBackButtonAction(this.endTour.bind(this), 10);
         this.events.subscribe("endTourAborted", () => {
             this.backbuttoncounter = 0;
         })
