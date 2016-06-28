@@ -1,16 +1,24 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, Headers} from '@angular/http';
 
-
-//a simple service, equals Busses service
 @Injectable()
-export default class TestService {
-  
-  private busses = [];
+export class Busses {
+    private busses = [];
 
-  constructor(private http:Http) { }
-  
-  requestBusses(serverURL) {
+    constructor(private http: Http) {
+    }
+
+    /**
+     * clears all lists
+     */
+    clearLists() {
+        this.busses = [];
+    }
+
+    /**
+     * requests busses from server
+     */
+    requestBusses(serverURL) {
         console.log("requestBusses called");
         console.log(this.http)
         this.http.get(serverURL + "/busses").map(res => res.json()).subscribe(
@@ -22,7 +30,29 @@ export default class TestService {
         );
     }
 
-  getBusses(){
-    return this.busses;
-  }
+    /**
+     * @returns JSON of busses
+     */
+    getBusses() {
+        return this.busses;
+    }
+
+    /**
+     * @param busId id of the selected bus
+     * @returns number of total seats of the selected busses 
+     */
+    getBusSeatsNumber(busId) {
+        return this.busses[busId - 1].totalSeats;
+    }
+
+    /**
+     * @returns id, numberplate and number of total seats of the busses as a list
+     */
+    getBussesInfos() {
+        let bussesInfos = [];
+        for (let i = 0; i < this.busses.length; i++) {
+            bussesInfos.push([this.busses[i].id, this.busses[i].numberPlate, this.busses[i].totalSeats]);
+        }
+        return bussesInfos;
+    }
 }

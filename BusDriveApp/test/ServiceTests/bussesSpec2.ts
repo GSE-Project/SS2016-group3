@@ -1,4 +1,4 @@
-import {Busses} from '../../app/components/Services/testService'
+import {Busses} from '../../app/components/Services/busses'
 import {
   describe,
   expect,
