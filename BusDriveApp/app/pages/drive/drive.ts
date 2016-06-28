@@ -41,23 +41,23 @@ export class DrivePage {
         this.getBusSeatsNumber();
         this.getLineStopsNames();
         this.nextStop = this.linestopsnames[0];
-        this.events.subscribe("newCustomStops", () => {
-            this.getCustomStops();
+        this.events.subscribe("newCustomStops", (linecustomstopsall) => {
+            this.getCustomStops(linecustomstopsall[0]);
         });
         this.events.subscribe("accept", customstop => {
-            this.acceptCustomStop(customstop[0])
+            this.acceptCustomStop(customstop[0]);
         });
         this.events.subscribe("decline", customstop => {
-            this.declineCustomStop(customstop[0])
+            this.declineCustomStop(customstop[0]);
         });
         this.events.subscribe("complete", customstop => {
             this.completeAcceptedCustomStop(customstop[0])
         });
         this.events.subscribe("noshow", customstop => {
-            this.noShowAcceptedCustomStop(customstop[0])
+            this.noShowAcceptedCustomStop(customstop[0]);
         });
 
-        this.platform.registerBackButtonAction(this.endTour.bind(this));
+        this.platform.registerBackButtonAction(this.endTour.bind(this), 10);
         this.events.subscribe("endTourAborted", () => {
             this.backbuttoncounter = 0;
         })
@@ -113,9 +113,10 @@ export class DrivePage {
 
     /**
      * gets customstops and creates a notification
+     * @param linecustomstopsall customstops of the lines
      */
-    getCustomStops() {
-        let newlinecustomstopsall = this.busdriveinterface.getLineCustomStopsAll();
+    getCustomStops(linecustomstopsall) {
+        let newlinecustomstopsall = linecustomstopsall;
         if (newlinecustomstopsall.length > 0) {
             if (this.linecustomstopsall.length > 0) {
                 let newcustomstopsid: number[] = [];
@@ -157,6 +158,7 @@ export class DrivePage {
                 }))
             }
         }
+        this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
     }
 
     /**

@@ -15,7 +15,6 @@ export class CustomStops {
      */
     clearLists() {
         this.linecustomstops = [];
-        console.log("customstops" + this.linecustomstops.length)
     }
 
     /**
@@ -24,49 +23,16 @@ export class CustomStops {
      * @retruns list of customstops of the line
      */
     requestLineCustomStops(serverURL, LineId) {
-        this.http.get(serverURL + "/customStops?lineId=" + LineId).map(res => res.json()).subscribe(
-            data => {
-                this.linecustomstops = data;
-            },
-            err => console.error("requestLineCustomStops failed"),
-            () => console.log('requestLineCustomStops completed')
-        );
-        for (let i = 0; i < this.linecustomstops.length; i++) {
-            let picuptime = new Date(this.linecustomstops[i].pickUpTime)
-            let hours = this.addZero(picuptime.getHours());
-            let minutes = this.addZero(picuptime.getMinutes());
-            let day = this.addZero(picuptime.getDate());
-            let month = this.addZero(picuptime.getMonth());
-            let year = this.addZero(picuptime.getFullYear());
-            let time = hours + ":" + minutes + " " + day + "." + month + "." + year;
-            this.linecustomstops[i].pickUpTime = time;
-        }
-
-        for (let i = 0; i < this.linecustomstops.length; i++) {
-            let assistance = [false, false, false, false, false];
-            if (this.linecustomstops[i].info.assistance.length > 0) {
-                this.linecustomstops[i].info.assistance.sort();
-                for (let j = 0; j < this.linecustomstops[i].info.assistance.length; j++) {
-                    if (this.linecustomstops[i].info.assistance[j] === 1) {
-                        assistance.splice(0, 1, true);
-                    }
-                    else if (this.linecustomstops[i].info.assistance[j] === 2) {
-                        assistance.splice(1, 1, true);
-                    }
-                    else if (this.linecustomstops[i].info.assistance[j] === 3) {
-                        assistance.splice(2, 1, true);
-                    }
-                    else if (this.linecustomstops[i].info.assistance[j] === 4) {
-                        assistance.splice(3, 1, true);
-                    }
-                    else if (this.linecustomstops[i].info.assistance[j] === 5) {
-                        assistance.splice(4, 1, true);
-                    }
-                }
-            }
-            this.linecustomstops[i].info.assistance = assistance;
-        }
-        console.log("customstops" + this.linecustomstops.length)
+        return new Promise(resolve => {
+            this.http.get(serverURL + "/customStops?lineId=" + LineId).map(res => res.json()).subscribe(
+                data => {
+                    this.linecustomstops = data;
+                    resolve(this.linecustomstops);
+                },
+                err => console.error("requestLineCustomStops failed"),
+                () => console.log('requestLineCustomStops completed')
+            );
+        })
     }
 
     /**
@@ -150,8 +116,39 @@ export class CustomStops {
      * @returns list of all information of the linecustomstops
      */
     getLineCustomStopsAll() {
+        for (let i = 0; i < this.linecustomstops.length; i++) {
+            let picuptime = new Date(this.linecustomstops[i].pickUpTime)
+            let hours = this.addZero(picuptime.getHours());
+            let minutes = this.addZero(picuptime.getMinutes());
+            let day = this.addZero(picuptime.getDate());
+            let month = this.addZero(picuptime.getMonth());
+            let year = this.addZero(picuptime.getFullYear());
+            let time = hours + ":" + minutes + " " + day + "." + month + "." + year;
+            this.linecustomstops[i].pickUpTime = time;
+            let assistance = [false, false, false, false, false];
+            if (this.linecustomstops[i].info.assistance.length > 0) {
+                this.linecustomstops[i].info.assistance.sort();
+                for (let j = 0; j < this.linecustomstops[i].info.assistance.length; j++) {
+                    if (this.linecustomstops[i].info.assistance[j] === 0) {
+                        assistance.splice(0, 1, true);
+                    }
+                    else if (this.linecustomstops[i].info.assistance[j] === 1) {
+                        assistance.splice(1, 1, true);
+                    }
+                    else if (this.linecustomstops[i].info.assistance[j] === 2) {
+                        assistance.splice(2, 1, true);
+                    }
+                    else if (this.linecustomstops[i].info.assistance[j] === 3) {
+                        assistance.splice(3, 1, true);
+                    }
+                    else if (this.linecustomstops[i].info.assistance[j] === 4) {
+                        assistance.splice(4, 1, true);
+                    }
+                }
+            }
+            this.linecustomstops[i].info.assistance = assistance;
+        }
         let linecustomstopsall = [];
-
         for (let i = 0; i < this.linecustomstops.length; i++) {
             linecustomstopsall.push([this.linecustomstops[i].id, this.linecustomstops[i].info.name, this.linecustomstops[i].pickUpTime, this.linecustomstops[i].numberOfPersons, this.linecustomstops[i].info.address, this.linecustomstops[i].info.assistance, this.linecustomstops[i].location.coordinates]);
         }

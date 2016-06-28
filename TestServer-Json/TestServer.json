@@ -298,13 +298,15 @@
       },
       "numberOfPersons": 3,
       "deviceID": 85757,
-      "userName": "Sascha",
-      "userAddress": "Uni Ost",
-      "userAssistance": [
-        1,
-        2,
-        5
-      ]
+      "info": {
+        "name": "Sascha",
+        "address": "Uni Ost",
+        "assistance": [
+          1,
+          2,
+          5
+        ]
+      }
     },
     {
       "lineId": 1,
@@ -319,12 +321,14 @@
       },
       "numberOfPersons": 1,
       "deviceID": 857547,
-      "userName": "Charel",
-      "userAddress": "Uni Sporthalle",
-      "userAssistance": [
-        1,
-        2
-      ]
+      "info": {
+        "name": "Charel",
+        "address": "Uni Sporthalle",
+        "assistance": [
+          2,
+          5
+        ]
+      }
     },
     {
       "lineId": 1,
@@ -339,12 +343,11 @@
       },
       "numberOfPersons": 2,
       "deviceID": 8578547,
-      "userName": "Patrick",
-      "userAddress": "Uni West",
-      "userAssistance": [
-        1,
-        5
-      ]
+      "info": {
+        "name": "Patrick",
+        "address": "Uni Ost",
+        "assistance": []
+      }
     },
     {
       "lineId": 1,
@@ -359,15 +362,17 @@
       },
       "numberOfPersons": 5,
       "deviceID": 8578547,
-      "userName": "Erik",
-      "userAddress": "Uni Süd",
-      "userAssistance": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
+      "info": {
+        "name": "Erik",
+        "address": "Uni Ost",
+        "assistance": [
+          1,
+          2,
+          4,
+          3,
+          5
+        ]
+      }
     }
   ],
   "updateBusStatus": {
@@ -379,12 +384,12 @@
     "position": {
       "type": "Point",
       "coordinates": [
-        7.608701399999998,
-        49.210522999999995
+        7.7522150000000005,
+        49.4252432
       ]
     },
     "takenSeats": 0,
-    "timeStamp": 1466723035438
+    "timeStamp": 1467031315199
   },
   "routes": {
     "routes": [

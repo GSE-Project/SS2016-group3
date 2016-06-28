@@ -14,6 +14,7 @@ export class CustomStopPage {
     @ViewChild(Map) map: Map;
     private customstop;
     private accepted;
+    private priority: number = 50;
 
     //-----Language-----
     public title;
@@ -25,9 +26,16 @@ export class CustomStopPage {
     public done;
     public noAppearance;
 
-    constructor(navParams: NavParams, private nav: NavController, public events: Events) {
+    constructor(navParams: NavParams, private nav: NavController, public events: Events, private platform: Platform) {
         this.customstop = navParams.get("showcustomstop");
         this.accepted = navParams.get("accepted");
+        this.platform.registerBackButtonAction(() => {
+            if (this.nav.canGoBack()) {
+                this.priority = 1;
+                this.nav.pop();
+                this.nav.remove();
+            }
+        }, this.priority);
         this.events.subscribe("mapLoaded", () => {
             let customstoplat = this.customstop[6][1];
             let customstoplng = this.customstop[6][0];
@@ -36,14 +44,14 @@ export class CustomStopPage {
         });
 
         //-----Language-----
-        this.title = language.stopTitle;
-        this.timeTrans=language.time;
-        this.addressTrans=language.addressTrans;
-        this.numberTrans=language.numberTrans;
-        this.decline=language.decline;
-        this.accept=language.accept;
-        this.done=language.done;
-        this.noAppearance=language.noAppearance;
+        this.title = language.customStopTitle;
+        this.timeTrans = language.time;
+        this.addressTrans = language.addressTrans;
+        this.numberTrans = language.numberTrans;
+        this.decline = language.decline;
+        this.accept = language.accept;
+        this.done = language.done;
+        this.noAppearance = language.noAppearance;
 
     }
 

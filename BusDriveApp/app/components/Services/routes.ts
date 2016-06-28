@@ -23,13 +23,16 @@ export class Routes {
      * requests routes from server
      */
     requestRoutes(serverURL) {
-        this.http.get(serverURL + "/routes").map(res => res.json()).subscribe(
-            data => {
-                this.routes = data["routes"];
-            },
-            err => console.error("requestRoute failed"),
-            () => console.log('requestRoute completed')
-        );
+        return new Promise(resolve => {
+            this.http.get(serverURL + "/routes").map(res => res.json()).subscribe(
+                data => {
+                    this.routes = data["routes"];
+                    resolve(this.routes);
+                },
+                err => console.error("requestRoute failed"),
+                () => console.log('requestRoute completed')
+            );
+        })
     }
 
     /**

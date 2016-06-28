@@ -35,7 +35,7 @@ export class TabsPage {
     public drive;
     public stops;
 
-    constructor(private platform: Platform,nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private menu: MenuController, public events: Events) {
+    constructor(private platform: Platform, nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private menu: MenuController, public events: Events) {
         this.nav = nav;
         this.tab1Root = DrivePage;
         this.tab3Root = StopsPage;
@@ -49,10 +49,10 @@ export class TabsPage {
         this.updateBusStatus();
         this.getLineRoute();
         this.getLineStops();
-        this.requestintervalID = setInterval(this.requestLineCustomStops.bind(this),5000);
+        this.requestintervalID = setInterval(this.requestLineCustomStops.bind(this), 5000);
         this.sendintervalID = setInterval(this.sendrealTimeData.bind(this), 5000);
 
-        this.events.subscribe("EndTour", () =>{
+        this.events.subscribe("EndTour", () => {
             this.endTour();
         })
         this.events.subscribe("Passneger", (counter) => {
@@ -64,11 +64,11 @@ export class TabsPage {
         this.drive = language.driveTitle;
         this.stops = language.stopTitle;
     }
-    
+
     /**
      * sets MapPage depending on platform
      */
-    setMapPage(){
+    setMapPage() {
         if (this.platform.is('ios')) {
             this.tab2Root = MapPage;
             console.log("MapPage");
@@ -100,9 +100,12 @@ export class TabsPage {
     /**
      * requests linecustomstops
      */
-    requestLineCustomStops(){
-        this.busdriveinterface.requestLineCustomStops(this.selectedline);
-        this.events.publish("newCustomStops");
+    requestLineCustomStops() {
+        this.busdriveinterface.requestLineCustomStops(this.selectedline).then(() => {
+            let linecustomstops = this.busdriveinterface.getLineCustomStopsAll();
+            this.events.publish("newCustomStops", linecustomstops);
+        });;
+
     }
 
     /**
@@ -165,7 +168,7 @@ export class TabsPage {
                     text: language.alertCancel,
                     handler: () => {
                         console.log('alert aborted');
-                         this.events.publish("endTourAborted");
+                        this.events.publish("endTourAborted");
                     }
                 },
                 {
