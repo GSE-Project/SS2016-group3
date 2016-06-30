@@ -8,14 +8,14 @@ import {BusDriveInterface} from '../../components/Services/busdriveinterface';
 })
 
 export class StopsPage {
-  private linestopsnames = [];
+  private linestopsinfos = [];
   private backbuttoncounter: number = 0;
 
   //-----Language-----
   public title;
 
   constructor(navParams: NavParams, private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events) {
-    this.getLineStopsNames();
+    this.getLineStopsInfos();
 
     this.platform.registerBackButtonAction(this.endTour.bind(this), 10);
     this.events.subscribe("endTourAborted", () => {
@@ -27,10 +27,10 @@ export class StopsPage {
   }
 
   /**
-   * gets the names of  linestops
+   * gets the names and the schedules of linestops
    */
-  getLineStopsNames() {
-    this.linestopsnames = this.busdriveinterface.getLineStopsNames();
+  getLineStopsInfos() {
+    this.linestopsinfos = this.busdriveinterface.getLineStopsInfos();
   }
 
   /**

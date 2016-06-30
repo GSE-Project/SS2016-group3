@@ -121,7 +121,7 @@ export class CustomStops {
             let hours = this.addZero(picuptime.getHours());
             let minutes = this.addZero(picuptime.getMinutes());
             let day = this.addZero(picuptime.getDate());
-            let month = this.addZero(picuptime.getMonth());
+            let month = this.addZero(picuptime.getMonth() + 1);
             let year = this.addZero(picuptime.getFullYear());
             let time = hours + ":" + minutes + " " + day + "." + month + "." + year;
             this.linecustomstops[i].pickUpTime = time;

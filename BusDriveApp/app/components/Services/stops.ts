@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 export class Stops {
     private stops = [];
     private linestops = [];
+    private linestopsschedules = [];
 
     constructor(private http: Http) {
     }
@@ -17,6 +18,7 @@ export class Stops {
     clearLists() {
         this.stops = [];
         this.linestops = [];
+        this.linestopsschedules = [];
     }
 
     /**
@@ -51,8 +53,14 @@ export class Stops {
         for (let i = 0; i < this.stops.length; i++) {
             for (let j = 0; j < this.stops[i].lines.length; j++) {
                 if (LineId === parseInt(this.stops[i].lines[j].id)) {
-                    console.log("add stop to linestops:" + this.stops[i].name);
                     this.linestops.push(this.stops[i]);
+                    let linestopsarrivingtimes = [];
+                    for (let k = 0; k < this.stops[i].schedule.length; k++) {
+                        if ((LineId === this.stops[i].schedule[k].lineId) && (this.stops[i].id === this.stops[i].schedule[k].stopId)) {
+                            linestopsarrivingtimes.push(this.stops[i].schedule[k].arrivingTime);
+                        }
+                    }
+                    this.linestopsschedules.push(linestopsarrivingtimes);
                 }
             }
         }
@@ -79,5 +87,17 @@ export class Stops {
             linestopscoordinates.push(this.linestops[i].location.coordinates);
         }
         return linestopscoordinates;
+    }
+
+    /**
+     * @returns names and schedules of linestops
+     */
+    getLineStopsInfos() {
+        let linestopsinfos = [];
+        for (let i = 0; i < this.linestops.length; i++) {
+            linestopsinfos.push([this.linestops[i].name, this.linestopsschedules[i]]);
+        }
+        return linestopsinfos;
+
     }
 }
