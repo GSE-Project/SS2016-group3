@@ -54,7 +54,7 @@ export class SettingPage {
     this.sendperiodTrans=language.sendperiodTrans;
     this.addTrans=language.addTrans;
     this.newServerTrans2=language.newServerTrans2;
-
+    console.log("Sprache -->" + this.translate.instant("setting.settingTrans"));
 
   }
 

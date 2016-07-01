@@ -32,6 +32,7 @@ export class MyApp {
   public about;
 
   constructor(private platform: Platform, private menu: MenuController, public events: Events,private  translate: TranslateService) {
+    this.translateConfig();
     this.initializeApp();
     this.setPages();
     this.events.subscribe("ChangeLanguage", () => {
@@ -48,7 +49,7 @@ export class MyApp {
       StatusBar.styleDefault();
     });
     //Rufen wir schon früher auf
-    this.translateConfig();
+    
     let settings = window.localStorage;
     if (!(settings["serverURL"])) {
       settings.setItem("serverURL", "https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1");
@@ -88,11 +89,12 @@ export class MyApp {
    * sets the pages of menu
    */
   setPages() {
+    
     this.settingTrans = language.settingTrans;
     this.about = language.about;
     this.pages = [
       { title: 'Tour', component: HomePage, icon: 'bus' },
-      { title: this.settingTrans, component: SettingPage, icon: 'settings' },
+      { title:  this.translate.instant("setting.settingTrans"), component: SettingPage, icon: 'settings' },
       { title: this.about, component: AboutPage, icon: 'alert' }
     ];
 
@@ -117,8 +119,13 @@ export class MyApp {
    * configures the translation service (ng2-translate)
    */
 translateConfig() {
-    var userLang = navigator.language.split('-')[0]; // use navigator lang if available
-    userLang = /(en|de)/gi.test(userLang) ? userLang : 'en';
+  let userLang= "en";
+  let settings = window.localStorage;
+   if ((settings["Language"])) {
+      userLang=settings.getItem("Language");
+    }
+   // var userLang = navigator.language.split('-')[0]; // use navigator lang if available
+    //userLang = /(en|de)/gi.test(userLang) ? userLang : 'en';
 
     // this language will be used as a fallback when a translation isn't found in the current language
     this.translate.setDefaultLang('en');
