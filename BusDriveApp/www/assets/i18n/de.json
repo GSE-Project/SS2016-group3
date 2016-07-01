@@ -19,7 +19,7 @@
     },    
     "drive": {    
         "title": "Fahren",
-        "passangers": "Passagiere",
+        "passengers": "Passagiere",
         "nextStopTrans": "Nächster Halt",
         "acceptedStopsTrans": "Angenommene Haltestellen",
         "newStopsTrans": "Neue Haltestellen",
