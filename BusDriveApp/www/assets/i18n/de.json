@@ -1,18 +1,35 @@
 {
-    "key" : "Übersetzung für Key",   
-    "settings" : "Übersetzung für Key",  
-   
     "home": {    
         "beginTour": "Tour beginnen"
     },
     "setting":{
-        "settingTrans":"Einstellungen"
+        "settingTrans":"Einstellungen",
+        "langTrans":"Sprache",
+        "cancelAlert":"Kommunikationsprobleme: keine empfangenen Daten",
+        "serverAdressTrans":"Serveradresse",
+        "newServerAdressTrans":"Neue Serveradresse",
+        "backgroundModeTrans":"Hintergrundmodus",
+        "preventSleepTrans":"Schlafen verhindern",
+        "sendDistTrans":"Sendedistanz",
+        "sendperiodTrans":"Sendeperiode",
+        "addTrans":"Hinzufügen",
+        "newServerTrans2":"Geben sie eine Server-URL ein"
+    },
+    "about": {    
+        "findUs": "Sie finden uns auf",
+        "opinion": "Ihre Meinung",
+        "imprint": "Impressum",
+        "disclaimer": "Rechtliches",
+        "privacyPolicy": "Datenschutzerklärung",
+        "license": "Lizenz",
+        "aboutTrans": "Über uns",
+        "versionInfo": "Versionsinfo"
     },
     "buslist": {    
         "title": "Wähle Bus aus",
         "numberplate": "Nummernschild",
         "seatsTrans": "Sitzplätze"
-    },   
+    }, 
     "linelist": {    
         "title": "Wähle Linie aus",
         "lineName": "Linie"
@@ -40,8 +57,6 @@
         "accepted": "Akzeptieren",
         "done": "Ausgeführt",
         "noAppearance": "kein Erscheinen"
-        
-       
     },
     "map": {    
         "title": "Karte"

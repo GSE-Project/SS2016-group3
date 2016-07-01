@@ -3,9 +3,11 @@ import {Component} from '@angular/core';
 import {AppAvailability} from 'ionic-native';
 import {language} from "../../components/languages/languages";
 import {LicensePage} from "../../components/about/license/license";
+import {TranslatePipe} from "ng2-translate/ng2-translate";
 
 @Component({
     templateUrl: 'build/components/about/about.html',
+    pipes: [TranslatePipe]
 })
 
 export class AboutPage {
