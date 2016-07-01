@@ -2,7 +2,7 @@ import {Page, Storage, LocalStorage, Events, Alert, App} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {Insomnia, BackgroundMode} from 'ionic-native';
 import {changeLanguage, language, de, en} from "../languages/languages";
-import {TranslatePipe} from "ng2-translate/ng2-translate";
+import {TranslatePipe,TranslateService} from "ng2-translate/ng2-translate";
 @Component({
   templateUrl: 'build/components//setting/setting.html',
   pipes: [TranslatePipe]
@@ -32,7 +32,7 @@ export class SettingPage {
   public newServerTrans2
 
 
-  constructor(private app: App, public events: Events) {
+  constructor(private app: App, public events: Events,public translate: TranslateService) {
     this.settings = window.localStorage;
     this.serverURL = this.getServerURL();
     this.lang = this.getLanguage();
@@ -40,7 +40,7 @@ export class SettingPage {
     this.serverURLListStorage = this.getServerURLList();
     this.insomnia = this.getInsomnia();
     this.mode = this.getBackgroundMode();
-   
+    this.translate = translate;
 
     //-----Language-----
     this.langTrans = language.langTrans;
@@ -157,17 +157,19 @@ export class SettingPage {
     if (lang === "en") {
       changeLanguage(lang);
       this.setLanguage(lang);
+      this.translate.use("en");
     }
     else {
       changeLanguage(lang);
       this.setLanguage(lang);
+       this.translate.use("de");
     }
     this.events.publish("ChangeLanguage");
     this.langTrans = language.langTrans;
     this.cancelAlert = language.alertCancel;
     this.serverAdressTrans = language.serveradressTrans;
     this.newServerAdressTrans = language.newServerTrans;
-    this.settingTrans = language.settingTrans;
+    //this.settingTrans = language.settingTrans;
     this.backgroundModeTrans=language.backgroundModeTrans;
     this.preventSleepTrans=language.preventSleepTrans;
     this.sendDistTrans=language.sendDist;

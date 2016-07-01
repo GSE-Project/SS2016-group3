@@ -1,9 +1,13 @@
 {
-    "key" : "Translation for Key",   
-    "nested": {    
-        "user": "User",
-        "signIn": "Sign In",
-        "signUp": "Sign Up"
+    "key" : "Übersetzung für Key",   
+    "settings" : "Übersetzung für Key",  
+   
+    "home": {    
+        "beginTour": "Start tour",
+        "signIn": "Einloggen",
+        "signUp": "Registrieren"
+    },
+    "setting":{
+        "settingTrans":"Settings"
     }
 }
- 
