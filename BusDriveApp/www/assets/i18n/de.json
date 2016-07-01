@@ -1,0 +1,13 @@
+{
+    "key" : "Übersetzung für Key",   
+    "settings" : "Übersetzung für Key",  
+   
+    "home": {    
+        "beginTour": "Tour beginnen",
+        "signIn": "Einloggen",
+        "signUp": "Registrieren"
+    },
+    "setting":{
+        "settingTrans":"Einstellungen"
+    }
+}

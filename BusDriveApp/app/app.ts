@@ -12,7 +12,9 @@ import {Stops} from './components/services/stops';
 import {Routes} from './components/services/routes';
 import {Provider} from './components/services/provider';
 import {CustomStops} from './components/services/customstops';
-
+import {provide} from '@angular/core';
+import {Http, HTTP_PROVIDERS} from '@angular/http';
+import {TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
 
 @Component({
   templateUrl: 'build/app.html',
@@ -29,12 +31,13 @@ export class MyApp {
   public settingTrans;
   public about;
 
-  constructor(private platform: Platform, private menu: MenuController, public events: Events) {
+  constructor(private platform: Platform, private menu: MenuController, public events: Events,private  translate: TranslateService) {
     this.initializeApp();
     this.setPages();
     this.events.subscribe("ChangeLanguage", () => {
       this.setPages();
     });
+    
   }
 
   /**
@@ -44,6 +47,8 @@ export class MyApp {
     this.platform.ready().then(() => {
       StatusBar.styleDefault();
     });
+    //Rufen wir schon früher auf
+    this.translateConfig();
     let settings = window.localStorage;
     if (!(settings["serverURL"])) {
       settings.setItem("serverURL", "https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1");
@@ -108,6 +113,25 @@ export class MyApp {
     this.platform.exitApp();
     LocalNotifications.clear(1);
   }
+  /**
+   * configures the translation service (ng2-translate)
+   */
+translateConfig() {
+    var userLang = navigator.language.split('-')[0]; // use navigator lang if available
+    userLang = /(en|de)/gi.test(userLang) ? userLang : 'en';
+
+    // this language will be used as a fallback when a translation isn't found in the current language
+    this.translate.setDefaultLang('en');
+
+    // the lang to use, if the lang isn't available, it will use the current loader to get them
+    this.translate.use(userLang);
+  }
+
 }
 
-ionicBootstrap(MyApp);
+ionicBootstrap(MyApp, [[provide(TranslateLoader, {
+  useFactory: (http: Http) => new TranslateStaticLoader(http, 'assets/i18n', '.json'),
+  deps: [Http]
+}),
+  TranslateService]], {
+});

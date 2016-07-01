@@ -3,9 +3,10 @@ import {Component} from '@angular/core';
 import {BusListPage} from '../buslist/buslist';
 import {language} from "../../components/languages/languages";
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
-
+import {TranslatePipe} from "ng2-translate/ng2-translate";
 @Component({
     templateUrl: 'build/pages/home/home.html',
+    pipes: [TranslatePipe]
 })
 
 export class HomePage {
@@ -14,7 +15,7 @@ export class HomePage {
     private recieveddata = false;
 
     //-----Language-----
-    public beginTour;
+   // public beginTour;
     public recieveddataTrans;
 
     constructor(private platform: Platform, private nav: NavController, private busdriveinterface: BusDriveInterface) {
@@ -22,7 +23,7 @@ export class HomePage {
         this.requestData();
 
         //-----Language-----
-        this.beginTour = language.beginTour;
+        //this.beginTour = language.beginTour;
         this.recieveddataTrans = language.recieveddata;
     }
 

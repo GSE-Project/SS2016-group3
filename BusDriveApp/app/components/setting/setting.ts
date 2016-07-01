@@ -2,9 +2,10 @@ import {Page, Storage, LocalStorage, Events, Alert, App} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {Insomnia, BackgroundMode} from 'ionic-native';
 import {changeLanguage, language, de, en} from "../languages/languages";
-
+import {TranslatePipe} from "ng2-translate/ng2-translate";
 @Component({
-  templateUrl: 'build/components//setting/setting.html'
+  templateUrl: 'build/components//setting/setting.html',
+  pipes: [TranslatePipe]
 })
 
 export class SettingPage {
@@ -22,7 +23,7 @@ export class SettingPage {
   public cancelAlert;
   public serverAdressTrans;
   public newServerAdressTrans;
-  public settingTrans;
+  //public settingTrans;
   public backgroundModeTrans;
   public preventSleepTrans;
   public sendDistTrans;
@@ -46,7 +47,7 @@ export class SettingPage {
     this.cancelAlert = language.alertCancel;
     this.serverAdressTrans = language.serveradressTrans;
     this.newServerAdressTrans = language.newServerTrans;
-    this.settingTrans = language.settingTrans;
+    //this.settingTrans = language.settingTrans;
     this.backgroundModeTrans=language.backgroundModeTrans;
     this.preventSleepTrans=language.preventSleepTrans;
     this.sendDistTrans=language.sendDist;

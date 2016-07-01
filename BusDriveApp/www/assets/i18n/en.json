@@ -1,0 +1,9 @@
+{
+    "key" : "Translation for Key",   
+    "nested": {    
+        "user": "User",
+        "signIn": "Sign In",
+        "signUp": "Sign Up"
+    }
+}
+ 
