@@ -4,10 +4,11 @@ import {LocalNotifications} from 'ionic-native';
 import {language} from "../../components/languages/languages";
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
 import {CustomStopPage} from '../drive/customstop/customstop';
-
+import {TranslatePipe} from "ng2-translate/ng2-translate";
 
 @Component({
     templateUrl: 'build/pages/drive/drive.html',
+    pipes: [TranslatePipe]
 })
 export class DrivePage {
     private selectedbusid;

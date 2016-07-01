@@ -3,9 +3,11 @@ import {Component} from '@angular/core';
 import {LineListPage} from '../linelist/linelist';
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
 import {language} from "../../components/languages/languages";
+import {TranslatePipe} from "ng2-translate/ng2-translate";
 
 @Component({
-    templateUrl: 'build/pages/buslist/buslist.html'
+    templateUrl: 'build/pages/buslist/buslist.html',
+    pipes: [TranslatePipe]
 })
 
 export class BusListPage {

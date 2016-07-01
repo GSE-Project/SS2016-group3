@@ -1,6 +1,6 @@
 <ion-navbar primary *navbar>
     <ion-title>
-        {{title}}
+        {{"linelist.title"|translate}}
     </ion-title>
 </ion-navbar>
 
@@ -10,7 +10,7 @@
             <ion-thumbnail item-left>
                 <ion-icon name="git-compare" style="font-size:90px" ></ion-icon>
             </ion-thumbnail>
-            <h2>{{lineName}} {{item[0]}}</h2>
+            <h2>{{"linelist.lineName"|translate}} {{item[0]}}</h2>
             <p>{{item[1]}}</p>           
         </ion-item>
     </ion-list>

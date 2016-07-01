@@ -3,10 +3,12 @@ import {Component} from '@angular/core';
 import {language} from "../../../components/languages/languages";
 import {ViewChild} from  '@angular/core';
 import {Map} from '../../../components/map/map';
+import {TranslatePipe} from "ng2-translate/ng2-translate";
 
 @Component({
     templateUrl: 'build/pages/drive/customstop/customstop.html',
-    directives: [Map]
+    directives: [Map],
+    pipes: [TranslatePipe]
 })
 
 export class CustomStopPage {

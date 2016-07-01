@@ -3,11 +3,50 @@
     "settings" : "Übersetzung für Key",  
    
     "home": {    
-        "beginTour": "Tour beginnen",
-        "signIn": "Einloggen",
-        "signUp": "Registrieren"
+        "beginTour": "Tour beginnen"
     },
     "setting":{
         "settingTrans":"Einstellungen"
+    },
+    "buslist": {    
+        "title": "Wähle Bus aus",
+        "numberplate": "Nummernschild",
+        "seatsTrans": "Sitzplätze"
+    },   
+    "linelist": {    
+        "title": "Wähle Linie aus",
+        "lineName": "Linie"
+    },    
+    "drive": {    
+        "title": "Fahren",
+        "passangers": "Passagiere",
+        "nextStopTrans": "Nächster Halt",
+        "acceptedStopsTrans": "Angenommene Haltestellen",
+        "newStopsTrans": "Neue Haltestellen",
+        "time": "Zeit",
+        "numberTrans": "Anzahl",
+        "done": "Ausgeführt",
+        "noAppearance": "kein Erscheinen",
+        "accepted": "Akzeptieren",
+        "decline": "Ablehnen",
+        "addressTrans": "Adresse"
+    },
+    "customstops": {    
+        "title": "Haltestelle",
+        "timeTrans": "Zeit",
+        "addressTrans": "Adresse",
+        "numberTrans": "Anzahl",
+        "decline": "Ablehnen",
+        "accepted": "Akzeptieren",
+        "done": "Ausgeführt",
+        "noAppearance": "kein Erscheinen"
+        
+       
+    },
+    "map": {    
+        "title": "Karte"
+    },    
+    "stops": {    
+        "title": "Fahrplan"
     }
 }

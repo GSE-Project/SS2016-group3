@@ -2,9 +2,10 @@ import {Page, NavParams, Platform, Events} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {language} from "../../components/languages/languages";
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
-
+import {TranslatePipe} from "ng2-translate/ng2-translate";
 @Component({
   templateUrl: 'build/pages/stops/stops.html',
+    pipes: [TranslatePipe]
 })
 
 export class StopsPage {

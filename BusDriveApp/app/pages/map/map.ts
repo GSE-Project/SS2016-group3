@@ -3,10 +3,11 @@ import {Component, ViewChild} from  '@angular/core';
 import {Map} from '../../components/map/map';
 import {language} from "../../components/languages/languages";
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
-
+import {TranslatePipe} from "ng2-translate/ng2-translate";
 @Component({
     templateUrl: 'build/pages/map/map.html',
-    directives: [Map]
+    directives: [Map],
+    pipes: [TranslatePipe]
 })
 
 export class MapPage {
