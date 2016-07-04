@@ -2,12 +2,12 @@
     "cancelTrans": "Abbrechen",
     
     "home": {    
-        "beginTour": "Tour beginnen"
+        "beginTour": "Tour beginnen",
+        "noDataTrans":"Kommunikationsproblem: Keine Daten empfangen"
     },
     "setting":{
         "settingTrans":"Einstellungen",
         "langTrans":"Sprache",
-        "cancelAlert":"Kommunikationsprobleme: keine empfangenen Daten",
         "serverAdressTrans":"Serveradresse",
         "newServerAdressTrans":"Neue Serveradresse",
         "backgroundModeTrans":"Hintergrundmodus",
@@ -28,12 +28,12 @@
         "versionInfo": "Versionsinfo"
     },
     "buslist": {    
-        "title": "Wähle Bus aus",
+        "title": "Wähle eine Bus aus",
         "numberplate": "Nummernschild",
         "seatsTrans": "Sitzplätze"
     }, 
     "linelist": {    
-        "title": "Wähle Linie aus",
+        "title": "Wähle eine Linie aus",
         "lineName": "Linie"
     },    
     "drive": {    

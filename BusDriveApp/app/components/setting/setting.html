@@ -9,14 +9,14 @@
   <ion-list>
     <ion-item>
       <ion-label>{{"setting.langTrans"| translate}}</ion-label>
-      <ion-select interface=action-sheet [(ngModel)]="lang" (ngModelChange)="changeLanguage(lang)" okText="Ok" cancelText={{cancelAlert}}>
+      <ion-select interface=action-sheet [(ngModel)]="lang" (ngModelChange)="changeLanguage(lang)" okText="Ok" cancelText={{cancelTrans}}>
         <ion-option value="en">English</ion-option>
         <ion-option value="de">Deutsch</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>{{"setting.serverAdressTrans"| translate}}</ion-label>
-      <ion-select interface=action-sheet [(ngModel)]="serverURL" (ngModelChange)="setServerURL(serverURL)" okText="Ok" cancelText={{cancelAlert}}>
+      <ion-select interface=action-sheet [(ngModel)]="serverURL" (ngModelChange)="setServerURL(serverURL)" okText="Ok" cancelText={{cancelTrans}}>
         <ion-option *ngFor="let url of serverURLList" value="{{url}}">{{url}}</ion-option>
       </ion-select>
     </ion-item>

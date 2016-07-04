@@ -2,12 +2,12 @@
     "cancelTrans": "Cancel",
     
     "home": {    
-        "beginTour": "Start Tour"
+        "beginTour": "Start Tour",
+        "noDataTrans":"Communication problems: no received data"
     },
     "setting":{
         "settingTrans":"Settings",
         "langTrans":"Language",
-        "cancelAlert":"Communication problems: no received data",
         "serverAdressTrans":"Serveraddress",
         "newServerAdressTrans":"New Serveraddress",
         "backgroundModeTrans":"Background mode",

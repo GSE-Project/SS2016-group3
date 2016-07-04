@@ -4,7 +4,7 @@ import {LocalNotifications} from 'ionic-native';
 import {language} from "../../components/languages/languages";
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
 import {CustomStopPage} from '../drive/customstop/customstop';
-import {TranslatePipe} from "ng2-translate/ng2-translate";
+import {TranslatePipe,TranslateService} from "ng2-translate/ng2-translate";
 
 @Component({
     templateUrl: 'build/pages/drive/drive.html',
@@ -37,7 +37,7 @@ export class DrivePage {
     public decline;
     public addressTrans
 
-    constructor(private nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events) {
+    constructor(private nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events, public translate:TranslateService) {
         this.selectedbusid = navParams.data[0]
         this.getBusSeatsNumber();
         this.getLineStopsNames();
@@ -147,10 +147,10 @@ export class DrivePage {
             if (this.newcustomstopsnumber > 0) {
                 LocalNotifications.schedule({
                     id: 1,
-                    text: this.newcustomstopsnumber + ' new Custom Stops',
+                    text: this.newcustomstopsnumber +" "+ this.translate.instant("drive.newStopsTrans"),
                 });
                 this.nav.present(Toast.create({
-                    message: this.newcustomstopsnumber + ' new Custom Stops',
+                    message: this.newcustomstopsnumber +" "+ this.translate.instant("drive.newStopsTrans"),
                     duration: 7000,
                     position: "top",
                     showCloseButton: true,

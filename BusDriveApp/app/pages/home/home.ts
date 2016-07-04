@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 import {BusListPage} from '../buslist/buslist';
 import {language} from "../../components/languages/languages";
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
-import {TranslatePipe} from "ng2-translate/ng2-translate";
+import {TranslatePipe,TranslateService} from "ng2-translate/ng2-translate";
 @Component({
     templateUrl: 'build/pages/home/home.html',
     pipes: [TranslatePipe]
@@ -14,17 +14,11 @@ export class HomePage {
     private recievedalldata = [false, false, false, false];
     private recieveddata = false;
 
-    //-----Language-----
-   // public beginTour;
-    public recieveddataTrans;
+   
 
-    constructor(private platform: Platform, private nav: NavController, private busdriveinterface: BusDriveInterface) {
+    constructor(private platform: Platform, private nav: NavController, private busdriveinterface: BusDriveInterface, private translate:TranslateService) {
         this.getMobileOperatingSystem();
         this.requestData();
-
-        //-----Language-----
-        //this.beginTour = language.beginTour;
-        this.recieveddataTrans = language.recieveddata;
     }
 
     /**
@@ -65,7 +59,7 @@ export class HomePage {
         }
         else {
             let alert = Alert.create({
-            title: this.recieveddataTrans,
+            title: this.translate.instant("home.noDataTrans"),
             enableBackdropDismiss: false,
             buttons: [
                 {

@@ -17,19 +17,9 @@ export class SettingPage {
   public mode = true;
 
   public settings;
+  public cancelTrans;
 
-  //-----Language-----
-  public langTrans;
-  public cancelAlert;
-  public serverAdressTrans;
-  public newServerAdressTrans;
-  //public settingTrans;
-  public backgroundModeTrans;
-  public preventSleepTrans;
-  public sendDistTrans;
-  public sendperiodTrans;
-  public addTrans;
-  public newServerTrans2
+  
 
 
   constructor(private app: App, public events: Events,public translate: TranslateService) {
@@ -41,20 +31,9 @@ export class SettingPage {
     this.insomnia = this.getInsomnia();
     this.mode = this.getBackgroundMode();
     this.translate = translate;
-
-    //-----Language-----
-    this.langTrans = language.langTrans;
-    this.cancelAlert = language.alertCancel;
-    this.serverAdressTrans = language.serveradressTrans;
-    this.newServerAdressTrans = language.newServerTrans;
-    //this.settingTrans = language.settingTrans;
-    this.backgroundModeTrans=language.backgroundModeTrans;
-    this.preventSleepTrans=language.preventSleepTrans;
-    this.sendDistTrans=language.sendDist;
-    this.sendperiodTrans=language.sendperiodTrans;
-    this.addTrans=language.addTrans;
-    this.newServerTrans2=language.newServerTrans2;
-    console.log("Sprache -->" + this.translate.instant("setting.settingTrans"));
+    this.cancelTrans=translate.instant("cancelTrans");
+    
+   
 
   }
 
@@ -63,8 +42,8 @@ export class SettingPage {
    */
   promptServerURL() {
     let prompt = Alert.create({
-      title: this.newServerAdressTrans,
-      message: this.newServerTrans2,
+      title: this.translate.instant("setting.newServerAdressTrans"),
+      message: this.translate.instant("setting.newServerTrans2"),
       inputs: [
         {
           name: 'URL',
@@ -73,16 +52,16 @@ export class SettingPage {
       ],
       buttons: [
         {
-          text: this.cancelAlert,
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: this.addTrans,
+          text: this.translate.instant("setting.addTrans"),
           handler: data => {
             this.addToServerURLList(data.URL);
             console.log('Add clicked');
+          }
+        },
+        {
+          text: this.translate.instant("cancelTrans"),
+          handler: data => {
+            console.log('Cancel clicked');
           }
         }
       ]
@@ -165,17 +144,7 @@ export class SettingPage {
        this.translate.use("de");
     }
     this.events.publish("ChangeLanguage");
-    this.langTrans = language.langTrans;
-    this.cancelAlert = language.alertCancel;
-    this.serverAdressTrans = language.serveradressTrans;
-    this.newServerAdressTrans = language.newServerTrans;
-    //this.settingTrans = language.settingTrans;
-    this.backgroundModeTrans=language.backgroundModeTrans;
-    this.preventSleepTrans=language.preventSleepTrans;
-    this.sendDistTrans=language.sendDist;
-    this.sendperiodTrans=language.sendperiodTrans;
-    this.addTrans=language.addTrans;
-    this.newServerTrans2=language.newServerTrans2;
+    this.cancelTrans=this.translate.instant("cancelTrans");
     console.log("ChangeLanguage: " + lang);
   }
 
