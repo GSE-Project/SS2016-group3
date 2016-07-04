@@ -11,12 +11,18 @@ export class NativeMap implements OnDestroy, AfterViewInit {
     private map;
     private mapElement;
     private mapElementId;
+    private directionsService = new google.maps.DirectionsService;
     private lineroutecoordinates = [];
     private lineroutepolyline;
     private linestopscoordinates = [];
     private linestopsnames = [];
     private linestopsmarkers = [];
     private customstopsmarkers = [];
+    private customstoproutepath: GoogleMapsLatLng[] = [];
+    private customstoppolyline: GoogleMapsPolyline;
+    private customstoppositionmarker: GoogleMapsMarker;
+    private customstopposition: GoogleMapsLatLng;
+    private busposition: GoogleMapsLatLng;
 
     constructor(private element: ElementRef, public events: Events) {
         this.events.subscribe("endTourAborted", () => {
@@ -134,13 +140,83 @@ export class NativeMap implements OnDestroy, AfterViewInit {
             this.map.addMarker({
                 'position': customstopLatLng,
                 'title': acceptedcustomstops[index][1],
-                'snippet': 
-                    'Abholzeit: ' + acceptedcustomstops[index][2] + '\nAnzahl: ' + acceptedcustomstops[index][3] + '\nAdresse: ' + acceptedcustomstops[index][4],
+                'snippet':
+                'Abholzeit: ' + acceptedcustomstops[index][2] + '\nAnzahl: ' + acceptedcustomstops[index][3] + '\nAdresse: ' + acceptedcustomstops[index][4],
                 'icon': 'blue'
             }).then((marker) => {
                 this.customstopsmarkers.push(marker);
+                marker.addEventListener(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+                    this.calcCustomStopRoute(customstopLatLng);
+                });
             })
         };
+    }
+
+    /**
+     * @param customstopposition lat,lng of a customstop
+     * calculates the route to a customstop 
+     */
+    calcCustomStopRoute(customstopposition) {
+        this.clearCustomStop();
+        let customstoproutepath: GoogleMapsLatLng[] = [];
+        let options = { timeout: 10000, enableHighAccuracy: true };
+        Geolocation.getCurrentPosition(options).then((resp) => {
+            this.busposition = new GoogleMapsLatLng(resp.coords.latitude, resp.coords.longitude);
+            this.customstopposition = customstopposition;
+            let busposition = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+            let request = {
+                origin: busposition,
+                destination: customstopposition,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+            this.directionsService.route(request, function (response, status) {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    let polyline = new google.maps.Polyline();
+                    let bounds = new google.maps.LatLngBounds();
+                    let legs = response.routes[0].legs;
+
+                    for (let i = 0; i < legs.length; i++) {
+                        let steps = legs[i].steps;
+                        for (let j = 0; j < steps.length; j++) {
+                            let nextSegment = steps[j].path;
+                            for (let k = 0; k < nextSegment.length; k++) {
+                                polyline.getPath().push(nextSegment[k]);
+                                bounds.extend(nextSegment[k]);
+                                let routelatlnglist: any[] = nextSegment[k].toUrlValue(6).split(",")
+                                let routelatlng = new GoogleMapsLatLng(parseFloat(routelatlnglist[0]), parseFloat(routelatlnglist[1]));
+                                customstoproutepath.push(routelatlng);
+                            }
+                        }
+                    }
+                }
+            });
+            this.customstoproutepath = customstoproutepath;
+            setTimeout(this.showCustomStopRoute.bind(this), 3000)
+        });
+    }
+
+    /**
+     * shows a polyline form ony positiny to customstopposition
+     */
+    showCustomStopRoute() {
+        this.map.addMarker({
+            'position': this.customstopposition,
+            'icon': 'blue'
+        }).then((marker) => {
+            this.customstoppositionmarker = marker;
+        });
+        this.map.addPolyline({
+            points: this.customstoproutepath,
+            'geodesic': true,
+            'visible': true,
+            'color': '#0000ff',
+            'width': 3
+        }).then((polyline) => {
+            this.customstoppolyline = polyline;
+            polyline.addEventListener(GoogleMapsEvent.OVERLAY_CLICK).subscribe(() => {
+                this.clearCustomStop();
+            });
+        });
     }
 
     /**
@@ -158,6 +234,17 @@ export class NativeMap implements OnDestroy, AfterViewInit {
     }
 
     /**
+     * clears customstop route on the map
+     */
+    clearCustomStop() {
+        if (this.customstoppolyline) {
+            this.customstoproutepath = [];
+            this.customstoppolyline.remove();
+            this.customstoppositionmarker.remove();
+        }
+    }
+
+    /**
      * clears and removes the map
      */
     removeMap() {
@@ -172,12 +259,12 @@ export class NativeMap implements OnDestroy, AfterViewInit {
         this.linestopscoordinates = [];
         this.linestopsnames = [];
         this.customstopsmarkers = [];
+        this.clearCustomStop();
         this.map.clear();
         this.map.remove();
     }
 
     ngOnDestroy() {
-        this.removeMap();
         while (this.mapElement.firstChild) {
             this.mapElement.removeChild(this.mapElement.firstChild);
         }

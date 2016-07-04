@@ -9,7 +9,7 @@
     </ion-title>
 </ion-navbar>
 
-<ion-pane primary class="drive">
+<ion-pane primary class="drive" id="drivepage">
 
     <table width="100%">
         <colgroup>
@@ -94,6 +94,9 @@
                             <img src="img/baby.png" *ngIf="item[5][3]" width="10%" height="auto">
                             <img src="img/child.png" *ngIf="item[5][4]" width="10%" height="auto">
                         </p>
+                        <ion-thumbnail item-right>
+                            <ion-icon name="close-circle" style="font-size:50px" *ngIf="item[7] === 6"></ion-icon>
+                        </ion-thumbnail>
                     </ion-item>
                     <ion-item-options side="right">
                         <button primary (click)="completeAcceptedCustomStop(item)">
@@ -126,6 +129,9 @@
                         <img src="img/baby.png" *ngIf="item[5][3]" width="10%" height="auto">
                         <img src="img/child.png" *ngIf="item[5][4]" width="10%" height="auto">
                     </p>
+                    <ion-thumbnail item-right>
+                        <ion-icon name="close-circle" style="font-size:50px" *ngIf="item[7] === 6"></ion-icon>
+                    </ion-thumbnail>
                 </ion-item>
                 <ion-item-options side="right">
                     <button primary (click)="acceptCustomStop(item)">

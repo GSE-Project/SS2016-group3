@@ -150,7 +150,7 @@ export class CustomStops {
         }
         let linecustomstopsall = [];
         for (let i = 0; i < this.linecustomstops.length; i++) {
-            linecustomstopsall.push([this.linecustomstops[i].id, this.linecustomstops[i].info.name, this.linecustomstops[i].pickUpTime, this.linecustomstops[i].numberOfPersons, this.linecustomstops[i].info.address, this.linecustomstops[i].info.assistance, this.linecustomstops[i].location.coordinates]);
+            linecustomstopsall.push([this.linecustomstops[i].id, this.linecustomstops[i].info.name, this.linecustomstops[i].pickUpTime, this.linecustomstops[i].numberOfPersons, this.linecustomstops[i].info.address, this.linecustomstops[i].info.assistance, this.linecustomstops[i].location.coordinates, this.linecustomstops[i].status]);
         }
         return linecustomstopsall;
     }

@@ -1,4 +1,4 @@
-import {Page, NavParams, Events, Toast, Alert, Platform, ActionSheet, NavController} from 'ionic-angular';
+import {Page, NavParams, Events, Toast, Alert, Platform, ActionSheet, Modal, NavController} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {LocalNotifications} from 'ionic-native';
 import {language} from "../../components/languages/languages";
@@ -84,7 +84,7 @@ export class DrivePage {
     increasePassengers() {
         if (this.counter < this.totalbusseats) {
             this.counter++
-            this.events.publish("Passneger", this.counter);
+            this.events.publish("Passenger", this.counter);
         }
     }
 
@@ -94,7 +94,7 @@ export class DrivePage {
     decreasePassengers() {
         if (this.counter > 0) {
             this.counter--;
-            this.events.publish("Passneger", this.counter);
+            this.events.publish("Passenger", this.counter);
         }
     }
 
@@ -157,6 +157,14 @@ export class DrivePage {
                     closeButtonText: "Ok",
                     dismissOnPageChange: true
                 }))
+            }
+        }
+        this.linecustomstopsall = linecustomstopsall;
+        for (let i = 0; i < this.acceptedcustomstops.length; i++){
+            for(let j = 0; j < this.linecustomstopsall.length; j++){
+                if(this.acceptedcustomstops[i][0] === this.linecustomstopsall[j][0]){
+                    this.acceptedcustomstops[i][7] = this.linecustomstopsall[j][7];
+                }
             }
         }
         this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
@@ -229,10 +237,8 @@ export class DrivePage {
         console.log("-> CustomStopPage");
         for (let index = 0; index < this.linecustomstopsall.length; index++) {
             if (this.linecustomstopsall[index] == customstop) {
-                this.nav.push(CustomStopPage, {
-                    showcustomstop: customstop,
-                    accepted: false
-                });
+                let modal = Modal.create(CustomStopPage, {showcustomstop: customstop, accepted: false});
+                this.nav.present(modal);
             }
         }
     }
@@ -244,10 +250,8 @@ export class DrivePage {
         console.log("-> CustomStopPage");
         for (let index = 0; index < this.acceptedcustomstops.length; index++) {
             if (this.acceptedcustomstops[index] == customstop) {
-                this.nav.push(CustomStopPage, {
-                    showcustomstop: customstop,
-                    accepted: true
-                });
+                let modal = Modal.create(CustomStopPage, {showcustomstop: customstop, accepted: true});
+                this.nav.present(modal);
             }
         }
     }

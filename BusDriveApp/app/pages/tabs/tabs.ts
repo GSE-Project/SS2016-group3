@@ -53,7 +53,7 @@ export class TabsPage {
         this.events.subscribe("EndTour", () => {
             this.endTour();
         })
-        this.events.subscribe("Passneger", (counter) => {
+        this.events.subscribe("Passenger", (counter) => {
             this.passangerscounter = counter[0];
         });
 

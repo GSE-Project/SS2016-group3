@@ -1,19 +1,20 @@
-import {Page, NavParams, NavController, Platform, Events} from 'ionic-angular';
+import {Page, NavParams, NavController, Platform, Events, ViewController} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {language} from "../../../components/languages/languages";
 import {ViewChild} from  '@angular/core';
-import {Map} from '../../../components/map/map';
+import {NativeMap} from '../../../components/nativemap/nativemap';
+import {GoogleMapsLatLng} from 'ionic-native';
 import {TranslatePipe} from "ng2-translate/ng2-translate";
 
 @Component({
     templateUrl: 'build/pages/drive/customstop/customstop.html',
-    directives: [Map],
+    directives: [NativeMap],
     pipes: [TranslatePipe]
 })
 
 export class CustomStopPage {
 
-    @ViewChild(Map) map: Map;
+    @ViewChild(NativeMap) nativemap: NativeMap;
     private customstop;
     private accepted;
     private priority: number = 50;
@@ -28,21 +29,18 @@ export class CustomStopPage {
     public done;
     public noAppearance;
 
-    constructor(navParams: NavParams, private nav: NavController, public events: Events, private platform: Platform) {
+    constructor(navParams: NavParams, private viewCtrl: ViewController, private nav: NavController, public events: Events, private platform: Platform) {
+        document.getElementById('drivepage').style.visibility = 'hidden';
+        document.getElementById('tabspage').style.visibility = 'hidden';
+        // document.addEventListener('backbutton', this.dismiss.bind(this), false);
         this.customstop = navParams.get("showcustomstop");
         this.accepted = navParams.get("accepted");
-        this.platform.registerBackButtonAction(() => {
-            if (this.nav.canGoBack()) {
-                this.priority = 1;
-                this.nav.pop();
-                this.nav.remove();
-            }
-        }, this.priority);
+        this.platform.registerBackButtonAction(this.dismiss.bind(this), this.priority);
         this.events.subscribe("mapLoaded", () => {
             let customstoplat = this.customstop[6][1];
             let customstoplng = this.customstop[6][0];
-            let latlng = new google.maps.LatLng(customstoplat, customstoplng);
-            this.map.setCustomstopPosition(latlng);
+            let customstopposition = new GoogleMapsLatLng(customstoplat, customstoplng);
+            this.nativemap.calcCustomStopRoute(customstopposition);
         });
 
         //-----Language-----
@@ -62,7 +60,7 @@ export class CustomStopPage {
      */
     acceptCustomStop() {
         this.events.publish("accept", this.customstop);
-        this.nav.pop();
+        this.dismiss();
     }
 
     /**
@@ -70,7 +68,7 @@ export class CustomStopPage {
      */
     declineCustomStop() {
         this.events.publish("decline", this.customstop);
-        this.nav.pop();
+        this.dismiss();
     }
 
     /**
@@ -78,7 +76,7 @@ export class CustomStopPage {
      */
     completeAcceptedCustomStop() {
         this.events.publish("complete", this.customstop);
-        this.nav.pop();
+        this.dismiss();
     }
 
     /**
@@ -86,6 +84,20 @@ export class CustomStopPage {
      */
     noShowAcceptedCustomStop() {
         this.events.publish("noshow", this.customstop);
-        this.nav.pop();
+        this.dismiss();
+    }
+
+    /**
+     * dismisses the modal
+     */
+    dismiss() {
+        this.nativemap.clearCustomStop();
+        if (document.getElementById('drivepage')) {
+            document.getElementById('drivepage').style.visibility = '';
+            document.getElementById('tabspage').style.visibility = '';
+        }
+        this.viewCtrl.dismiss();
+        this.priority = 1;
+
     }
 }
