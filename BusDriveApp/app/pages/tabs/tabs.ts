@@ -8,6 +8,7 @@ import {StopsPage} from '../stops/stops';
 import {Geolocation} from 'ionic-native';
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
 import {language} from "../../components/languages/languages";
+import {TranslateService} from 'ng2-translate/ng2-translate';
 
 @Component({
     templateUrl: 'build/pages/tabs/tabs.html'
@@ -30,12 +31,9 @@ export class TabsPage {
     private lastSendTime = undefined;
     private passangerscounter = 0;
 
-    //-----Language-----
-    public map;
-    public drive;
-    public stops;
 
-    constructor(private platform: Platform, nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private menu: MenuController, public events: Events) {
+
+    constructor(private platform: Platform, nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private menu: MenuController, public events: Events,private  translate: TranslateService) {
         this.nav = nav;
         this.tab1Root = DrivePage;
         this.tab3Root = StopsPage;
@@ -59,10 +57,7 @@ export class TabsPage {
             this.passangerscounter = counter[0];
         });
 
-        //-----Language-----
-        this.map = language.mapTitle;
-        this.drive = language.driveTitle;
-        this.stops = language.stopTitle;
+
     }
 
     /**
@@ -165,13 +160,6 @@ export class TabsPage {
             enableBackdropDismiss: false,
             buttons: [
                 {
-                    text: language.alertCancel,
-                    handler: () => {
-                        console.log('alert aborted');
-                        this.events.publish("endTourAborted");
-                    }
-                },
-                {
                     text: 'OK',
                     handler: () => {
                         console.log('alert confirmed');
@@ -179,6 +167,13 @@ export class TabsPage {
                         this.events.publish("endTourConfirmed");
                         clearInterval(this.sendintervalID);
                         clearInterval(this.requestintervalID);
+                    }
+                },
+                 {
+                    text: this.translate.instant("cancelTrans"),
+                    handler: () => {
+                        console.log('alert aborted');
+                        this.events.publish("endTourAborted");
                     }
                 }]
         });

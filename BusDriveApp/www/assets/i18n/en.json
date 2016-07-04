@@ -1,4 +1,6 @@
 {
+    "cancelTrans": "Cancel",
+    
     "home": {    
         "beginTour": "Start Tour"
     },
@@ -48,7 +50,7 @@
         "decline": "Decline",
         "addressTrans": "Address"
     },
-    "customstops": {    
+    "customstop": {    
         "title": "Custom Stop",
         "timeTrans": "Time",
         "addressTrans": "Address",

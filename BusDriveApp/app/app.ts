@@ -89,12 +89,15 @@ export class MyApp {
    * sets the pages of menu
    */
   setPages() {
-    
-    this.settingTrans = language.settingTrans;
+   // this.translate.get("setting.settingTrans").subscribe(res => {
+   //   console.log("title:" + res);
+   //   this.settingTrans = res;
+   // });
+    this.settingTrans = this.translate.instant("setting.settingTrans");
     this.about = language.about;
     this.pages = [
       { title: 'Tour', component: HomePage, icon: 'bus' },
-      { title:  this.translate.instant("setting.settingTrans"), component: SettingPage, icon: 'settings' },
+      { title:  this.settingTrans, component: SettingPage, icon: 'settings' },
       { title: this.about, component: AboutPage, icon: 'alert' }
     ];
 

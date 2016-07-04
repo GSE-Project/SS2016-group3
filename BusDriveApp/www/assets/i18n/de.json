@@ -1,4 +1,6 @@
 {
+    "cancelTrans": "Abbrechen",
+    
     "home": {    
         "beginTour": "Tour beginnen"
     },
@@ -43,12 +45,12 @@
         "time": "Zeit",
         "numberTrans": "Anzahl",
         "done": "Ausgeführt",
-        "noAppearance": "kein Erscheinen",
+        "noAppearance": "Kein Erscheinen",
         "accepted": "Akzeptieren",
         "decline": "Ablehnen",
         "addressTrans": "Adresse"
     },
-    "customstops": {    
+    "customstop": {    
         "title": "Haltestelle",
         "timeTrans": "Zeit",
         "addressTrans": "Adresse",
@@ -56,7 +58,7 @@
         "decline": "Ablehnen",
         "accepted": "Akzeptieren",
         "done": "Ausgeführt",
-        "noAppearance": "kein Erscheinen"
+        "noAppearance": "Kein Erscheinen"
     },
     "map": {    
         "title": "Karte"
