@@ -19,15 +19,6 @@ export class CustomStopPage {
     private accepted;
     private priority: number = 50;
 
-    //-----Language-----
-    public title;
-    public timeTrans;
-    public addressTrans;
-    public numberTrans;
-    public decline;
-    public accept;
-    public done;
-    public noAppearance;
 
     constructor(navParams: NavParams, private viewCtrl: ViewController, private nav: NavController, public events: Events, private platform: Platform) {
         document.getElementById('drivepage').style.visibility = 'hidden';
@@ -43,15 +34,6 @@ export class CustomStopPage {
             this.nativemap.calcCustomStopRoute(customstopposition);
         });
 
-        //-----Language-----
-        this.title = language.customStopTitle;
-        this.timeTrans = language.time;
-        this.addressTrans = language.addressTrans;
-        this.numberTrans = language.numberTrans;
-        this.decline = language.decline;
-        this.accept = language.accept;
-        this.done = language.done;
-        this.noAppearance = language.noAppearance;
 
     }
 
