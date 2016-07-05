@@ -1,7 +1,6 @@
 import {Page, NavParams, Events, Toast, Alert, Platform, ActionSheet, Modal, NavController} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {LocalNotifications} from 'ionic-native';
-import {language} from "../../components/languages/languages";
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
 import {CustomStopPage} from '../drive/customstop/customstop';
 import {TranslatePipe,TranslateService} from "ng2-translate/ng2-translate";

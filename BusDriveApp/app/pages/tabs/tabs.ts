@@ -7,7 +7,6 @@ import {NativeMapPage} from '../nativemap/nativemap';
 import {StopsPage} from '../stops/stops';
 import {Geolocation} from 'ionic-native';
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
-import {language} from "../../components/languages/languages";
 import {TranslateService} from 'ng2-translate/ng2-translate';
 
 @Component({
@@ -156,7 +155,7 @@ export class TabsPage {
      */
     endTour() {
         let alert = ActionSheet.create({
-            title: language.alertTitle,
+            title: this.translate.instant("home.endTour"),
             enableBackdropDismiss: false,
             buttons: [
                 {

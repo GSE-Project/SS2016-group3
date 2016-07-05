@@ -1,7 +1,6 @@
 import {Page, NavParams, Platform, NavController, Events} from 'ionic-angular';
 import {Component, ViewChild} from  '@angular/core';
 import {Map} from '../../components/map/map';
-import {language} from "../../components/languages/languages";
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
 import {TranslatePipe} from "ng2-translate/ng2-translate";
 @Component({
@@ -19,8 +18,7 @@ export class MapPage {
     private acceptedcustomstops = [];
     private backbuttoncounter: number = 0;
 
-    //-----Language-----
-    public title;
+
 
     constructor(private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events) {
         this.getLineRouteCoordinates();
@@ -39,8 +37,6 @@ export class MapPage {
             this.backbuttoncounter = 0;
         })
         
-        //-----Language-----
-        this.title = language.mapTitle;
     }
 
     /**

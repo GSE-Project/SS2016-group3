@@ -1,7 +1,8 @@
 {
     "cancelTrans": "Abbrechen",
     
-    "home": {    
+    "home": {
+        "endTour":"Tour beenden?",    
         "beginTour": "Tour beginnen",
         "noDataTrans":"Kommunikationsproblem: Keine Daten empfangen"
     },

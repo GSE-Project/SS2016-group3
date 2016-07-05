@@ -1,6 +1,5 @@
 import {Page, NavParams, NavController, Platform, Events, ViewController} from 'ionic-angular';
 import {Component} from '@angular/core';
-import {language} from "../../../components/languages/languages";
 import {ViewChild} from  '@angular/core';
 import {NativeMap} from '../../../components/nativemap/nativemap';
 import {GoogleMapsLatLng} from 'ionic-native';

@@ -4,7 +4,7 @@ import {Component, ViewChild} from '@angular/core';
 import {HomePage} from './pages/home/home';
 import {SettingPage} from './components/setting/setting';
 import {AboutPage} from './components/about/about';
-import {language} from "./components/languages/languages";
+
 import {BusDriveInterface} from './components/Services/busdriveinterface';
 import {Busses} from './components/services/busses';
 import {Lines} from './components/services/lines';
@@ -94,7 +94,7 @@ export class MyApp {
    //   this.settingTrans = res;
    // });
     this.settingTrans = this.translate.instant("setting.settingTrans");
-    this.about = language.about;
+    this.about = this.translate.instant("about.aboutTrans");
     this.pages = [
       { title: 'Tour', component: HomePage, icon: 'bus' },
       { title:  this.settingTrans, component: SettingPage, icon: 'settings' },

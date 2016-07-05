@@ -1,7 +1,6 @@
 import {Page, Storage, LocalStorage, Events, Alert, App} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {Insomnia, BackgroundMode} from 'ionic-native';
-import {changeLanguage, language, de, en} from "../languages/languages";
 import {TranslatePipe,TranslateService} from "ng2-translate/ng2-translate";
 @Component({
   templateUrl: 'build/components//setting/setting.html',
@@ -134,12 +133,12 @@ export class SettingPage {
    */
   changeLanguage(lang) {
     if (lang === "en") {
-      changeLanguage(lang);
+
       this.setLanguage(lang);
       this.translate.use("en");
     }
     else {
-      changeLanguage(lang);
+
       this.setLanguage(lang);
        this.translate.use("de");
     }

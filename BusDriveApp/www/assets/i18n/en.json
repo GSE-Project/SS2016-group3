@@ -2,6 +2,7 @@
     "cancelTrans": "Cancel",
     
     "home": {    
+        "endTour":"End tour?",
         "beginTour": "Start Tour",
         "noDataTrans":"Communication problems: no received data"
     },

@@ -1,12 +1,13 @@
 import {Page, NavParams, Platform, Events} from 'ionic-angular';
 import {Component, ViewChild} from  '@angular/core';
 import {NativeMap} from '../../components/nativemap/nativemap';
-import {language} from "../../components/languages/languages";
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
+import {TranslatePipe} from "ng2-translate/ng2-translate";
 
 @Component({
     templateUrl: 'build/pages/nativemap/nativemap.html',
-    directives: [NativeMap]
+    directives: [NativeMap],
+    pipes: [TranslatePipe]
 })
 
 export class NativeMapPage {
@@ -18,8 +19,7 @@ export class NativeMapPage {
     private acceptedcustomstops = [];
     private backbuttoncounter: number = 0;
 
-    //-----Language-----
-    public title;
+
 
     constructor(private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events) {
         this.getLineRouteCoordinates();
@@ -38,8 +38,6 @@ export class NativeMapPage {
             this.backbuttoncounter = 0;
         })
 
-        //-----Language-----
-        this.title = language.mapTitle;
     }
 
     /**
