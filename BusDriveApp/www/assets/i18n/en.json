@@ -46,7 +46,7 @@
         "numberTrans": "Seats",
         "done": "Done",
         "noAppearance": "no appearance",
-        "accepted": "Accept",
+        "accept": "Accept",
         "decline": "Decline",
         "addressTrans": "Address"
     },
@@ -56,7 +56,7 @@
         "addressTrans": "Address",
         "numberTrans": "Seats",
         "decline": "Decline",
-        "accepted": "Accept",
+        "accept": "Accept",
         "done": "Done",
         "noAppearance": "no appearance"
     },

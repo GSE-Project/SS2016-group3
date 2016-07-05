@@ -39,32 +39,44 @@
     </colgroup>
     <tr>
       <td align="center">
-        <button primary *ngIf="accepted" (click)="completeAcceptedCustomStop()" width="200px">
-        <ion-icon name="done-all"></ion-icon>
-        {{"customstop.done"|translate}}
-       </button>
+        <div class="buttonleft">
+          <button primary *ngIf="accepted" (click)="completeAcceptedCustomStop()" class ="button_action" item-width="100%">
+          <ion-icon name="done-all"></ion-icon>
+          {{"customstop.done"|translate}}
+        </button>
+        </div>
       </td>
       <td align="center">
-        <button primary *ngIf="accepted" (click)="noShowAcceptedCustomStop()" width="200px">
-    <ion-icon name="sad"></ion-icon>
-    {{"customstop.noAppearance"|translate}}
-  </button>
+        <div class="buttonright">
+          <button primary *ngIf="accepted" (click)="noShowAcceptedCustomStop()" class ="button_action" item-width="100%">
+            <ion-icon name="sad"></ion-icon>
+            {{"customstop.noAppearance"|translate}}
+          </button>
+        </div>
       </td>
     </tr>
   </table>
   <table width="100%">
+    <colgroup>
+      <col width="50%">
+      <col width="50%">
+    </colgroup>
     <tr>
       <td align="center">
-        <button primary *ngIf="!accepted" (click)="acceptCustomStop()" width="200px">
+        <div class="buttonleft">
+        <button primary *ngIf="!accepted" (click)="acceptCustomStop()" class ="button_action" item-width="100%">
           <ion-icon name="checkmark"></ion-icon>
           {{"customstop.accept"|translate}}
         </button>
+        </div>
       </td>
       <td align="center">
-        <button primary *ngIf="!accepted" (click)="declineCustomStop()" width="200px">
+        <div class="buttonright">
+        <button primary *ngIf="!accepted" (click)="declineCustomStop()" class ="button_action" item-width="100%">
           <ion-icon name="close"></ion-icon>
           {{"customstop.decline"|translate}}
         </button>
+        </div>
       </td>
     </tr>
   </table>

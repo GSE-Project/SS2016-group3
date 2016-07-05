@@ -46,7 +46,7 @@
         "numberTrans": "Anzahl",
         "done": "Ausgeführt",
         "noAppearance": "Kein Erscheinen",
-        "accepted": "Akzeptieren",
+        "accept": "Akzeptieren",
         "decline": "Ablehnen",
         "addressTrans": "Adresse"
     },
@@ -56,7 +56,7 @@
         "addressTrans": "Adresse",
         "numberTrans": "Anzahl",
         "decline": "Ablehnen",
-        "accepted": "Akzeptieren",
+        "accept": "Akzeptieren",
         "done": "Ausgeführt",
         "noAppearance": "Kein Erscheinen"
     },
