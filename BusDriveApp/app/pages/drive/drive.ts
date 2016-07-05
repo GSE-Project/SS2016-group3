@@ -23,20 +23,6 @@ export class DrivePage {
     private acceptedcustomstops = [];
     private backbuttoncounter: number = 0;
 
-    //-----Language-----
-    public passengers;
-    public title;
-    public nextStopTrans;
-    public acceptedStopsTrans;
-    public newStopsTrans
-    public time;
-    public numberTrans;
-    public done;
-    public noAppearance;
-    public accept;
-    public decline;
-    public addressTrans
-
     constructor(private nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events, public translate:TranslateService) {
         this.selectedbusid = navParams.data[0]
         this.getBusSeatsNumber();
@@ -63,19 +49,7 @@ export class DrivePage {
             this.backbuttoncounter = 0;
         })
 
-        //-----Language-----
-        this.passengers = language.passengers;
-        this.title = language.driveTitle;
-        this.nextStopTrans = language.nextStop;
-        this.acceptedStopsTrans = language.acceptedStops;
-        this.newStopsTrans = language.newStops;
-        this.time = language.time;
-        this.numberTrans = language.numberTrans;
-        this.done = language.done;
-        this.noAppearance = language.noAppearance;
-        this.accept = language.accept;
-        this.decline = language.decline;
-        this.addressTrans = language.addressTrans;
+ 
     }
 
     /**

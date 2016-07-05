@@ -14,9 +14,6 @@ export class LineListPage {
     private linesInfos = [];
     private selectedbus;
 
-    //-----Language-----
-    public lineName;
-    public title;
 
     constructor(nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private menu: MenuController) {
         this.nav = nav;
@@ -25,9 +22,6 @@ export class LineListPage {
 
         this.getLinesInfos();
 
-        //-----Language-----
-        this.lineName = language.lineName;
-        this.title = language.lineTitle;
     }
 
     /**
