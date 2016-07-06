@@ -1,4 +1,4 @@
-import {Page, Alert, ActionSheet, NavController, NavParams, MenuController, Events, Platform} from 'ionic-angular';
+import {Page, ViewController, ActionSheet, NavController, NavParams, MenuController, Events, Platform} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {HomePage} from '../home/home';
 import {DrivePage} from '../drive/drive';
@@ -14,7 +14,6 @@ import {TranslateService} from 'ng2-translate/ng2-translate';
 })
 
 export class TabsPage {
-    private nav;
     private tab1Root;
     private tab2Root;
     private tab3Root;
@@ -33,21 +32,18 @@ export class TabsPage {
     private mapTrans
     private stopsTrans
 
-
-    constructor(private platform: Platform, nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private menu: MenuController, public events: Events,private  translate: TranslateService) {
-        this.nav = nav;
+    constructor(private platform: Platform, private nav: NavController, private viewCtrl: ViewController, navParams: NavParams, private busdriveinterface: BusDriveInterface, public events: Events, private translate: TranslateService) {
         this.tab1Root = DrivePage;
         this.tab3Root = StopsPage;
         this.setMapPage();
-        this.menu.swipeEnable(false);
 
         this.selectedbus = navParams.get("selectedbus");
         this.selectedline = navParams.get("selectedline");
         this.rootParams = [this.selectedbus, this.selectedline];
 
-        this.driveTrans= translate.instant("drive.title");
-        this.mapTrans= translate.instant("map.title");
-        this.stopsTrans= translate.instant("stops.title");
+        this.driveTrans = translate.instant("drive.title");
+        this.mapTrans = translate.instant("map.title");
+        this.stopsTrans = translate.instant("stops.title");
         this.updateBusStatus();
         this.getLineRoute();
         this.getLineStops();
@@ -60,8 +56,6 @@ export class TabsPage {
         this.events.subscribe("Passenger", (counter) => {
             this.passangerscounter = counter[0];
         });
-
-
     }
 
     /**
@@ -104,7 +98,6 @@ export class TabsPage {
             let linecustomstops = this.busdriveinterface.getLineCustomStopsAll();
             this.events.publish("newCustomStops", linecustomstops);
         });;
-
     }
 
     /**
@@ -167,13 +160,15 @@ export class TabsPage {
                     text: 'OK',
                     handler: () => {
                         console.log('alert confirmed');
-                        this.nav.setRoot(HomePage);
+                        this.viewCtrl.dismiss().then(() => {
+                            this.nav.popToRoot();
+                        })
                         this.events.publish("endTourConfirmed");
                         clearInterval(this.sendintervalID);
                         clearInterval(this.requestintervalID);
                     }
                 },
-                 {
+                {
                     text: this.translate.instant("cancelTrans"),
                     handler: () => {
                         console.log('alert aborted');

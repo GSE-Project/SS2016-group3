@@ -12,12 +12,10 @@ import {TranslatePipe} from "ng2-translate/ng2-translate";
 })
 
 export class CustomStopPage {
-
     @ViewChild(NativeMap) nativemap: NativeMap;
     private customstop;
     private accepted;
     private priority: number = 50;
-
 
     constructor(navParams: NavParams, private viewCtrl: ViewController, private nav: NavController, public events: Events, private platform: Platform) {
         document.getElementById('drivepage').style.visibility = 'hidden';
@@ -32,8 +30,6 @@ export class CustomStopPage {
             let customstopposition = new GoogleMapsLatLng(customstoplat, customstoplng);
             this.nativemap.calcCustomStopRoute(customstopposition);
         });
-
-
     }
 
     /**
@@ -79,6 +75,5 @@ export class CustomStopPage {
         }
         this.viewCtrl.dismiss();
         this.priority = 1;
-
     }
 }

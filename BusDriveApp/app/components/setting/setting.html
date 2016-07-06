@@ -1,7 +1,4 @@
 <ion-navbar primary *navbar>
-  <button menuToggle>
-    <ion-icon name="menu"></ion-icon>
-  </button>
   <ion-title>{{"setting.settingTrans" | translate}}</ion-title>
 </ion-navbar>
 
@@ -24,12 +21,12 @@
       <button large class="button button-block" (click)="addNewServerURL()">
         <ion-icon name="add"></ion-icon>
       </button>
-      </ion-item>
-      <ion-item>
+    </ion-item>
+    <ion-item>
       <button large class="button button-block" (click)="clearServerURLList()">
         <ion-icon name="trash"></ion-icon>
       </button>
-      </ion-item>
+    </ion-item>
     <ion-item>
       <ion-label>{{"setting.backgroundModeTrans"| translate}}</ion-label>
       <ion-toggle [(ngModel)]="mode" (ngModelChange)="changeBackgroundMode(mode)"></ion-toggle>
