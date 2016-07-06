@@ -4,7 +4,6 @@ import {Component, ViewChild} from '@angular/core';
 import {HomePage} from './pages/home/home';
 import {SettingPage} from './components/setting/setting';
 import {AboutPage} from './components/about/about';
-
 import {BusDriveInterface} from './components/Services/busdriveinterface';
 import {Busses} from './components/services/busses';
 import {Lines} from './components/services/lines';
@@ -31,14 +30,12 @@ export class MyApp {
   public settingTrans;
   public about;
 
-  constructor(private platform: Platform, private menu: MenuController, public events: Events,private  translate: TranslateService) {
-    this.translateConfig();
+  constructor(private platform: Platform, private menu: MenuController, public events: Events, public translate: TranslateService, private settings: SettingPage) {
     this.initializeApp();
     this.setPages();
     this.events.subscribe("ChangeLanguage", () => {
       this.setPages();
     });
-    
   }
 
   /**
@@ -48,59 +45,20 @@ export class MyApp {
     this.platform.ready().then(() => {
       StatusBar.styleDefault();
     });
-    //Rufen wir schon früher auf
-    
-    let settings = window.localStorage;
-    if (!(settings["serverURL"])) {
-      settings.setItem("serverURL", "https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1");
-      settings.setItem("serverURLList", "https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1");
-      settings.setItem("insomnia", "true");
-      settings.setItem("BackgroundMode", "true");
-    }
-    if (settings.getItem("insomnia") === "true") {
-      Insomnia.keepAwake()
-        .then(
-        () => console.log('prevent the screen from falling asleep'),
-        () => console.log('failed to prevent the screen from falling asleep')
-        );
-    }
-    else if (settings.getItem("insomnia") === "false") {
-      Insomnia.allowSleepAgain()
-        .then(
-        () => console.log('allow the screen to fall asleep'),
-        () => console.log('failed to allow the screen to fall asleep')
-        );
-    }
-    if (settings.getItem("BackgroundMode") === "true") {
-      BackgroundMode.enable();
-      console.log("BackgroundMode " + settings.getItem("BackgroundMode"));
-      BackgroundMode.setDefaults({
-        title: "BusDriveApp",
-        text: "sending real time data"
-      })
-    }
-    else if (settings.getItem("BackgroundMode") === "false") {
-      BackgroundMode.disable();
-      console.log("BackgroundMode " + settings.getItem("BackgroundMode"));
-    }
+    this.settings.loadDefaultSettings();
   }
 
   /**
    * sets the pages of menu
    */
   setPages() {
-   // this.translate.get("setting.settingTrans").subscribe(res => {
-   //   console.log("title:" + res);
-   //   this.settingTrans = res;
-   // });
     this.settingTrans = this.translate.instant("setting.settingTrans");
     this.about = this.translate.instant("about.aboutTrans");
     this.pages = [
       { title: 'Tour', component: HomePage, icon: 'bus' },
-      { title:  this.settingTrans, component: SettingPage, icon: 'settings' },
+      { title: this.settingTrans, component: SettingPage, icon: 'settings' },
       { title: this.about, component: AboutPage, icon: 'alert' }
     ];
-
   }
 
   /**
@@ -118,25 +76,6 @@ export class MyApp {
     this.platform.exitApp();
     LocalNotifications.clear(1);
   }
-  /**
-   * configures the translation service (ng2-translate)
-   */
-translateConfig() {
-  let userLang= "en";
-  let settings = window.localStorage;
-   if ((settings["Language"])) {
-      userLang=settings.getItem("Language");
-    }
-   // var userLang = navigator.language.split('-')[0]; // use navigator lang if available
-    //userLang = /(en|de)/gi.test(userLang) ? userLang : 'en';
-
-    // this language will be used as a fallback when a translation isn't found in the current language
-    this.translate.setDefaultLang('en');
-
-    // the lang to use, if the lang isn't available, it will use the current loader to get them
-    this.translate.use(userLang);
-  }
-
 }
 
 ionicBootstrap(MyApp, [[provide(TranslateLoader, {
@@ -144,4 +83,4 @@ ionicBootstrap(MyApp, [[provide(TranslateLoader, {
   deps: [Http]
 }),
   TranslateService]], {
-});
+  });
