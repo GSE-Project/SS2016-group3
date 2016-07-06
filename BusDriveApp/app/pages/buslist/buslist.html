@@ -1,6 +1,6 @@
 <ion-navbar primary *navbar>
     <ion-title>
-        {{title}}
+        {{"buslist.title"| translate}}
     </ion-title>
 </ion-navbar>
 
@@ -11,8 +11,8 @@
                 <ion-icon name="bus" style="font-size:100px" ></ion-icon>
             </ion-thumbnail>
             <h2>Bus Nr. {{item[0]}}</h2>
-            <p>{{numberplate}}: {{item[1]}}</p>   
-            <p>{{seatsTrans}}: {{item[2]}}</p>          
+            <p>{{"buslist.numberplate"|translate}}: {{item[1]}}</p>   
+            <p>{{"buslist.seatsTrans"|translate}}: {{item[2]}}</p>          
         </ion-item>
     </ion-list>
 </ion-content>

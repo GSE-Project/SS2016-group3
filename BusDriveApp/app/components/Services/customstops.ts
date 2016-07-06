@@ -121,7 +121,7 @@ export class CustomStops {
             let hours = this.addZero(picuptime.getHours());
             let minutes = this.addZero(picuptime.getMinutes());
             let day = this.addZero(picuptime.getDate());
-            let month = this.addZero(picuptime.getMonth());
+            let month = this.addZero(picuptime.getMonth() + 1);
             let year = this.addZero(picuptime.getFullYear());
             let time = hours + ":" + minutes + " " + day + "." + month + "." + year;
             this.linecustomstops[i].pickUpTime = time;
@@ -150,7 +150,7 @@ export class CustomStops {
         }
         let linecustomstopsall = [];
         for (let i = 0; i < this.linecustomstops.length; i++) {
-            linecustomstopsall.push([this.linecustomstops[i].id, this.linecustomstops[i].info.name, this.linecustomstops[i].pickUpTime, this.linecustomstops[i].numberOfPersons, this.linecustomstops[i].info.address, this.linecustomstops[i].info.assistance, this.linecustomstops[i].location.coordinates]);
+            linecustomstopsall.push([this.linecustomstops[i].id, this.linecustomstops[i].info.name, this.linecustomstops[i].pickUpTime, this.linecustomstops[i].numberOfPersons, this.linecustomstops[i].info.address, this.linecustomstops[i].info.assistance, this.linecustomstops[i].location.coordinates, this.linecustomstops[i].status]);
         }
         return linecustomstopsall;
     }

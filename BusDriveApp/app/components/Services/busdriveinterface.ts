@@ -115,6 +115,13 @@ export class BusDriveInterface {
     }
 
     /**
+     * @returns names and schedules of linestops
+     */
+    getLineStopsInfos() {
+         return this.stops.getLineStopsInfos();
+    }
+
+    /**
      * requests routes from server
      */
     requestRoutes() {

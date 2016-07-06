@@ -4,7 +4,6 @@ import {Component, ViewChild} from '@angular/core';
 import {HomePage} from './pages/home/home';
 import {SettingPage} from './components/setting/setting';
 import {AboutPage} from './components/about/about';
-import {language} from "./components/languages/languages";
 import {BusDriveInterface} from './components/Services/busdriveinterface';
 import {Busses} from './components/services/busses';
 import {Lines} from './components/services/lines';
@@ -12,7 +11,9 @@ import {Stops} from './components/services/stops';
 import {Routes} from './components/services/routes';
 import {Provider} from './components/services/provider';
 import {CustomStops} from './components/services/customstops';
-
+import {provide} from '@angular/core';
+import {Http, HTTP_PROVIDERS} from '@angular/http';
+import {TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader} from 'ng2-translate/ng2-translate';
 
 @Component({
   templateUrl: 'build/app.html',
@@ -29,9 +30,9 @@ export class MyApp {
   public settingTrans;
   public about;
 
-  constructor(private platform: Platform, private menu: MenuController, public events: Events) {
+  constructor(private platform: Platform, private menu: MenuController, public events: Events, public translate: TranslateService, private settings: SettingPage) {
     this.initializeApp();
-    this.setPages();
+    this.setPages();     
     this.events.subscribe("ChangeLanguage", () => {
       this.setPages();
     });
@@ -44,53 +45,21 @@ export class MyApp {
     this.platform.ready().then(() => {
       StatusBar.styleDefault();
     });
-    let settings = window.localStorage;
-    if (!(settings["serverURL"])) {
-      settings.setItem("serverURL", "https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1");
-      settings.setItem("serverURLList", "https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1");
-      settings.setItem("insomnia", "true");
-      settings.setItem("BackgroundMode", "true");
-    }
-    if (settings.getItem("insomnia") === "true") {
-      Insomnia.keepAwake()
-        .then(
-        () => console.log('prevent the screen from falling asleep'),
-        () => console.log('failed to prevent the screen from falling asleep')
-        );
-    }
-    else if (settings.getItem("insomnia") === "false") {
-      Insomnia.allowSleepAgain()
-        .then(
-        () => console.log('allow the screen to fall asleep'),
-        () => console.log('failed to allow the screen to fall asleep')
-        );
-    }
-    if (settings.getItem("BackgroundMode") === "true") {
-      BackgroundMode.enable();
-      console.log("BackgroundMode " + settings.getItem("BackgroundMode"));
-      BackgroundMode.setDefaults({
-        title: "BusDriveApp",
-        text: "sending real time data"
-      })
-    }
-    else if (settings.getItem("BackgroundMode") === "false") {
-      BackgroundMode.disable();
-      console.log("BackgroundMode " + settings.getItem("BackgroundMode"));
-    }
+    this.settings.loadDefaultSettings();
   }
-
+  
   /**
    * sets the pages of menu
    */
   setPages() {
-    this.settingTrans = language.settingTrans;
-    this.about = language.about;
+    
+    
+
     this.pages = [
       { title: 'Tour', component: HomePage, icon: 'bus' },
-      { title: this.settingTrans, component: SettingPage, icon: 'settings' },
-      { title: this.about, component: AboutPage, icon: 'alert' }
+      { title:'Settings', component: SettingPage, icon: 'settings' },
+      { title: 'About', component: AboutPage, icon: 'alert' }
     ];
-
   }
 
   /**
@@ -110,4 +79,9 @@ export class MyApp {
   }
 }
 
-ionicBootstrap(MyApp);
+ionicBootstrap(MyApp, [[provide(TranslateLoader, {
+  useFactory: (http: Http) => new TranslateStaticLoader(http, 'assets/i18n', '.json'),
+  deps: [Http]
+}),
+  TranslateService]], {
+  });

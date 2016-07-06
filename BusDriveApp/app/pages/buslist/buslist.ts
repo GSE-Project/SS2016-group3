@@ -2,20 +2,17 @@ import {Page, NavController, NavParams, MenuController} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {LineListPage} from '../linelist/linelist';
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
-import {language} from "../../components/languages/languages";
+import {TranslatePipe} from "ng2-translate/ng2-translate";
 
 @Component({
-    templateUrl: 'build/pages/buslist/buslist.html'
+    templateUrl: 'build/pages/buslist/buslist.html',
+    pipes: [TranslatePipe]
 })
 
 export class BusListPage {
     private nav;
     private bussesInfos = [];
 
-    //-----Language-----
-    public numberplate;
-    public title
-    public seatsTrans;
 
     constructor(nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private menu: MenuController) {
         this.nav = nav;
@@ -23,10 +20,6 @@ export class BusListPage {
 
         this.getBussesInfos();
 
-        //-----Language-----
-        this.numberplate = language.numberplate;
-        this.title = language.chooseBus;
-        this.seatsTrans = language.seatsTrans;
     }
 
     /**

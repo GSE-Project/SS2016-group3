@@ -7,7 +7,7 @@ import {NativeMapPage} from '../nativemap/nativemap';
 import {StopsPage} from '../stops/stops';
 import {Geolocation} from 'ionic-native';
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
-import {language} from "../../components/languages/languages";
+import {TranslateService} from 'ng2-translate/ng2-translate';
 
 @Component({
     templateUrl: 'build/pages/tabs/tabs.html'
@@ -29,13 +29,12 @@ export class TabsPage {
     private lat = 0;
     private lastSendTime = undefined;
     private passangerscounter = 0;
+    private driveTrans;
+    private mapTrans
+    private stopsTrans
 
-    //-----Language-----
-    public map;
-    public drive;
-    public stops;
 
-    constructor(private platform: Platform, nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private menu: MenuController, public events: Events) {
+    constructor(private platform: Platform, nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private menu: MenuController, public events: Events,private  translate: TranslateService) {
         this.nav = nav;
         this.tab1Root = DrivePage;
         this.tab3Root = StopsPage;
@@ -46,6 +45,9 @@ export class TabsPage {
         this.selectedline = navParams.get("selectedline");
         this.rootParams = [this.selectedbus, this.selectedline];
 
+        this.driveTrans= translate.instant("drive.title");
+        this.mapTrans= translate.instant("map.title");
+        this.stopsTrans= translate.instant("stops.title");
         this.updateBusStatus();
         this.getLineRoute();
         this.getLineStops();
@@ -55,14 +57,11 @@ export class TabsPage {
         this.events.subscribe("EndTour", () => {
             this.endTour();
         })
-        this.events.subscribe("Passneger", (counter) => {
+        this.events.subscribe("Passenger", (counter) => {
             this.passangerscounter = counter[0];
         });
 
-        //-----Language-----
-        this.map = language.mapTitle;
-        this.drive = language.driveTitle;
-        this.stops = language.stopTitle;
+
     }
 
     /**
@@ -161,16 +160,9 @@ export class TabsPage {
      */
     endTour() {
         let alert = ActionSheet.create({
-            title: language.alertTitle,
+            title: this.translate.instant("home.endTour"),
             enableBackdropDismiss: false,
             buttons: [
-                {
-                    text: language.alertCancel,
-                    handler: () => {
-                        console.log('alert aborted');
-                        this.events.publish("endTourAborted");
-                    }
-                },
                 {
                     text: 'OK',
                     handler: () => {
@@ -179,6 +171,13 @@ export class TabsPage {
                         this.events.publish("endTourConfirmed");
                         clearInterval(this.sendintervalID);
                         clearInterval(this.requestintervalID);
+                    }
+                },
+                 {
+                    text: this.translate.instant("cancelTrans"),
+                    handler: () => {
+                        console.log('alert aborted');
+                        this.events.publish("endTourAborted");
                     }
                 }]
         });

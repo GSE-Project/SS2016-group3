@@ -1,41 +1,25 @@
 import {Page, Platform, NavController} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {AppAvailability} from 'ionic-native';
-import {language} from "../../components/languages/languages";
 import {LicensePage} from "../../components/about/license/license";
+import {TranslatePipe} from "ng2-translate/ng2-translate";
 
 @Component({
     templateUrl: 'build/components/about/about.html',
+    pipes: [TranslatePipe]
 })
 
 export class AboutPage {
     private platform;
     private nav;
 
-    //----------Language-------
-    private findUs;
-    private opinion;
-    private disclaimer;
-    private imprint;
-    private privacyPolicy;
-    private license;
-    private versionInfo;
-    private aboutTrans;
+
+   
 
     constructor(platform: Platform, nav: NavController) {
         this.platform = platform;
         this.nav = nav;
         
-        //----------Language--------------
-        this.findUs = language.findUs;
-        this.opinion = language.opinion;
-        this.disclaimer = language.disclaimer;
-        this.imprint = language.imprint;
-        this.privacyPolicy = language.privacyPolicy;
-        this.license = language.license;
-        this.versionInfo = language.versionInfo;
-        this.aboutTrans=language.about;
-
     }
     /**
      * opens a url in the system app if installed or in the browser

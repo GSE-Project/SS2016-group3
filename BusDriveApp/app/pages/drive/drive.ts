@@ -1,13 +1,13 @@
-import {Page, NavParams, Events, Toast, Alert, Platform, ActionSheet, NavController} from 'ionic-angular';
+import {Page, NavParams, Events, Toast, Alert, Platform, ActionSheet, Modal, NavController} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {LocalNotifications} from 'ionic-native';
-import {language} from "../../components/languages/languages";
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
 import {CustomStopPage} from '../drive/customstop/customstop';
-
+import {TranslatePipe,TranslateService} from "ng2-translate/ng2-translate";
 
 @Component({
     templateUrl: 'build/pages/drive/drive.html',
+    pipes: [TranslatePipe]
 })
 export class DrivePage {
     private selectedbusid;
@@ -22,21 +22,7 @@ export class DrivePage {
     private acceptedcustomstops = [];
     private backbuttoncounter: number = 0;
 
-    //-----Language-----
-    public passengers;
-    public title;
-    public nextStopTrans;
-    public acceptedStopsTrans;
-    public newStopsTrans
-    public time;
-    public numberTrans;
-    public done;
-    public noAppearance;
-    public accept;
-    public decline;
-    public addressTrans
-
-    constructor(private nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events) {
+    constructor(private nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events, public translate:TranslateService) {
         this.selectedbusid = navParams.data[0]
         this.getBusSeatsNumber();
         this.getLineStopsNames();
@@ -62,19 +48,7 @@ export class DrivePage {
             this.backbuttoncounter = 0;
         })
 
-        //-----Language-----
-        this.passengers = language.passengers;
-        this.title = language.driveTitle;
-        this.nextStopTrans = language.nextStop;
-        this.acceptedStopsTrans = language.acceptedStops;
-        this.newStopsTrans = language.newStops;
-        this.time = language.time;
-        this.numberTrans = language.numberTrans;
-        this.done = language.done;
-        this.noAppearance = language.noAppearance;
-        this.accept = language.accept;
-        this.decline = language.decline;
-        this.addressTrans = language.addressTrans;
+ 
     }
 
     /**
@@ -83,7 +57,7 @@ export class DrivePage {
     increasePassengers() {
         if (this.counter < this.totalbusseats) {
             this.counter++
-            this.events.publish("Passneger", this.counter);
+            this.events.publish("Passenger", this.counter);
         }
     }
 
@@ -93,7 +67,7 @@ export class DrivePage {
     decreasePassengers() {
         if (this.counter > 0) {
             this.counter--;
-            this.events.publish("Passneger", this.counter);
+            this.events.publish("Passenger", this.counter);
         }
     }
 
@@ -146,16 +120,24 @@ export class DrivePage {
             if (this.newcustomstopsnumber > 0) {
                 LocalNotifications.schedule({
                     id: 1,
-                    text: this.newcustomstopsnumber + ' new Custom Stops',
+                    text: this.newcustomstopsnumber +" "+ this.translate.instant("drive.newStopsTrans"),
                 });
                 this.nav.present(Toast.create({
-                    message: this.newcustomstopsnumber + ' new Custom Stops',
+                    message: this.newcustomstopsnumber +" "+ this.translate.instant("drive.newStopsTrans"),
                     duration: 7000,
                     position: "top",
                     showCloseButton: true,
                     closeButtonText: "Ok",
                     dismissOnPageChange: true
                 }))
+            }
+        }
+        this.linecustomstopsall = linecustomstopsall;
+        for (let i = 0; i < this.acceptedcustomstops.length; i++){
+            for(let j = 0; j < this.linecustomstopsall.length; j++){
+                if(this.acceptedcustomstops[i][0] === this.linecustomstopsall[j][0]){
+                    this.acceptedcustomstops[i][7] = this.linecustomstopsall[j][7];
+                }
             }
         }
         this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
@@ -228,10 +210,8 @@ export class DrivePage {
         console.log("-> CustomStopPage");
         for (let index = 0; index < this.linecustomstopsall.length; index++) {
             if (this.linecustomstopsall[index] == customstop) {
-                this.nav.push(CustomStopPage, {
-                    showcustomstop: customstop,
-                    accepted: false
-                });
+                let modal = Modal.create(CustomStopPage, {showcustomstop: customstop, accepted: false});
+                this.nav.present(modal);
             }
         }
     }
@@ -243,10 +223,8 @@ export class DrivePage {
         console.log("-> CustomStopPage");
         for (let index = 0; index < this.acceptedcustomstops.length; index++) {
             if (this.acceptedcustomstops[index] == customstop) {
-                this.nav.push(CustomStopPage, {
-                    showcustomstop: customstop,
-                    accepted: true
-                });
+                let modal = Modal.create(CustomStopPage, {showcustomstop: customstop, accepted: true});
+                this.nav.present(modal);
             }
         }
     }

@@ -40,10 +40,31 @@
     "timestamp": 2
   },
   "stops": {
+    "timeStamp": 1468923834000,
     "stops": [
       {
         "id": 1,
         "name": "Kirche",
+        "schedule": [
+          {
+            "lineName": "Pirmasens",
+            "lineId": 1,
+            "stopId": 1,
+            "arrivingTime": "091:00:00"
+          },
+          {
+            "lineName": "Pirmasens",
+            "lineId": 1,
+            "stopId": 1,
+            "arrivingTime": "121:00:00"
+          },
+          {
+            "lineName": "Pirmasens",
+            "lineId": 1,
+            "stopId": 1,
+            "arrivingTime": "131:00:00"
+          }
+        ],
         "lines": [
           {
             "id": "1"
@@ -55,25 +76,31 @@
             7.60747,
             49.209277
           ]
-        },
-        "schedule": [
-          {
-            "lineId": 2,
-            "time": "12:00"
-          },
-          {
-            "lineId": 2,
-            "time": "13:00"
-          },
-          {
-            "lineId": 2,
-            "time": "9:00"
-          }
-        ]
+        }
       },
       {
         "id": 2,
         "name": "Brunnen",
+        "schedule": [
+          {
+            "lineName": "Pirmasens",
+            "lineId": 1,
+            "stopId": 2,
+            "arrivingTime": "092:00:00"
+          },
+          {
+            "lineName": "Pirmasens",
+            "lineId": 1,
+            "stopId": 2,
+            "arrivingTime": "122:00:00"
+          },
+          {
+            "lineName": "Pirmasens",
+            "lineId": 1,
+            "stopId": 2,
+            "arrivingTime": "132:00:00"
+          }
+        ],
         "lines": [
           {
             "id": "1"
@@ -85,25 +112,31 @@
             7.606499,
             49.207937
           ]
-        },
-        "schedule": [
-          {
-            "lineId": 2,
-            "time": "12:00"
-          },
-          {
-            "lineId": 2,
-            "time": "13:00"
-          },
-          {
-            "lineId": 2,
-            "time": "9:00"
-          }
-        ]
+        }
       },
       {
         "id": 3,
         "name": "Park",
+        "schedule": [
+          {
+            "lineName": "Pirmasens",
+            "lineId": 1,
+            "stopId": 3,
+            "arrivingTime": "093:00:00"
+          },
+          {
+            "lineName": "Pirmasens",
+            "lineId": 1,
+            "stopId": 3,
+            "arrivingTime": "123:00:00"
+          },
+          {
+            "lineName": "Pirmasens",
+            "lineId": 1,
+            "stopId": 3,
+            "arrivingTime": "133:00:00"
+          }
+        ],
         "lines": [
           {
             "id": "1"
@@ -115,25 +148,31 @@
             7.604546,
             49.207636
           ]
-        },
-        "schedule": [
-          {
-            "lineId": 2,
-            "time": "12:00"
-          },
-          {
-            "lineId": 2,
-            "time": "13:00"
-          },
-          {
-            "lineId": 2,
-            "time": "9:00"
-          }
-        ]
+        }
       },
       {
         "id": 4,
         "name": "Markt",
+        "schedule": [
+          {
+            "lineName": "Pirmasens",
+            "lineId": 1,
+            "stopId": 4,
+            "arrivingTime": "094:00:00"
+          },
+          {
+            "lineName": "Pirmasens",
+            "lineId": 1,
+            "stopId": 4,
+            "arrivingTime": "124:00:00"
+          },
+          {
+            "lineName": "Pirmasens",
+            "lineId": 1,
+            "stopId": 4,
+            "arrivingTime": "134:00:00"
+          }
+        ],
         "lines": [
           {
             "id": "1"
@@ -145,25 +184,31 @@
             7.604975,
             49.209038
           ]
-        },
-        "schedule": [
-          {
-            "lineId": 2,
-            "time": "12:00"
-          },
-          {
-            "lineId": 2,
-            "time": "13:00"
-          },
-          {
-            "lineId": 2,
-            "time": "9:00"
-          }
-        ]
+        }
       },
       {
         "id": 5,
         "name": "Uni West",
+        "schedule": [
+          {
+            "lineName": "Uni",
+            "lineId": 2,
+            "stopId": 5,
+            "arrivingTime": "17:00:00"
+          },
+          {
+            "lineName": "Uni",
+            "lineId": 2,
+            "stopId": 5,
+            "arrivingTime": "16:00:00"
+          },
+          {
+            "lineName": "Uni",
+            "lineId": 2,
+            "stopId": 5,
+            "arrivingTime": "15:00:00"
+          }
+        ],
         "lines": [
           {
             "id": "2"
@@ -175,25 +220,31 @@
             7.749317,
             49.424822
           ]
-        },
-        "schedule": [
-          {
-            "lineId": 2,
-            "time": "12:00"
-          },
-          {
-            "lineId": 2,
-            "time": "13:00"
-          },
-          {
-            "lineId": 2,
-            "time": "9:00"
-          }
-        ]
+        }
       },
       {
         "id": 6,
         "name": "Uni Süd",
+        "schedule": [
+          {
+            "lineName": "Uni",
+            "lineId": 2,
+            "stopId": 6,
+            "arrivingTime": "09:00:00"
+          },
+          {
+            "lineName": "Uni",
+            "lineId": 2,
+            "stopId": 6,
+            "arrivingTime": "12:00:00"
+          },
+          {
+            "lineName": "Uni",
+            "lineId": 2,
+            "stopId": 6,
+            "arrivingTime": "13:00:00"
+          }
+        ],
         "lines": [
           {
             "id": "2"
@@ -205,25 +256,31 @@
             7.750694,
             49.423046
           ]
-        },
-        "schedule": [
-          {
-            "lineId": 2,
-            "time": "12:00"
-          },
-          {
-            "lineId": 2,
-            "time": "13:00"
-          },
-          {
-            "lineId": 2,
-            "time": "9:00"
-          }
-        ]
+        }
       },
       {
         "id": 7,
         "name": "Uni Ost",
+        "schedule": [
+          {
+            "lineName": "Uni",
+            "lineId": 2,
+            "stopId": 7,
+            "arrivingTime": "09:00:00"
+          },
+          {
+            "lineName": "Uni",
+            "lineId": 2,
+            "stopId": 7,
+            "arrivingTime": "12:00:00"
+          },
+          {
+            "lineName": "Uni",
+            "lineId": 2,
+            "stopId": 7,
+            "arrivingTime": "13:00:00"
+          }
+        ],
         "lines": [
           {
             "id": "2"
@@ -235,25 +292,31 @@
             7.754991,
             49.423989
           ]
-        },
-        "schedule": [
-          {
-            "lineId": 2,
-            "time": "12:00"
-          },
-          {
-            "lineId": 2,
-            "time": "13:00"
-          },
-          {
-            "lineId": 2,
-            "time": "9:00"
-          }
-        ]
+        }
       },
       {
         "id": 8,
         "name": "Uni Sporthalle",
+        "schedule": [
+          {
+            "lineName": "Uni",
+            "lineId": 2,
+            "stopId": 8,
+            "arrivingTime": "09:00:00"
+          },
+          {
+            "lineName": "Uni",
+            "lineId": 2,
+            "stopId": 8,
+            "arrivingTime": "12:00:00"
+          },
+          {
+            "lineName": "Uni",
+            "lineId": 2,
+            "stopId": 8,
+            "arrivingTime": "13:00:00"
+          }
+        ],
         "lines": [
           {
             "id": "2"
@@ -265,24 +328,9 @@
             7.750936,
             49.425893
           ]
-        },
-        "schedule": [
-          {
-            "lineId": 2,
-            "time": "12:00"
-          },
-          {
-            "lineId": 2,
-            "time": "13:00"
-          },
-          {
-            "lineId": 2,
-            "time": "9:00"
-          }
-        ]
+        }
       }
-    ],
-    "timestamp": 2
+    ]
   },
   "customStops": [
     {
@@ -321,6 +369,7 @@
       },
       "numberOfPersons": 1,
       "deviceID": 857547,
+      "status": 6,
       "info": {
         "name": "Charel",
         "address": "Uni Sporthalle",
@@ -384,12 +433,12 @@
     "position": {
       "type": "Point",
       "coordinates": [
-        7.7522150000000005,
-        49.4252432
+        7.752265799999999,
+        49.4252094
       ]
     },
     "takenSeats": 0,
-    "timeStamp": 1467031315199
+    "timeStamp": 1467625314529
   },
   "routes": {
     "routes": [

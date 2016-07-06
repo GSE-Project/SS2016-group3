@@ -2,13 +2,13 @@
     <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
-    <ion-title>{{aboutTrans}}</ion-title>
+    <ion-title>{{"about.aboutTrans"|translate}}</ion-title>
 </ion-navbar>
 
 <ion-content class="about">
     <ion-list>
         <ion-item>
-            <div class="platform"> {{findUs}} </div>
+            <div class="platform"> {{"about.findUs"|translate}} </div>
             <ion-card>
                 <ion-list>
                     <button ion-item (click)="openFacebook('912830465460833')">
@@ -31,7 +31,7 @@
             </ion-card>
         </ion-item>
         <ion-item>
-            <div class="version"> {{opinion}} </div>
+            <div class="version"> {{"about.opinion"|translate}} </div>
             <ion-card>
                 <button ion-item (click)="mailto('gseprojekt3@informatik.uni-kl.de')">
                         <ion-icon name="mail" item-left></ion-icon>
@@ -40,26 +40,26 @@
             </ion-card>
         </ion-item>
         <ion-item>
-            <div class="platform"> {{disclaimer}} </div>
+            <div class="platform"> {{"about.disclaimer"|translate}} </div>
             <ion-card>
                 <ion-list>
                     <button ion-item (click)="openURL('http://www.digitale-doerfer.de/impressum')">
                         <ion-icon name="information" item-left></ion-icon>
-                            {{imprint}}
+                            {{"about.imprint"|translate}}
                     </button>
                     <button ion-item (click)="openURL('http://www.digitale-doerfer.de/datenschutzerklaerung')">
                         <ion-icon name="information" item-left></ion-icon>
-                            {{privacyPolicy}}
+                            {{"about.privacyPolicy"|translate}}
                     </button>
                     <button ion-item (click)="openLicense()">
                         <ion-icon name="information" item-left></ion-icon>
-                            {{license}}
+                            {{"about.license"|translate}}
                     </button>
                 </ion-list>
             </ion-card>
         </ion-item>
         <ion-item>
-            <div class="version"> {{versionInfo}} </div>
+            <div class="version"> {{"about.versionInfo"|translate}} </div>
             <ion-card>
                 <button ion-item>
                         <ion-icon name="apps" item-left></ion-icon>

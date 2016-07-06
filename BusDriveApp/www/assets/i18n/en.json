@@ -1,0 +1,70 @@
+{
+    "cancelTrans": "Cancel",
+    
+    "home": {    
+        "endTour":"End tour?",
+        "beginTour": "Start Tour",
+        "noDataTrans":"Communication problems: no received data"
+    },
+    "setting":{
+        "settingTrans":"Settings",
+        "langTrans":"Language",
+        "serverAdressTrans":"Serveraddress",
+        "newServerAdressTrans":"New Serveraddress",
+        "backgroundModeTrans":"Background mode",
+        "preventSleepTrans":"Prevent sleeping",
+        "sendDistTrans":"Sending distance",
+        "sendperiodTrans":"Sending period",
+        "addTrans":"Add",
+        "newServerTrans2":"Enter a new Server-URL"
+    },
+    "about": {    
+        "findUs": "Find us on",
+        "opinion": "Your opinion",
+        "imprint": "Imprint",
+        "disclaimer": "Disclaimer",
+        "privacyPolicy": "Privacy Policy",
+        "license": "License",
+        "aboutTrans": "About",
+        "versionInfo": "Version Info"
+    },
+    "buslist": {    
+        "title": "Choose bus",
+        "numberplate": "Numberplate",
+        "seatsTrans": "Seats"
+    }, 
+    "linelist": {    
+        "title": "Choose line",
+        "lineName": "Line"
+    },    
+    "drive": {    
+        "title": "Drive",
+        "passengers": "Seats taken",
+        "nextStopTrans": "Next stop",
+        "acceptedStopsTrans": "Accepted custom stops",
+        "newStopsTrans": "New stop",
+        "time": "Time",
+        "numberTrans": "Seats",
+        "done": "Done",
+        "noAppearance": "no appearance",
+        "accept": "Accept",
+        "decline": "Decline",
+        "addressTrans": "Address"
+    },
+    "customstop": {    
+        "title": "Custom Stop",
+        "timeTrans": "Time",
+        "addressTrans": "Address",
+        "numberTrans": "Seats",
+        "decline": "Decline",
+        "accept": "Accept",
+        "done": "Done",
+        "noAppearance": "no appearance"
+    },
+    "map": {    
+        "title": "Map"
+    },    
+    "stops": {    
+        "title": "Schedule"
+    }
+}

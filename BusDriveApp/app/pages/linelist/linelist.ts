@@ -2,10 +2,10 @@ import {Page, NavController, NavParams, MenuController} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {TabsPage} from '../tabs/tabs';
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
-import {language} from "../../components/languages/languages";
-
+import {TranslatePipe} from "ng2-translate/ng2-translate";
 @Component({
-    templateUrl: 'build/pages/linelist/linelist.html'
+    templateUrl: 'build/pages/linelist/linelist.html',
+    pipes: [TranslatePipe]
 })
 
 export class LineListPage {
@@ -13,9 +13,6 @@ export class LineListPage {
     private linesInfos = [];
     private selectedbus;
 
-    //-----Language-----
-    public lineName;
-    public title;
 
     constructor(nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private menu: MenuController) {
         this.nav = nav;
@@ -24,9 +21,6 @@ export class LineListPage {
 
         this.getLinesInfos();
 
-        //-----Language-----
-        this.lineName = language.lineName;
-        this.title = language.lineTitle;
     }
 
     /**

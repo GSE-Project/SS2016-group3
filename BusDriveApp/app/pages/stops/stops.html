@@ -1,18 +1,23 @@
 <ion-navbar primary *navbar>
     <ion-buttons left>
-        <button  (click)="endTour()">
+        <button (click)="endTour()">
       <ion-icon name="arrow-back" ></ion-icon>
     </button>
     </ion-buttons>
     <ion-title>
-        {{title}}
-    </ion-title>      
+        {{"stops.title"|translate}}
+    </ion-title>
 </ion-navbar>
 
 <ion-content class="stops">
     <ion-list>
-        <ion-item *ngFor="let item of linestopsnames">
-            <h2>{{item}}</h2>
+        <ion-item *ngFor="let item of linestopsinfos">
+            <h2>{{item[0]}}</h2>
+            <div class="line" item-right>
+                <p *ngFor="let schedule of item[1]">
+                    <span class="filled">{{schedule}}</span>
+                </p>
+            </div>
         </ion-item>
     </ion-list>
 </ion-content>

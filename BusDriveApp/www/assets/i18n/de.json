@@ -1,0 +1,70 @@
+{
+    "cancelTrans": "Abbrechen",
+    
+    "home": {
+        "endTour":"Tour beenden?",    
+        "beginTour": "Tour beginnen",
+        "noDataTrans":"Kommunikationsproblem: Keine Daten empfangen"
+    },
+    "setting":{
+        "settingTrans":"Einstellungen",
+        "langTrans":"Sprache",
+        "serverAdressTrans":"Serveradresse",
+        "newServerAdressTrans":"Neue Serveradresse",
+        "backgroundModeTrans":"Hintergrundmodus",
+        "preventSleepTrans":"Schlafen verhindern",
+        "sendDistTrans":"Sendedistanz",
+        "sendperiodTrans":"Sendeperiode",
+        "addTrans":"Hinzufügen",
+        "newServerTrans2":"Geben sie eine Server-URL ein"
+    },
+    "about": {    
+        "findUs": "Sie finden uns auf",
+        "opinion": "Ihre Meinung",
+        "imprint": "Impressum",
+        "disclaimer": "Rechtliches",
+        "privacyPolicy": "Datenschutzerklärung",
+        "license": "Lizenz",
+        "aboutTrans": "Über uns",
+        "versionInfo": "Versionsinfo"
+    },
+    "buslist": {    
+        "title": "Wähle eine Bus aus",
+        "numberplate": "Nummernschild",
+        "seatsTrans": "Sitzplätze"
+    }, 
+    "linelist": {    
+        "title": "Wähle eine Linie aus",
+        "lineName": "Linie"
+    },    
+    "drive": {    
+        "title": "Fahren",
+        "passengers": "Passagiere",
+        "nextStopTrans": "Nächster Halt",
+        "acceptedStopsTrans": "Angenommene Haltestellen",
+        "newStopsTrans": "Neue Haltestellen",
+        "time": "Zeit",
+        "numberTrans": "Anzahl",
+        "done": "Ausgeführt",
+        "noAppearance": "Kein Erscheinen",
+        "accept": "Akzeptieren",
+        "decline": "Ablehnen",
+        "addressTrans": "Adresse"
+    },
+    "customstop": {    
+        "title": "Haltestelle",
+        "timeTrans": "Zeit",
+        "addressTrans": "Adresse",
+        "numberTrans": "Anzahl",
+        "decline": "Ablehnen",
+        "accept": "Akzeptieren",
+        "done": "Ausgeführt",
+        "noAppearance": "Kein Erscheinen"
+    },
+    "map": {    
+        "title": "Karte"
+    },    
+    "stops": {    
+        "title": "Fahrplan"
+    }
+}
