@@ -1,0 +1,20 @@
+<ion-content>
+<ion-list class="popover-page">
+
+
+    <ion-item>
+        <button (click)="openSetting()" ion-item detail-none class="button_icon">
+        <ion-icon name="settings" style="font-size:20px" ></ion-icon>
+             {{"setting.settingTrans"| translate}}
+              </button>
+
+    </ion-item>
+    <ion-item>
+        <button (click)="openAbout()" ion-item detail-none class="button_icon">
+           <ion-icon name="alert" style="font-size:20px" ></ion-icon>
+              {{"about.aboutTrans"| translate}}
+        </button>
+
+    </ion-item>
+</ion-list>
+</ion-content>

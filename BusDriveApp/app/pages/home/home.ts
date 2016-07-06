@@ -1,8 +1,9 @@
-import {Page, Platform, NavController, Alert} from 'ionic-angular';
+import {Page, Platform, NavController, Alert,Popover} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {BusListPage} from '../buslist/buslist';
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
 import {TranslatePipe,TranslateService} from "ng2-translate/ng2-translate";
+import {PopoverPage} from '../home/popover/Popover'
 @Component({
     templateUrl: 'build/pages/home/home.html',
     pipes: [TranslatePipe]
@@ -19,6 +20,14 @@ export class HomePage {
         this.getMobileOperatingSystem();
         this.requestData();
     }
+    presentPopover(ev) {
+    let popover = Popover.create(PopoverPage, {
+    });
+
+    this.nav.present(popover, {
+      ev: ev
+    });
+}
 
     /**
      * requests data from server via services component
