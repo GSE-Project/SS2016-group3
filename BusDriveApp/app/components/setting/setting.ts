@@ -274,6 +274,8 @@ export class SettingPage {
         this.translate.setDefaultLang('en');
         // the lang to use, if the lang isn't available, it will use the current loader to get them
         this.translate.use(this.getLanguage());
+
+       
       })
     });
   }

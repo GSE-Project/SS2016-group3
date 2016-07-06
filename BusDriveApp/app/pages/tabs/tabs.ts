@@ -29,7 +29,9 @@ export class TabsPage {
     private lat = 0;
     private lastSendTime = undefined;
     private passangerscounter = 0;
-
+    private driveTrans;
+    private mapTrans
+    private stopsTrans
 
 
     constructor(private platform: Platform, nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private menu: MenuController, public events: Events,private  translate: TranslateService) {
@@ -43,6 +45,9 @@ export class TabsPage {
         this.selectedline = navParams.get("selectedline");
         this.rootParams = [this.selectedbus, this.selectedline];
 
+        this.driveTrans= translate.instant("drive.title");
+        this.mapTrans= translate.instant("map.title");
+        this.stopsTrans= translate.instant("stops.title");
         this.updateBusStatus();
         this.getLineRoute();
         this.getLineStops();

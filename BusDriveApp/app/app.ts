@@ -32,7 +32,7 @@ export class MyApp {
 
   constructor(private platform: Platform, private menu: MenuController, public events: Events, public translate: TranslateService, private settings: SettingPage) {
     this.initializeApp();
-    this.setPages();
+    this.setPages();     
     this.events.subscribe("ChangeLanguage", () => {
       this.setPages();
     });
@@ -47,17 +47,18 @@ export class MyApp {
     });
     this.settings.loadDefaultSettings();
   }
-
+  
   /**
    * sets the pages of menu
    */
   setPages() {
-    this.settingTrans = this.translate.instant("setting.settingTrans");
-    this.about = this.translate.instant("about.aboutTrans");
+    
+    
+
     this.pages = [
       { title: 'Tour', component: HomePage, icon: 'bus' },
-      { title: this.settingTrans, component: SettingPage, icon: 'settings' },
-      { title: this.about, component: AboutPage, icon: 'alert' }
+      { title:'Settings', component: SettingPage, icon: 'settings' },
+      { title: 'About', component: AboutPage, icon: 'alert' }
     ];
   }
 
