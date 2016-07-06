@@ -19,7 +19,7 @@ module.exports = function(config) {
       'node_modules/reflect-metadata/Reflect.js',
       'node_modules/zone.js/dist/zone.js',
       'test/**/testSpec.ts',
-      'test/**/bussesSpec2.ts',
+     // 'test/**/bussesSpec.ts',
 	    'app/*.ts',
 	    'typings/browser.d.ts',
 	    'app/**/*.ts'
