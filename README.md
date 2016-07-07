@@ -1,3 +1,4 @@
+unit-test-mockBackend: [![Build Status](https://travis-ci.org/GSE-Project/SS2016-group3.svg?branch=unit-test-mockBackend)](https://travis-ci.org/GSE-Project/SS2016-group3) [![Coverage Status](https://coveralls.io/repos/GSE-Project/SS2016-group3/badge.svg?branch=unit-test-mockBackend)](https://coveralls.io/r/GSE-Project/SS2016-group3?branch=unit-test-mockBackend) 
 
 develop: [![Build Status](https://travis-ci.org/GSE-Project/SS2016-group3.svg?branch=develop)](https://travis-ci.org/GSE-Project/SS2016-group3) [![Coverage Status](https://coveralls.io/repos/GSE-Project/SS2016-group3/badge.svg?branch=develop)](https://coveralls.io/r/GSE-Project/SS2016-group3?branch=develop) 
 
