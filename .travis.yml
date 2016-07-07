@@ -19,7 +19,7 @@ before_install:
  - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
 install:
  - cd BusDriveApp
- - npm install -g
+ - npm install
  #- npm install -g gulp
  #- npm install karma
  #- npm install jasmine
