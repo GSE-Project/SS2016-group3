@@ -17,13 +17,14 @@ cache:
 before_install:
  - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
 install:
+- npm install -g
  - cd BusDriveApp
  - npm install -g gulp
- #- npm install karma
- #- npm install jasmine
+ - npm install karma
+ - npm install jasmine
  - npm install -g cordova
  - npm install -g ionic@beta
- - npm install 
+ 
 script: 
  - gulp test
 after_script:
