@@ -79,4 +79,8 @@ export class NativeMapPage {
         }
         this.backbuttoncounter = 1;
     }
+
+    ionViewDidLeave(){
+        this.nativemap.clearCustomStop();
+    }
 }

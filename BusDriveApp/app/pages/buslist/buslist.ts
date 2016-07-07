@@ -14,10 +14,9 @@ export class BusListPage {
     private bussesInfos = [];
 
 
-    constructor(nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private menu: MenuController) {
+    constructor(nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface) {
         this.nav = nav;
-        this.menu.swipeEnable(false);
-
+        
         this.getBussesInfos();
 
     }

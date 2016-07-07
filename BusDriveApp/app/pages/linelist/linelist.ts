@@ -14,10 +14,9 @@ export class LineListPage {
     private selectedbus;
 
 
-    constructor(nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private menu: MenuController) {
+    constructor(nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface) {
         this.nav = nav;
         this.selectedbus = navParams.get("selectedbus")
-        this.menu.swipeEnable(false);
 
         this.getLinesInfos();
 

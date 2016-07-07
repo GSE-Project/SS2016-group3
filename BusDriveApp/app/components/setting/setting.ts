@@ -132,7 +132,7 @@ export class SettingPage {
    */
   setLanguage(lang) {
     this.settings.set("Language", lang).then(() => {
-      console.log("set new language: " + this.lang);
+      console.log("set new language: " + lang);
     });
   }
 
@@ -165,8 +165,8 @@ export class SettingPage {
   }
 
   /**
-   * @param insomnia boolean
    * sets insomnia
+   * @param insomnia boolean
    */
   setInsomnia(insomnia) {
     this.settings.set("insomnia", insomnia);
@@ -190,29 +190,29 @@ export class SettingPage {
 
   /**
    * changes insomnia
+   * @param insomnia boolean
    */
   changeInsomnia(insomnia) {
-    if (insomnia === true) {
+    if (insomnia === true || insomnia === "true") {
       Insomnia.keepAwake()
         .then(
         () => console.log('prevent the screen from falling asleep'),
         () => console.log('failed to prevent the screen from falling asleep')
         );
     }
-    else if (insomnia === false) {
+    else if (insomnia === false || insomnia === "false") {
       Insomnia.allowSleepAgain()
         .then(
         () => console.log('allow the screen to fall asleep'),
         () => console.log('failed to allow the screen to fall asleep')
         );
     }
-    console.log("Insomnia " + insomnia);
     this.setInsomnia(insomnia);
   }
 
   /**
-   * @param mode boolean
    * sets BackgroundMode
+   * @param mode boolean
    */
   setBackgroundMode(mode) {
     this.settings.set("BackgroundMode", mode);
@@ -236,15 +236,21 @@ export class SettingPage {
 
   /**
    * changes BackgroundMode
+   * @param mode boolean
    */
   changeBackgroundMode(mode) {
-    if (mode === true) {
+    if (mode === true || mode === "true") {
       BackgroundMode.enable();
+      BackgroundMode.setDefaults({
+        title: "BusDriveApp",
+        text: "sending real time data"
+      });
+      console.log("BackgroundMode aktiviert");
     }
-    else if (mode === false) {
+    else if (mode === false || mode === "false") {
       BackgroundMode.disable();
+      console.log("BackgroundMode deaktiviert");
     }
-    console.log("BackgroundMode " + mode);
     this.setBackgroundMode(mode);
   }
 
@@ -275,7 +281,7 @@ export class SettingPage {
         // the lang to use, if the lang isn't available, it will use the current loader to get them
         this.translate.use(this.getLanguage());
 
-       
+
       })
     });
   }

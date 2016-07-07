@@ -1,9 +1,10 @@
-import {Page, Platform, NavController, Alert,Popover} from 'ionic-angular';
+import {Page, Platform, NavController, Alert, Popover} from 'ionic-angular';
 import {Component} from '@angular/core';
-import {BusListPage} from '../buslist/buslist';
+import {TranslatePipe, TranslateService} from "ng2-translate/ng2-translate";
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
-import {TranslatePipe,TranslateService} from "ng2-translate/ng2-translate";
+import {BusListPage} from '../buslist/buslist';
 import {PopoverPage} from '../home/popover/Popover'
+
 @Component({
     templateUrl: 'build/pages/home/home.html',
     pipes: [TranslatePipe]
@@ -14,20 +15,22 @@ export class HomePage {
     private recievedalldata = [false, false, false, false];
     private recieveddata = false;
 
-   
-
-    constructor(private platform: Platform, private nav: NavController, private busdriveinterface: BusDriveInterface, private translate:TranslateService) {
+    constructor(private platform: Platform, private nav: NavController, private busdriveinterface: BusDriveInterface, private translate: TranslateService) {
         this.getMobileOperatingSystem();
         this.requestData();
     }
-    presentPopover(ev) {
-    let popover = Popover.create(PopoverPage, {
-    });
 
-    this.nav.present(popover, {
-      ev: ev
-    });
-}
+    /**
+     * opens the popover
+     * @param ev event
+     */
+    presentPopover(ev) {
+        let popover = Popover.create(PopoverPage, {
+        });
+        this.nav.present(popover, {
+            ev: ev
+        });
+    }
 
     /**
      * requests data from server via services component
@@ -67,19 +70,18 @@ export class HomePage {
         }
         else {
             let alert = Alert.create({
-            title: this.translate.instant("home.noDataTrans"),
-            enableBackdropDismiss: false,
-            buttons: [
-                {
-                    text: 'OK',
-                    handler: () => {
-                        console.log('alert confirmed');
-                        this.requestData();
-                    }
-                }]
-        });
-        this.nav.present(alert);
-
+                title: this.translate.instant("home.noDataTrans"),
+                enableBackdropDismiss: false,
+                buttons: [
+                    {
+                        text: 'OK',
+                        handler: () => {
+                            console.log('alert confirmed');
+                            this.requestData();
+                        }
+                    }]
+            });
+            this.nav.present(alert);
         }
     }
 

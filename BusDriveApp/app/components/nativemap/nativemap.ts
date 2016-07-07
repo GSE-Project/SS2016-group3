@@ -210,7 +210,7 @@ export class NativeMap implements OnDestroy, AfterViewInit {
             'geodesic': true,
             'visible': true,
             'color': '#0000ff',
-            'width': 3
+            'width': 7
         }).then((polyline) => {
             this.customstoppolyline = polyline;
             polyline.addEventListener(GoogleMapsEvent.OVERLAY_CLICK).subscribe(() => {

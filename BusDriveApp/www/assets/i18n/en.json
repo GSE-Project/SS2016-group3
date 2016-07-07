@@ -3,6 +3,7 @@
     
     "home": {    
         "endTour":"End tour?",
+        "exitTrans": "Close",
         "beginTour": "Start Tour",
         "noDataTrans":"Communication problems: no received data"
     },
