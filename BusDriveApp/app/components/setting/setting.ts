@@ -1,4 +1,4 @@
-import {Page, Storage, SqlStorage, LocalStorage, Events, Alert, App} from 'ionic-angular';
+import {Page, Storage, SqlStorage, Events, Alert, App} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {Insomnia, BackgroundMode} from 'ionic-native';
 import {TranslatePipe, TranslateService} from "ng2-translate/ng2-translate";
@@ -21,7 +21,7 @@ export class SettingPage {
 
   constructor(private app: App, public events: Events, public translate: TranslateService) {
     this.translate = translate;
-    this.settings = new Storage(LocalStorage);
+    this.settings = new Storage(SqlStorage);
     this.serverURL = this.getServerURL();
     this.lang = this.getLanguage();
     this.serverURLList = this.getServerURLList();
@@ -263,6 +263,7 @@ export class SettingPage {
         this.setServerURL("https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1");
         this.serverURL = "https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1";
         this.addToServerURLList("https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1");
+        this.clearServerURLList();
         this.setInsomnia("true");
         this.setBackgroundMode("true");
         this.setLanguage("de");

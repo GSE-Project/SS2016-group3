@@ -100,5 +100,11 @@ export class HomePage {
         }
         console.log("current OS: " + this.os);
     }
+    ionViewLoaded() {
+        this.recievedalldata = [false, false, false, false];
+        this.recieveddata = false;
+        this.requestData();
+    }
 }
+
 

@@ -14,7 +14,9 @@ export class BusDriveInterface {
     private serverURL;
 
     constructor(private http: Http, private setting: SettingPage, public events: Events, private busses: Busses, private lines: Lines, private stops: Stops, private routes: Routes, private provider: Provider, private customstops: CustomStops) {
-        this.serverURL = setting.getServerURL();
+        this.setting.getServerURLFromStorage().then(() => {
+            this.serverURL = this.setting.getServerURL();
+        });
         this.events.subscribe("newServerURL", (URL) => {
             this.serverURL = URL;
         })
