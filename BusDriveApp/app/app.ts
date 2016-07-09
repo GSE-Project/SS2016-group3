@@ -1,5 +1,5 @@
 import {App, Platform, ionicBootstrap} from 'ionic-angular';
-import {StatusBar} from 'ionic-native';
+import {StatusBar, Splashscreen} from 'ionic-native';
 import {Component, ViewChild} from '@angular/core';
 import {HomePage} from './pages/home/home';
 import {SettingPage} from './components/setting/setting';
@@ -33,6 +33,7 @@ export class MyApp {
   initializeApp() {
     this.platform.ready().then(() => {
       StatusBar.styleDefault();
+      Splashscreen.hide();
     });
     this.settings.loadDefaultSettings();
   }
