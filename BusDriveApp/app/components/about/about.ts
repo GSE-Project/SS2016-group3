@@ -14,12 +14,12 @@ export class AboutPage {
     private nav;
 
 
-   
+
 
     constructor(platform: Platform, nav: NavController) {
         this.platform = platform;
         this.nav = nav;
-        
+
     }
     /**
      * opens a url in the system app if installed or in the browser
@@ -114,7 +114,9 @@ export class AboutPage {
      * @param email email adress for the message
      */
     mailto(email) {
-        window.open(`mailto:${email}`, '_system');
+        this.platform.ready().then(() => {
+            open(`mailto:${email}`, '_system', "location=true");
+        });
     }
 
     /**
