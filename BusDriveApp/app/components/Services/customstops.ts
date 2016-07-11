@@ -20,9 +20,10 @@ export class CustomStops {
     /**
      * @param serverURL URL of the server
      * @param LineId id of the selected line
+     * @param BusId id of the selected bus
      * @retruns list of customstops of the line
      */
-    requestLineCustomStops(serverURL, LineId) {
+    requestLineCustomStops(serverURL, LineId, BusId) {
         return new Promise(resolve => {
             this.http.get(serverURL + "/customStops?lineId=" + LineId).map(res => res.json()).subscribe(
                 data => {

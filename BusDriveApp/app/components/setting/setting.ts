@@ -70,7 +70,9 @@ export class SettingPage {
    */
   addToServerURLList(URL) {
     this.serverURLList.push(URL);
-    this.settings.set("serverURLList", this.serverURLList);
+    this.settings.set("serverURLList", this.serverURLList).then(() => {
+      this.setServerURL(URL);
+    });
   }
 
   /**
@@ -105,6 +107,7 @@ export class SettingPage {
    */
   setServerURL(URL) {
     this.settings.set("serverURL", URL).then(() => {
+      this.serverURL = URL;
       this.events.publish("newServerURL", URL);
       console.log("set new server url: " + this.serverURL);
     });
@@ -116,6 +119,7 @@ export class SettingPage {
   getServerURL() {
     this.getServerURLFromStorage();
     return this.serverURL;
+    
   }
   getServerURLFromStorage() {
     return new Promise(resolve => {
@@ -261,9 +265,7 @@ export class SettingPage {
     this.settings.get("DefaultSettingsFlag").then((flag) => {
       if (!(flag === "false")) {
         this.setServerURL("https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1");
-        this.serverURL = "https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1";
         this.addToServerURLList("https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1");
-        this.clearServerURLList();
         this.setInsomnia("true");
         this.setBackgroundMode("true");
         this.setLanguage("de");

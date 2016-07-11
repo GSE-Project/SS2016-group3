@@ -5,7 +5,7 @@
         "endTour":"Tour beenden?",   
         "exitTrans": "Beenden", 
         "beginTour": "Tour beginnen",
-        "noDataTrans":"Kommunikationsproblem: Keine Daten empfangen"
+        "noDataTrans":"Kommunikationsprobleme: Keine Daten empfangen"
     },
     "setting":{
         "settingTrans":"Einstellungen",

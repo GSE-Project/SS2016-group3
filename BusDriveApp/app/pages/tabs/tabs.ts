@@ -94,7 +94,7 @@ export class TabsPage {
      * requests linecustomstops
      */
     requestLineCustomStops() {
-        this.busdriveinterface.requestLineCustomStops(this.selectedline).then(() => {
+        this.busdriveinterface.requestLineCustomStops(this.selectedline, this.selectedbus).then(() => {
             let linecustomstops = this.busdriveinterface.getLineCustomStopsAll();
             this.events.publish("newCustomStops", linecustomstops);
         });;

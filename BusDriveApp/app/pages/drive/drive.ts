@@ -2,13 +2,13 @@ import {Page, NavParams, Events, Toast, Alert, Platform, ActionSheet, Modal, Nav
 import {Component} from '@angular/core';
 import {LocalNotifications} from 'ionic-native';
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
-import {CustomStopPage} from '../drive/customstop/customstop';
-import {TranslatePipe,TranslateService} from "ng2-translate/ng2-translate";
+import {TranslatePipe, TranslateService} from "ng2-translate/ng2-translate";
 
 @Component({
     templateUrl: 'build/pages/drive/drive.html',
     pipes: [TranslatePipe]
 })
+
 export class DrivePage {
     private selectedbusid;
     private counter: number = 0;
@@ -22,7 +22,7 @@ export class DrivePage {
     private acceptedcustomstops = [];
     private backbuttoncounter: number = 0;
 
-    constructor(private nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events, public translate:TranslateService) {
+    constructor(private nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events, public translate: TranslateService) {
         this.selectedbusid = navParams.data[0]
         this.getBusSeatsNumber();
         this.getLineStopsNames();
@@ -43,12 +43,10 @@ export class DrivePage {
             this.noShowAcceptedCustomStop(customstop[0]);
         });
 
-        this.platform.registerBackButtonAction(this.endTour.bind(this), 10);
+        this.platform.registerBackButtonAction(this.endTour.bind(this));
         this.events.subscribe("endTourAborted", () => {
             this.backbuttoncounter = 0;
         })
-
- 
     }
 
     /**
@@ -120,10 +118,10 @@ export class DrivePage {
             if (this.newcustomstopsnumber > 0) {
                 LocalNotifications.schedule({
                     id: 1,
-                    text: this.newcustomstopsnumber +" "+ this.translate.instant("drive.newStopsTrans"),
+                    text: this.newcustomstopsnumber + " " + this.translate.instant("drive.newStopsTrans"),
                 });
                 this.nav.present(Toast.create({
-                    message: this.newcustomstopsnumber +" "+ this.translate.instant("drive.newStopsTrans"),
+                    message: this.newcustomstopsnumber + " " + this.translate.instant("drive.newStopsTrans"),
                     duration: 7000,
                     position: "top",
                     showCloseButton: true,
@@ -133,9 +131,9 @@ export class DrivePage {
             }
         }
         this.linecustomstopsall = linecustomstopsall;
-        for (let i = 0; i < this.acceptedcustomstops.length; i++){
-            for(let j = 0; j < this.linecustomstopsall.length; j++){
-                if(this.acceptedcustomstops[i][0] === this.linecustomstopsall[j][0]){
+        for (let i = 0; i < this.acceptedcustomstops.length; i++) {
+            for (let j = 0; j < this.linecustomstopsall.length; j++) {
+                if (this.acceptedcustomstops[i][0] === this.linecustomstopsall[j][0]) {
                     this.acceptedcustomstops[i][7] = this.linecustomstopsall[j][7];
                 }
             }
@@ -204,27 +202,29 @@ export class DrivePage {
     }
 
     /**
-     * shows map fragment and all infromation of the customstop
+     * shows the customstop on the map
+     * @param customstop a customstop
      */
     showCustomStop(customstop) {
-        console.log("-> CustomStopPage");
+        console.log("-> MapPage");
         for (let index = 0; index < this.linecustomstopsall.length; index++) {
             if (this.linecustomstopsall[index] == customstop) {
-                let modal = Modal.create(CustomStopPage, {showcustomstop: customstop, accepted: false});
-                this.nav.present(modal);
+                this.nav.parent.select(1);
+                this.events.publish("ShowCustomStop", (customstop));
             }
         }
     }
 
     /**
-     * shows map fragment and all infromation of the accepted customstop
+     * shows the accepted customstop on the map
+     * @param customstop a accepted customstop
      */
     showAcceptedCustomStop(customstop) {
-        console.log("-> CustomStopPage");
+        console.log("-> MapPage");
         for (let index = 0; index < this.acceptedcustomstops.length; index++) {
             if (this.acceptedcustomstops[index] == customstop) {
-                let modal = Modal.create(CustomStopPage, {showcustomstop: customstop, accepted: true});
-                this.nav.present(modal);
+                this.nav.parent.select(1);
+                this.events.publish("ShowCustomStop", (customstop));
             }
         }
     }
