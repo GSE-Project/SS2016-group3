@@ -135,6 +135,7 @@ export class NativeMap implements OnDestroy, AfterViewInit {
             }).then((marker) => {
                 this.customstopsmarkers.push(marker);
                 marker.addEventListener(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+                    this.events.publish("LoadCustomStop");
                     this.calcCustomStopRoute(acceptedcustomstops[index]);
                 });
             })

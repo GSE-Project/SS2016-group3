@@ -47,11 +47,11 @@ export class AboutPage {
         AppAvailability.check(app)
             .then(
             function () {  // Success callback
-                window.open(url, '_system', 'location=no');
+                open(url, '_system', 'location=no');
                 console.log('Twitter is available');
             },
             function () {  // Error callback
-                window.open(url, '_system', 'location=no');
+                open(url, '_system', 'location=no');
                 console.log('Twitter is not available');
             }
             );
@@ -73,11 +73,11 @@ export class AboutPage {
         AppAvailability.check(app)
             .then(
             function () {  // Success callback
-                window.open('fb://page/' + url, '_system', 'location=no');
+                open('fb://page/' + url, '_system', 'location=no');
                 console.log('Facebook is available');
             },
             function () {  // Error callback
-                window.open('https://www.facebook.com/' + url, '_system', 'location=no');
+                open('https://www.facebook.com/' + url, '_system', 'location=no');
                 console.log('Facebook is not available');
             }
             );
@@ -99,11 +99,11 @@ export class AboutPage {
         AppAvailability.check(app)
             .then(
             function () {  // Success callback
-                window.open(url, '_system', 'location=no');
+                open(url, '_system', 'location=no');
                 console.log('YouTube is available');
             },
             function () {  // Error callback
-                window.open(url, '_system', 'location=no');
+                open(url, '_system', 'location=no');
                 console.log('YouTube is not available');
             }
             );

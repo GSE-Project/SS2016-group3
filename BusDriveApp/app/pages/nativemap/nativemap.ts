@@ -27,13 +27,17 @@ export class NativeMapPage {
         this.events.subscribe("mapLoaded", () => {
             this.showLine();
         });
-        this.events.subscribe("acceptedCustomStops", acceptedcustomstops => {
+        this.events.subscribe("acceptedCustomStops", (acceptedcustomstops) => {
             this.acceptedcustomstops = acceptedcustomstops[0];
             this.nativemap.loadCustomStops(this.acceptedcustomstops);
         });
         this.events.subscribe("ShowCustomStop", (customstop) => {
             this.showCustomStopRoute(customstop[0]);
         });
+        this.events.subscribe("LoadCustomStop", () => {
+            this.nav.present(Loading.create({}));
+        });
+
         this.platform.registerBackButtonAction(this.endTour.bind(this));
         this.events.subscribe("endTourAborted", () => {
             this.backbuttoncounter = 0;
