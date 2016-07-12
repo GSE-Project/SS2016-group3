@@ -50,6 +50,9 @@
       <ion-label>{{"setting.preventSleepTrans"| translate}}</ion-label>
       <ion-toggle [(ngModel)]="insomnia" (ngModelChange)="changeInsomnia(insomnia)"></ion-toggle>
     </ion-item>
+    <ion-item>
+      <button large class="button button-block" (click)="restoreDefaultSettings()">{{"setting.defaultSettings" | translate}}</button>
+    </ion-item>
     <!-- Falls man die Sendedistanz und Sendeperiode einstellen will
       <ion-item>
       <ion-label>{{"setting.sendDistTrans"| translate}}</ion-label>

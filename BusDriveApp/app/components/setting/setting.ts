@@ -246,8 +246,7 @@ export class SettingPage {
     if (mode === true || mode === "true") {
       BackgroundMode.enable();
       BackgroundMode.setDefaults({
-        title: "BusDriveApp",
-        text: "sending real time data"
+        title: "BusDriveApp"
       });
       console.log("BackgroundMode aktiviert");
     }
@@ -287,5 +286,33 @@ export class SettingPage {
 
       })
     });
+  }
+  /**
+   * sets the settings back to default
+   */
+  restoreDefaultSettings(){
+      let alert = Alert.create({
+      title: this.translate.instant("setting.defaultSettings"),
+      
+      buttons: [
+        {
+          text: 'OK',
+          handler: data => {
+            console.log("setzte einstellungen zurück");
+            //TODO: 
+          }
+        },
+        {
+          text: this.cancelTrans
+         
+
+          
+        }
+      ]
+    });
+    let nav = this.app.getActiveNav();
+    nav.present(alert);
+
+    
   }
 }

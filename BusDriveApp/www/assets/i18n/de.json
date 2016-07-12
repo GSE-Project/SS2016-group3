@@ -17,7 +17,8 @@
         "sendDistTrans":"Sendedistanz",
         "sendperiodTrans":"Sendeperiode",
         "addTrans":"Hinzufügen",
-        "newServerTrans2":"Geben sie eine Server-URL ein"
+        "newServerTrans2":"Geben sie eine Server-URL ein",
+        "defaultSettings":"Einstellungen zurücksetzen"
     },
     "about": {    
         "findUs": "Sie finden uns auf",
