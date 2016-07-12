@@ -88,7 +88,20 @@ export class DrivePage {
      * @param linecustomstopsall customstops of the lines
      */
     getCustomStops(linecustomstopsall) {
-        let newlinecustomstopsall = linecustomstopsall;
+        let newlinecustomstopsall = [];
+        if (this.acceptedcustomstops.length === 0) {
+            for (let i = 0; i < linecustomstopsall.length; i++) {
+                if (linecustomstopsall[i][7] === 2) {
+                    this.acceptedcustomstops.push(linecustomstopsall[i]);
+                }
+            }
+            this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
+        }
+        for (let i = 0; i < linecustomstopsall.length; i++) {
+            if (linecustomstopsall[i][7] === 1) {
+                newlinecustomstopsall.push(linecustomstopsall[i]);
+            }
+        }
         if (newlinecustomstopsall.length > 0) {
             if (this.linecustomstopsall.length > 0) {
                 let newcustomstopsid: number[] = [];
@@ -130,15 +143,14 @@ export class DrivePage {
                 }))
             }
         }
-        this.linecustomstopsall = linecustomstopsall;
+        this.linecustomstopsall = newlinecustomstopsall;
         for (let i = 0; i < this.acceptedcustomstops.length; i++) {
-            for (let j = 0; j < this.linecustomstopsall.length; j++) {
-                if (this.acceptedcustomstops[i][0] === this.linecustomstopsall[j][0]) {
-                    this.acceptedcustomstops[i][7] = this.linecustomstopsall[j][7];
+            for (let j = 0; j < linecustomstopsall.length; j++) {
+                if (this.acceptedcustomstops[i][0] === linecustomstopsall[j][0]) {
+                    this.acceptedcustomstops[i][7] = linecustomstopsall[j][7];
                 }
             }
         }
-        this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
     }
 
     /**
@@ -155,7 +167,7 @@ export class DrivePage {
         if (this.newcustomstopscounter === 0) {
             this.newcustomstopscounter = undefined;
         }
-        this.busdriveinterface.postCustomStopStatus(customstop[0], 2);
+        this.busdriveinterface.postCustomStopStatus(customstop[0], this.selectedbusid, 2);
         this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
     }
 
@@ -172,7 +184,7 @@ export class DrivePage {
         if (this.newcustomstopscounter === 0) {
             this.newcustomstopscounter = undefined;
         }
-        this.busdriveinterface.postCustomStopStatus(customstop[0], 3);
+        this.busdriveinterface.postCustomStopStatus(customstop[0], this.selectedbusid, 3);
     }
 
     /**
@@ -184,7 +196,7 @@ export class DrivePage {
         if (posnumber > -1) {
             this.acceptedcustomstops.splice(posnumber, 1)
         }
-        this.busdriveinterface.postCustomStopStatus(customstop[0], 4);
+        this.busdriveinterface.postCustomStopStatus(customstop[0], this.selectedbusid, 4);
         this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
     }
 
@@ -197,7 +209,7 @@ export class DrivePage {
         if (posnumber > -1) {
             this.acceptedcustomstops.splice(posnumber, 1)
         }
-        this.busdriveinterface.postCustomStopStatus(customstop[0], 5);
+        this.busdriveinterface.postCustomStopStatus(customstop[0], this.selectedbusid, 5);
         this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
     }
 

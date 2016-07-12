@@ -119,7 +119,7 @@ export class SettingPage {
   getServerURL() {
     this.getServerURLFromStorage();
     return this.serverURL;
-    
+
   }
   getServerURLFromStorage() {
     return new Promise(resolve => {
@@ -282,37 +282,34 @@ export class SettingPage {
         this.translate.setDefaultLang('en');
         // the lang to use, if the lang isn't available, it will use the current loader to get them
         this.translate.use(this.getLanguage());
-
-
       })
     });
   }
+
   /**
    * sets the settings back to default
    */
-  restoreDefaultSettings(){
-      let alert = Alert.create({
+  restoreDefaultSettings() {
+    let alert = Alert.create({
       title: this.translate.instant("setting.defaultSettings"),
-      
       buttons: [
         {
           text: 'OK',
-          handler: data => {
-            console.log("setzte einstellungen zurück");
-            //TODO: 
+          handler: () => {
+            console.log("restore default settings");
+            this.settings.set("DefaultSettingsFlag", "true").then(() => {
+              this.loadDefaultSettings();
+              setTimeout(this.clearServerURLList.bind(this),500);
+            })
           }
         },
         {
           text: this.cancelTrans
-         
-
-          
         }
       ]
     });
     let nav = this.app.getActiveNav();
     nav.present(alert);
 
-    
   }
 }

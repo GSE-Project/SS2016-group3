@@ -25,7 +25,7 @@ export class CustomStops {
      */
     requestLineCustomStops(serverURL, LineId, BusId) {
         return new Promise(resolve => {
-            this.http.get(serverURL + "/customStops?lineId=" + LineId).map(res => res.json()).subscribe(
+            this.http.get(serverURL + "/customStops?lineId=" + LineId + "&busId=" + BusId).map(res => res.json()).subscribe(
                 data => {
                     this.linecustomstops = data;
                     resolve(this.linecustomstops);

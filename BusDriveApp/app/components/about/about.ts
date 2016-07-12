@@ -10,16 +10,8 @@ import {TranslatePipe} from "ng2-translate/ng2-translate";
 })
 
 export class AboutPage {
-    private platform;
-    private nav;
 
-
-
-
-    constructor(platform: Platform, nav: NavController) {
-        this.platform = platform;
-        this.nav = nav;
-
+    constructor(private platform: Platform, private nav: NavController) {
     }
     /**
      * opens a url in the system app if installed or in the browser
@@ -127,5 +119,4 @@ export class AboutPage {
         this.nav.push(LicensePage, {
         });
     }
-
 }

@@ -18,7 +18,7 @@
         "sendperiodTrans":"Sending period",
         "addTrans":"Add",
         "newServerTrans2":"Enter a new Server-URL",
-        "defaultSettings":"Set settings to default"
+        "defaultSettings":"Restore default settings"
     },
     "about": {    
         "findUs": "Find us on",

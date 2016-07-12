@@ -248,10 +248,11 @@ export class BusDriveInterface {
 
     /**
      * posts CustomStopStatus
-     * @param customstopID ID of the customstop
+     * @param customstopId ID of the customstop
+     * @param BusId ID of the customstop
      * @param status status of the customstop 
      */
-    postCustomStopStatus(customstopID, status) {
-        this.provider.postCustomStopStatus(customstopID, status, this.serverURL);
+    postCustomStopStatus(CustomstopId, BusId, status) {
+        this.provider.postCustomStopStatus(CustomstopId, BusId, status, this.serverURL);
     }
 }
