@@ -1,7 +1,8 @@
+|  Branch	|  Build Status	|  Coverage	|
+|---------	|----------------------------------------------------------------------------------------------------------------------------------------	|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
+| Develop 	| [![Build Status](https://travis-ci.org/GSE-Project/SS2016-group3.svg?branch=develop)](https://travis-ci.org/GSE-Project/SS2016-group3) 	| [![Coverage Status](https://coveralls.io/repos/GSE-Project/SS2016-group3/badge.svg?branch=develop)](https://coveralls.io/r/GSE-Project/SS2016-group3?branch=develop) 	|
+| Master 	| [![Build Status](https://travis-ci.org/GSE-Project/SS2016-group3.svg?branch=master)](https://travis-ci.org/GSE-Project/SS2016-group3) 	| [![Coverage Status](https://coveralls.io/repos/github/GSE-Project/SS2016-group3/badge.svg?branch=master)](https://coveralls.io/github/GSE-Project/SS2016-group3?branch=master) 	|
 
-develop: [![Build Status](https://travis-ci.org/GSE-Project/SS2016-group3.svg?branch=develop)](https://travis-ci.org/GSE-Project/SS2016-group3) [![Coverage Status](https://coveralls.io/repos/GSE-Project/SS2016-group3/badge.svg?branch=develop)](https://coveralls.io/r/GSE-Project/SS2016-group3?branch=develop) 
-
-master: [![Build Status](https://travis-ci.org/GSE-Project/SS2016-group3.svg?branch=master)](https://travis-ci.org/GSE-Project/SS2016-group3)[![Coverage Status](https://coveralls.io/repos/github/GSE-Project/SS2016-group3/badge.svg?branch=master)](https://coveralls.io/github/GSE-Project/SS2016-group3?branch=master)
 # Digitale Dörfer - mobile people’s bus system
 
 
@@ -16,7 +17,6 @@ This app is used to track the bus and send its position to the server.
 
 The application is written in [TypeScript](https://github.com/Microsoft/TypeScript) and utilizes the beta version of the cross-platform development framework [Ionic](https://github.com/driftyco/ionic/tree/2.0).
 
-It uses also [MapTilerLayer](http://www.maptiler.com/maptilerlayer).
 
 Requirements documentation:
 - [Bürgerbus Concept](/Doc/Requirements/B%C3%BCrgerbus%20Concept%20Document.pdf)
