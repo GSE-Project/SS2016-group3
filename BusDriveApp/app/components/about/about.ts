@@ -10,16 +10,8 @@ import {TranslatePipe} from "ng2-translate/ng2-translate";
 })
 
 export class AboutPage {
-    private platform;
-    private nav;
 
-
-   
-
-    constructor(platform: Platform, nav: NavController) {
-        this.platform = platform;
-        this.nav = nav;
-        
+    constructor(private platform: Platform, private nav: NavController) {
     }
     /**
      * opens a url in the system app if installed or in the browser
@@ -47,11 +39,11 @@ export class AboutPage {
         AppAvailability.check(app)
             .then(
             function () {  // Success callback
-                window.open(url, '_system', 'location=no');
+                open(url, '_system', 'location=no');
                 console.log('Twitter is available');
             },
             function () {  // Error callback
-                window.open(url, '_system', 'location=no');
+                open(url, '_system', 'location=no');
                 console.log('Twitter is not available');
             }
             );
@@ -73,11 +65,11 @@ export class AboutPage {
         AppAvailability.check(app)
             .then(
             function () {  // Success callback
-                window.open('fb://page/' + url, '_system', 'location=no');
+                open('fb://page/' + url, '_system', 'location=no');
                 console.log('Facebook is available');
             },
             function () {  // Error callback
-                window.open('https://www.facebook.com/' + url, '_system', 'location=no');
+                open('https://www.facebook.com/' + url, '_system', 'location=no');
                 console.log('Facebook is not available');
             }
             );
@@ -99,11 +91,11 @@ export class AboutPage {
         AppAvailability.check(app)
             .then(
             function () {  // Success callback
-                window.open(url, '_system', 'location=no');
+                open(url, '_system', 'location=no');
                 console.log('YouTube is available');
             },
             function () {  // Error callback
-                window.open(url, '_system', 'location=no');
+                open(url, '_system', 'location=no');
                 console.log('YouTube is not available');
             }
             );
@@ -114,7 +106,9 @@ export class AboutPage {
      * @param email email adress for the message
      */
     mailto(email) {
-        window.open(`mailto:${email}`, '_system');
+        this.platform.ready().then(() => {
+            open(`mailto:${email}`, '_system', "location=true");
+        });
     }
 
     /**
@@ -125,5 +119,4 @@ export class AboutPage {
         this.nav.push(LicensePage, {
         });
     }
-
 }

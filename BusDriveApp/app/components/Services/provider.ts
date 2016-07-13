@@ -53,17 +53,19 @@ export class Provider {
     /**
      * posts CustomStopStatus
      * @param customstopID ID of the customstop
+     * @param BusId ID of the selected bus
      * @param status status of the customstop 
      */
-    postCustomStopStatus(customstopID, status, serverURL) {
+    postCustomStopStatus(CustomstopId, BusId, status, serverURL) {
         let customStopStatus = JSON.stringify(
             {
-                "status": status
+                "status": status,
+                "busId": BusId
             })
         let senddata = new XMLHttpRequest();
-        senddata.open('POST', serverURL + "/customStops/" + customstopID );
+        senddata.open('POST', serverURL + "/customStops/" + CustomstopId);
         senddata.setRequestHeader("Content-Type", "application/json");
         senddata.send(customStopStatus);
-        console.log("Senden: " + " CustomstopID: " + customstopID, "Status: " + status);
+        console.log("Senden: " + " CustomstopID: " + CustomstopId, "Status: " + status);
     }
 }

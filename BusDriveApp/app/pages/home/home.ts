@@ -17,7 +17,6 @@ export class HomePage {
 
     constructor(private platform: Platform, private nav: NavController, private busdriveinterface: BusDriveInterface, private translate: TranslateService) {
         this.getMobileOperatingSystem();
-        this.requestData();
     }
 
     /**
@@ -37,18 +36,20 @@ export class HomePage {
      */
     requestData() {
         this.busdriveinterface.clearLists();
-        this.busdriveinterface.requestBusses().then(() => {
-            this.recievedalldata[0] = true;
-        });
-        this.busdriveinterface.requestLines().then(() => {
-            this.recievedalldata[1] = true;
-        });;
-        this.busdriveinterface.requestStops().then(() => {
-            this.recievedalldata[2] = true;
-        });;
-        this.busdriveinterface.requestRoutes().then(() => {
-            this.recievedalldata[3] = true;
-        });;
+        this.busdriveinterface.getServerURL().then(() => {
+            this.busdriveinterface.requestBusses().then(() => {
+                this.recievedalldata[0] = true;
+            });
+            this.busdriveinterface.requestLines().then(() => {
+                this.recievedalldata[1] = true;
+            });;
+            this.busdriveinterface.requestStops().then(() => {
+                this.recievedalldata[2] = true;
+            });;
+            this.busdriveinterface.requestRoutes().then(() => {
+                this.recievedalldata[3] = true;
+            });;
+        })
     }
 
     /**
@@ -100,5 +101,16 @@ export class HomePage {
         }
         console.log("current OS: " + this.os);
     }
+
+    ionViewLoaded(){
+        setTimeout(this.requestData.bind(this), 500);
+    }
+
+    ionViewDidEnter() {
+        this.recievedalldata = [false, false, false, false];
+        this.recieveddata = false;
+        this.requestData();
+    }
 }
+
 

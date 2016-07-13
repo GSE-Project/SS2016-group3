@@ -1,4 +1,4 @@
-import {Page, Storage, SqlStorage, LocalStorage, Events, Alert, App} from 'ionic-angular';
+import {Page, Storage, SqlStorage, Events, Alert, App} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {Insomnia, BackgroundMode} from 'ionic-native';
 import {TranslatePipe, TranslateService} from "ng2-translate/ng2-translate";
@@ -21,7 +21,7 @@ export class SettingPage {
 
   constructor(private app: App, public events: Events, public translate: TranslateService) {
     this.translate = translate;
-    this.settings = new Storage(LocalStorage);
+    this.settings = new Storage(SqlStorage);
     this.serverURL = this.getServerURL();
     this.lang = this.getLanguage();
     this.serverURLList = this.getServerURLList();
@@ -70,7 +70,9 @@ export class SettingPage {
    */
   addToServerURLList(URL) {
     this.serverURLList.push(URL);
-    this.settings.set("serverURLList", this.serverURLList);
+    this.settings.set("serverURLList", this.serverURLList).then(() => {
+      this.setServerURL(URL);
+    });
   }
 
   /**
@@ -105,6 +107,7 @@ export class SettingPage {
    */
   setServerURL(URL) {
     this.settings.set("serverURL", URL).then(() => {
+      this.serverURL = URL;
       this.events.publish("newServerURL", URL);
       console.log("set new server url: " + this.serverURL);
     });
@@ -116,6 +119,7 @@ export class SettingPage {
   getServerURL() {
     this.getServerURLFromStorage();
     return this.serverURL;
+
   }
   getServerURLFromStorage() {
     return new Promise(resolve => {
@@ -242,8 +246,7 @@ export class SettingPage {
     if (mode === true || mode === "true") {
       BackgroundMode.enable();
       BackgroundMode.setDefaults({
-        title: "BusDriveApp",
-        text: "sending real time data"
+        title: "BusDriveApp"
       });
       console.log("BackgroundMode aktiviert");
     }
@@ -261,7 +264,6 @@ export class SettingPage {
     this.settings.get("DefaultSettingsFlag").then((flag) => {
       if (!(flag === "false")) {
         this.setServerURL("https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1");
-        this.serverURL = "https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1";
         this.addToServerURLList("https://digital-villages-server.herokuapp.com/services/rest/linemanagement/v1");
         this.setInsomnia("true");
         this.setBackgroundMode("true");
@@ -280,9 +282,34 @@ export class SettingPage {
         this.translate.setDefaultLang('en');
         // the lang to use, if the lang isn't available, it will use the current loader to get them
         this.translate.use(this.getLanguage());
-
-
       })
     });
+  }
+
+  /**
+   * sets the settings back to default
+   */
+  restoreDefaultSettings() {
+    let alert = Alert.create({
+      title: this.translate.instant("setting.defaultSettings"),
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            console.log("restore default settings");
+            this.settings.set("DefaultSettingsFlag", "true").then(() => {
+              this.loadDefaultSettings();
+              setTimeout(this.clearServerURLList.bind(this),500);
+            })
+          }
+        },
+        {
+          text: this.cancelTrans
+        }
+      ]
+    });
+    let nav = this.app.getActiveNav();
+    nav.present(alert);
+
   }
 }

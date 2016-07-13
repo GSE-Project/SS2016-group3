@@ -14,7 +14,6 @@ export class BusDriveInterface {
     private serverURL;
 
     constructor(private http: Http, private setting: SettingPage, public events: Events, private busses: Busses, private lines: Lines, private stops: Stops, private routes: Routes, private provider: Provider, private customstops: CustomStops) {
-        this.serverURL = setting.getServerURL();
         this.events.subscribe("newServerURL", (URL) => {
             this.serverURL = URL;
         })
@@ -27,6 +26,15 @@ export class BusDriveInterface {
         this.routes.clearLists();
         this.customstops.clearLists();
         console.log("lists cleared");
+    }
+
+    getServerURL() {
+        return new Promise(resolve => {
+            this.setting.getServerURLFromStorage().then(() => {
+                this.serverURL = this.setting.getServerURL();
+                resolve(this.serverURL);
+            });
+        })
     }
 
     /**
@@ -118,7 +126,7 @@ export class BusDriveInterface {
      * @returns names and schedules of linestops
      */
     getLineStopsInfos() {
-         return this.stops.getLineStopsInfos();
+        return this.stops.getLineStopsInfos();
     }
 
     /**
@@ -160,8 +168,8 @@ export class BusDriveInterface {
      * requests linecustomstops from server 
      * @param LineId id of the selected line
      */
-    requestLineCustomStops(LineId) {
-        return this.customstops.requestLineCustomStops(this.serverURL, LineId);
+    requestLineCustomStops(LineId, BusId) {
+        return this.customstops.requestLineCustomStops(this.serverURL, LineId, BusId);
     }
 
     /**
@@ -240,10 +248,11 @@ export class BusDriveInterface {
 
     /**
      * posts CustomStopStatus
-     * @param customstopID ID of the customstop
+     * @param customstopId ID of the customstop
+     * @param BusId ID of the customstop
      * @param status status of the customstop 
      */
-    postCustomStopStatus(customstopID, status) {
-        this.provider.postCustomStopStatus(customstopID, status, this.serverURL);
+    postCustomStopStatus(CustomstopId, BusId, status) {
+        this.provider.postCustomStopStatus(CustomstopId, BusId, status, this.serverURL);
     }
 }

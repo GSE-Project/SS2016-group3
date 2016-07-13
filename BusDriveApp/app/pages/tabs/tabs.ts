@@ -35,7 +35,7 @@ export class TabsPage {
     constructor(private platform: Platform, private nav: NavController, private viewCtrl: ViewController, navParams: NavParams, private busdriveinterface: BusDriveInterface, public events: Events, private translate: TranslateService) {
         this.tab1Root = DrivePage;
         this.tab3Root = StopsPage;
-        this.setMapPage();
+        this.tab2Root = NativeMapPage;
 
         this.selectedbus = navParams.get("selectedbus");
         this.selectedline = navParams.get("selectedline");
@@ -59,24 +59,6 @@ export class TabsPage {
     }
 
     /**
-     * sets MapPage depending on platform
-     */
-    setMapPage() {
-        if (this.platform.is('ios')) {
-            this.tab2Root = MapPage;
-            console.log("MapPage");
-        }
-        else if (this.platform.is('android')) {
-            this.tab2Root = NativeMapPage;
-            console.log("NativeMapPage");
-        }
-        else {
-            this.tab2Root = MapPage;
-            console.log("MapPage");
-        }
-    }
-
-    /**
      * gets the linestops
      */
     getLineStops() {
@@ -94,7 +76,7 @@ export class TabsPage {
      * requests linecustomstops
      */
     requestLineCustomStops() {
-        this.busdriveinterface.requestLineCustomStops(this.selectedline).then(() => {
+        this.busdriveinterface.requestLineCustomStops(this.selectedline, this.selectedbus).then(() => {
             let linecustomstops = this.busdriveinterface.getLineCustomStopsAll();
             this.events.publish("newCustomStops", linecustomstops);
         });;

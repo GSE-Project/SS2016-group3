@@ -18,15 +18,30 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <button large class="button button-block" (click)="addNewServerURL()">
-        <ion-icon name="add"></ion-icon>
-      </button>
+      <table width="100%">
+        <colgroup>
+          <col width="30%">
+          <col width="10%">
+          <col width="60%">
+        </colgroup>
+        <tr>
+          <td>
+            <button large class="button button-block" (click)="clearServerURLList()">
+              <ion-icon name="trash"></ion-icon>
+            </button>
+          </td>
+          <td>
+            
+          </td>
+          <td>
+            <button large class="button button-block" (click)="addNewServerURL()">
+              <ion-icon name="add"></ion-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
     </ion-item>
-    <ion-item>
-      <button large class="button button-block" (click)="clearServerURLList()">
-        <ion-icon name="trash"></ion-icon>
-      </button>
-    </ion-item>
+    
     <ion-item>
       <ion-label>{{"setting.backgroundModeTrans"| translate}}</ion-label>
       <ion-toggle [(ngModel)]="mode" (ngModelChange)="changeBackgroundMode(mode)"></ion-toggle>
@@ -36,6 +51,10 @@
       <ion-toggle [(ngModel)]="insomnia" (ngModelChange)="changeInsomnia(insomnia)"></ion-toggle>
     </ion-item>
     <ion-item>
+      <button large class="button button-block" (click)="restoreDefaultSettings()">{{"setting.defaultSettings" | translate}}</button>
+    </ion-item>
+    <!-- Falls man die Sendedistanz und Sendeperiode einstellen will
+      <ion-item>
       <ion-label>{{"setting.sendDistTrans"| translate}}</ion-label>
       <ion-range min="25" max="150" step="25" pin="true" snaps="true" [(ngModel)]="distance" secondary>
         <ion-icon range-left small name="resize"></ion-icon>
@@ -48,6 +67,6 @@
         <ion-icon range-left small name="clock"></ion-icon>
         <ion-icon range-right name="clock"></ion-icon>
       </ion-range>
-    </ion-item>
+    </ion-item>    -->
   </ion-list>
 </ion-content>

@@ -17,7 +17,8 @@
         "sendDistTrans":"Sending distance",
         "sendperiodTrans":"Sending period",
         "addTrans":"Add",
-        "newServerTrans2":"Enter a new Server-URL"
+        "newServerTrans2":"Enter a new Server-URL",
+        "defaultSettings":"Restore default settings"
     },
     "about": {    
         "findUs": "Find us on",
@@ -43,7 +44,7 @@
         "passengers": "Seats taken",
         "nextStopTrans": "Next stop",
         "acceptedStopsTrans": "Accepted custom stops",
-        "newStopsTrans": "New stop",
+        "newStopsTrans": "New stops",
         "time": "Time",
         "numberTrans": "Seats",
         "done": "Done",
