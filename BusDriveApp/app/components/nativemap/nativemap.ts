@@ -235,7 +235,9 @@ export class NativeMap implements OnDestroy, AfterViewInit {
     clearCustomStop() {
         if (this.customstoppolyline) {
             this.customstoppolyline.remove();
-            this.customstoppositionmarker.remove();
+            if (this.customstoppositionmarker) {
+                this.customstoppositionmarker.remove();
+            }
         }
     }
 

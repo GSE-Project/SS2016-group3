@@ -14,6 +14,7 @@ import {TranslatePipe} from "ng2-translate/ng2-translate";
 export class NativeMapPage {
     @ViewChild(NativeMap) nativemap: NativeMap;
     private selectedline;
+    private loading;
     private linestopscoordinates = [];
     private linestopsnames = [];
     private lineroutecoordinates = [];
@@ -35,9 +36,12 @@ export class NativeMapPage {
             this.showCustomStopRoute(customstop[0]);
         });
         this.events.subscribe("LoadCustomStop", () => {
-            this.nav.present(Loading.create({}));
+            this.loading = Loading.create({})
+            this.nav.present(this.loading);
         });
-
+        this.events.subscribe("CustomStopLoaded", () => {
+            this.loading.dismiss();
+        });
         this.platform.registerBackButtonAction(this.endTour.bind(this));
         this.events.subscribe("endTourAborted", () => {
             this.backbuttoncounter = 0;
@@ -77,12 +81,9 @@ export class NativeMapPage {
      * shows a customstop on the map ( route and marker)
      */
     showCustomStopRoute(customstop) {
-        let loading = Loading.create({});
-        this.nav.present(loading);
+        this.loading = Loading.create({});
+        this.nav.present(this.loading);
         this.nativemap.calcCustomStopRoute(customstop);
-        this.events.subscribe("CustomStopLoaded", () => {
-            loading.dismiss();
-        });
     }
 
     /**
@@ -98,5 +99,13 @@ export class NativeMapPage {
 
     ionViewDidLeave() {
         this.nativemap.clearCustomStop();
+    }
+
+    ionViewDidEnter() {
+        this.platform.registerBackButtonAction(this.endTour.bind(this));
+    }
+
+    ionViewLoaded() {
+        this.nav.parent.select(0);
     }
 }
