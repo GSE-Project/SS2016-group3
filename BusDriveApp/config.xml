@@ -58,10 +58,11 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
-    <preference name="SplashScreenDelay" value="10000" />
-    <preference name="FadeSplashScreen" value="true" />
-    <preference name="FadeSplashScreenDuration" value="750" />
-    <preference name="ShowSplashScreenSpinner" value="false" />
+  <preference name="SplashScreenDelay" value="10000" />
+  <preference name="FadeSplashScreen" value="true" />
+  <preference name="FadeSplashScreenDuration" value="750" />
+  <preference name="ShowSplashScreenSpinner" value="false" />
+  <preference name="orientation" value="portrait" />
   <feature name="StatusBar">
     <param name="ios-package" onload="true" value="CDVStatusBar"/>
   </feature>
@@ -75,5 +76,5 @@
   <plugin name="cordova-plugin-googlemaps" spec="https://github.com/phonegap-googlemaps-plugin/cordova-plugin-googlemaps">
     <variable name="API_KEY_FOR_ANDROID" value="AIzaSyBuoI32XuVQR3B5e1F1Or4TQ0LA4739oSQ" />
     <variable name="API_KEY_FOR_IOS" value="AIzaSyAX9CCffrBMaBUJf0Utdh6vzkl3zPc72eI" />
-</plugin>
+  </plugin>
 </widget>
