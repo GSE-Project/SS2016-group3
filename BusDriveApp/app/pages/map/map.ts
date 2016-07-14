@@ -2,7 +2,7 @@ import {Page, NavParams, Platform, NavController, Events} from 'ionic-angular';
 import {Component, ViewChild} from  '@angular/core';
 import {Map} from '../../components/map/map';
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
-import {TranslatePipe} from "ng2-translate/ng2-translate";
+import {TranslatePipe} from 'ng2-translate/ng2-translate';
 @Component({
     templateUrl: 'build/pages/map/map.html',
     directives: [Map],

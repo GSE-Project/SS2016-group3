@@ -2,7 +2,7 @@ import {Page, NavParams, Events, Toast, Alert, Platform, ActionSheet, Modal, Nav
 import {Component} from '@angular/core';
 import {LocalNotifications} from 'ionic-native';
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
-import {TranslatePipe, TranslateService} from "ng2-translate/ng2-translate";
+import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 
 @Component({
     templateUrl: 'build/pages/drive/drive.html',

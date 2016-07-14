@@ -1,6 +1,6 @@
 import {Page, Platform, NavController, Alert, Popover} from 'ionic-angular';
 import {Component} from '@angular/core';
-import {TranslatePipe, TranslateService} from "ng2-translate/ng2-translate";
+import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
 import {BusListPage} from '../buslist/buslist';
 import {PopoverPage} from '../home/popover/Popover'

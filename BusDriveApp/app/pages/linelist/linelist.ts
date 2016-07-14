@@ -2,7 +2,7 @@ import {Page, NavController, NavParams, MenuController} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {TabsPage} from '../tabs/tabs';
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
-import {TranslatePipe} from "ng2-translate/ng2-translate";
+import {TranslatePipe} from 'ng2-translate/ng2-translate';
 @Component({
     templateUrl: 'build/pages/linelist/linelist.html',
     pipes: [TranslatePipe]
