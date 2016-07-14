@@ -1,6 +1,6 @@
 import {Component, ElementRef, AfterViewInit, OnDestroy} from '@angular/core';
 import {Events} from 'ionic-angular';
-import {Geolocation, GoogleMap, GoogleMapsEvent, GoogleMapsMarker, GoogleMapsLatLng, GoogleMapsPolyline} from 'ionic-native';
+import {Geolocation, GoogleMap, GoogleMapsEvent, GoogleMapsMarker, GoogleMapsLatLng, GoogleMapsPolyline, Diagnostic} from 'ionic-native';
 
 @Component({
     selector: 'nativemap',
@@ -63,17 +63,21 @@ export class NativeMap implements OnDestroy, AfterViewInit {
      */
     centerCamera() {
         let options = { timeout: 10000, enableHighAccuracy: true };
-        Geolocation.getCurrentPosition(options).then((resp) => {
-            let latitude = resp.coords.latitude;
-            let longitude = resp.coords.longitude;
-            this.map.animateCamera({
-                'target': new GoogleMapsLatLng(latitude, longitude),
-                'tilt': 10,
-                'zoom': 15,
-                'bearing': 0,
-                'duration': 6000
-            });
-        })
+        Diagnostic.isLocationEnabled().then((isEnabled) => {
+            if (isEnabled) {
+                Geolocation.getCurrentPosition(options).then((resp) => {
+                    let latitude = resp.coords.latitude;
+                    let longitude = resp.coords.longitude;
+                    this.map.animateCamera({
+                        'target': new GoogleMapsLatLng(latitude, longitude),
+                        'tilt': 10,
+                        'zoom': 15,
+                        'bearing': 0,
+                        'duration': 6000
+                    });
+                })
+            }
+        });
     }
 
     /**

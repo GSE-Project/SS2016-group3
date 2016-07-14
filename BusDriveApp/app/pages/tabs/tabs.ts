@@ -8,15 +8,16 @@ import {StopsPage} from '../stops/stops';
 import {Geolocation} from 'ionic-native';
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
 import {TranslateService} from 'ng2-translate/ng2-translate';
+import {Diagnostic} from 'ionic-native';
 
 @Component({
     templateUrl: 'build/pages/tabs/tabs.html'
 })
 
 export class TabsPage {
-    private tab1Root;
-    private tab2Root;
-    private tab3Root;
+    private tab1Root = DrivePage;
+    private tab2Root = NativeMapPage;
+    private tab3Root = StopsPage;
     private sendintervalID;
     private requestintervalID;
 
@@ -33,9 +34,6 @@ export class TabsPage {
     private stopsTrans
 
     constructor(private platform: Platform, private nav: NavController, private viewCtrl: ViewController, navParams: NavParams, private busdriveinterface: BusDriveInterface, public events: Events, private translate: TranslateService) {
-        this.tab1Root = DrivePage;
-        this.tab3Root = StopsPage;
-        this.tab2Root = NativeMapPage;
 
         this.selectedbus = navParams.get("selectedbus");
         this.selectedline = navParams.get("selectedline");
@@ -94,7 +92,9 @@ export class TabsPage {
      */
     sendrealTimeData() {
         let currenTime = undefined;
-        Geolocation.getCurrentPosition().then((resp) => {
+        Diagnostic.isLocationEnabled().then((isEnabled) => {
+            if (isEnabled){
+                Geolocation.getCurrentPosition().then((resp) => {
             let latitude = resp.coords.latitude;
             let longitude = resp.coords.longitude;
             let busspeed = resp.coords.speed;
@@ -105,6 +105,14 @@ export class TabsPage {
                 this.lastSendTime = new Date();
             }
         });
+            }
+            else {
+                console.log("GPS NOT ENABLED")
+            }
+        });
+        
+        
+        
         currenTime = new Date();
         console.log("passed time after last send: " + (currenTime - this.lastSendTime));
     }
