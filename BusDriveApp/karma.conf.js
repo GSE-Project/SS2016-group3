@@ -18,7 +18,9 @@ module.exports = function(config) {
       'node_modules/traceur/bin/traceur-runtime.js',         // TypeError: undefined is not a constructor (evaluating 'new exports.Map()')
       'node_modules/reflect-metadata/Reflect.js',
       'node_modules/zone.js/dist/zone.js',
-      'test/**/*Spec.ts',
+      'test/**/testSpec.ts',  // working mockBackend example
+      'test/**/bussesSpec.ts', // fails, also bussesSpec2 and bussesSpec3, which are similar approaches
+      //'test/**/*Spec.ts', // uncomment this line to execute all Specs
 	    'app/*.ts',
 	    'typings/browser.d.ts',
 	    'app/**/*.ts'
@@ -30,6 +32,8 @@ module.exports = function(config) {
 	  'node_modules/angular2/**/*_spec.js',
 	  'node_modules/angular2/src/facade/collection.ts',
       'node_modules/ionic-angular/**/*spec*'
+      
+      
     ],
 
 
@@ -73,7 +77,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS','Chrome'],
+    browsers: ['PhantomJS','Safari'],
 
 
     // Continuous Integration mode
