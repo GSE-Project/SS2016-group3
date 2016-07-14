@@ -73,16 +73,11 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS','Chrome'],
+    browsers: ['PhantomJS'],
 
+    // https://github.com/lathonez/clicker/issues/82
+    // try increasing this value if you see the error "Disconnected (1 times), because no message in 30000 ms."
+    browserNoActivityTimeout: 30000
 
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
-
-    // Concurrency level
-    // how many browser should be started simultaneous
-    concurrency: Infinity
-	
   })
 }

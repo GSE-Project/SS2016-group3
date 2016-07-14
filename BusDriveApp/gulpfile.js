@@ -2,17 +2,35 @@ var gulp = require('gulp'),
     gulpWatch = require('gulp-watch'),
     del = require('del'),
     runSequence = require('run-sequence'),
-    argv = process.argv;
+    argv = process.argv,
+    path = require('path');
 var Server = require('karma').Server;
 
 /**
- * Run test once and exit
+ * Gulp Test tasks
  */
 gulp.task('test', function (done) {
   new Server({
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true
-  }, done).start();
+    configFile: path.resolve('./karma.conf.js'),
+    browsers: ['PhantomJS'],
+    singleRun: true,
+  }, done()).start();
+});
+
+gulp.task('test:tdd', function (done) {
+  new Server({
+    configFile: path.resolve('./karma.conf.js'),
+    browsers: ['PhantomJS'],
+    singleRun: false,
+  }, done()).start();
+});
+
+gulp.task('test:debug', function (done) {
+  new Server({
+    configFile: path.resolve('./karma.conf.js'),
+    browsers: ['Chrome'],
+    singleRun: false,
+  }, done()).start();
 });
 
 /**
