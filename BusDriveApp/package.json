@@ -67,5 +67,7 @@
     "cordova-plugin-app-event",
     "cordova-plugin-network-information"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    "ios"
+  ]
 }
