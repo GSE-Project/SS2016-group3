@@ -8,10 +8,10 @@
     <ion-list>
         <ion-item *ngFor="let item of linesInfos" (click)="selectLine(item)">
             <ion-thumbnail item-left>
-                <ion-icon name="git-compare" style="font-size:90px" ></ion-icon>
+                <ion-icon name="git-compare" style="font-size:90px"></ion-icon>
             </ion-thumbnail>
             <h2>{{"linelist.lineName"|translate}} {{item[0]}}</h2>
-            <p>{{item[1]}}</p>           
+            <p>{{item[1]}}</p>
         </ion-item>
     </ion-list>
 </ion-content>

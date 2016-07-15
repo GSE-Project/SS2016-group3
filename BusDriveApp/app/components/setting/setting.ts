@@ -90,6 +90,10 @@ export class SettingPage {
     this.getServerURLListFromStorage();
     return this.serverURLList
   }
+
+  /**
+   * @returns promise
+   */
   getServerURLListFromStorage() {
     return new Promise(resolve => {
       this.settings.get("serverURLList").then((URLList) => {
@@ -98,7 +102,7 @@ export class SettingPage {
         }
         resolve(this.serverURLList);
       });
-    })
+    });
   }
 
   /**
@@ -121,13 +125,17 @@ export class SettingPage {
     return this.serverURL;
 
   }
+
+  /**
+   * @returns promise
+   */
   getServerURLFromStorage() {
     return new Promise(resolve => {
       this.settings.get("serverURL").then((URL) => {
         this.serverURL = URL;
         resolve(this.serverURL);
       });
-    })
+    });
   }
 
   /**
@@ -147,13 +155,17 @@ export class SettingPage {
     this.getLanguageFromStorage();
     return this.lang
   }
+
+  /**
+   * @returns promise
+   */
   getLanguageFromStorage() {
     return new Promise(resolve => {
       this.settings.get("Language").then((lang) => {
         this.lang = lang;
         resolve(this.lang);
       });
-    })
+    });
   }
 
   /**
@@ -183,13 +195,17 @@ export class SettingPage {
     this.getInsomniaFromStorage();
     return this.insomnia;
   }
+
+  /**
+   * @returns promise
+   */
   getInsomniaFromStorage() {
     return new Promise(resolve => {
       this.settings.get("insomnia").then((insomnia) => {
         this.insomnia = insomnia;
         resolve(this.insomnia);
       });
-    })
+    });
   }
 
   /**
@@ -229,13 +245,17 @@ export class SettingPage {
     this.getBackgroundModeFromStorage();
     return this.mode;
   }
+
+  /**
+   * @returns promise
+   */
   getBackgroundModeFromStorage() {
     return new Promise(resolve => {
       this.settings.get("BackgroundMode").then((mode) => {
         this.mode = mode;
         resolve(this.mode);
       });
-    })
+    });
   }
 
   /**
@@ -273,16 +293,16 @@ export class SettingPage {
     }).then(() => {
       this.getInsomniaFromStorage().then(() => {
         this.changeInsomnia(this.getInsomnia());
-      })
+      });
       this.getBackgroundModeFromStorage().then(() => {
         this.changeBackgroundMode(this.getBackgroundMode());
-      })
+      });
       this.getLanguageFromStorage().then(() => {
         // this language will be used as a fallback when a translation isn't found in the current language
         this.translate.setDefaultLang('en');
         // the lang to use, if the lang isn't available, it will use the current loader to get them
         this.translate.use(this.getLanguage());
-      })
+      });
     });
   }
 
@@ -299,7 +319,7 @@ export class SettingPage {
             console.log("restore default settings");
             this.settings.set("DefaultSettingsFlag", "true").then(() => {
               this.loadDefaultSettings();
-              setTimeout(this.clearServerURLList.bind(this),500);
+              setTimeout(this.clearServerURLList.bind(this), 500);
             })
           }
         },
@@ -310,6 +330,5 @@ export class SettingPage {
     });
     let nav = this.app.getActiveNav();
     nav.present(alert);
-
   }
 }

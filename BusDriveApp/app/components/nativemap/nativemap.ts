@@ -30,7 +30,7 @@ export class NativeMap implements OnDestroy, AfterViewInit {
     }
 
     /**
-     * loads Google Maps and shows its own position
+     * loads Google Maps and center camera to own position
      */
     loadMap() {
         this.mapElementId = 'map' + new Date().getTime();
@@ -75,7 +75,7 @@ export class NativeMap implements OnDestroy, AfterViewInit {
                         'bearing': 0,
                         'duration': 6000
                     });
-                })
+                });
             }
         });
     }
@@ -85,7 +85,7 @@ export class NativeMap implements OnDestroy, AfterViewInit {
      * @param lineroutecoordinates list of coordinates of the lineroute
      */
     loadRoute(lineroutecoordinates) {
-        this.map.clear(); // übergangslösung
+        this.map.clear();
         let routepath = [];
         for (let i = 0; i < lineroutecoordinates.length; i++) {
             let latlng = new GoogleMapsLatLng(lineroutecoordinates[i][0], lineroutecoordinates[i][1]);
@@ -157,40 +157,44 @@ export class NativeMap implements OnDestroy, AfterViewInit {
         let customstoplng = customstop[6][0];
         let customstopposition = new GoogleMapsLatLng(customstoplat, customstoplng);
         let options = { timeout: 10000, enableHighAccuracy: true };
-        Geolocation.getCurrentPosition(options).then((resp) => {
-            let busposition = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
-            let request = {
-                origin: busposition,
-                destination: customstopposition,
-                travelMode: google.maps.TravelMode.DRIVING
-            };
-            this.directionsService.route(request, function (response, status) {
-                if (status === google.maps.DirectionsStatus.OK) {
-                    let polyline = new google.maps.Polyline();
-                    let bounds = new google.maps.LatLngBounds();
-                    let legs = response.routes[0].legs;
+        Diagnostic.isLocationEnabled().then((isEnabled) => {
+            if (isEnabled) {
+                Geolocation.getCurrentPosition(options).then((resp) => {
+                    let busposition = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+                    let request = {
+                        origin: busposition,
+                        destination: customstopposition,
+                        travelMode: google.maps.TravelMode.DRIVING
+                    };
+                    this.directionsService.route(request, function (response, status) {
+                        if (status === google.maps.DirectionsStatus.OK) {
+                            let polyline = new google.maps.Polyline();
+                            let bounds = new google.maps.LatLngBounds();
+                            let legs = response.routes[0].legs;
 
-                    for (let i = 0; i < legs.length; i++) {
-                        let steps = legs[i].steps;
-                        for (let j = 0; j < steps.length; j++) {
-                            let nextSegment = steps[j].path;
-                            for (let k = 0; k < nextSegment.length; k++) {
-                                polyline.getPath().push(nextSegment[k]);
-                                bounds.extend(nextSegment[k]);
-                                let routelatlnglist: any[] = nextSegment[k].toUrlValue(6).split(",")
-                                let routelatlng = new GoogleMapsLatLng(parseFloat(routelatlnglist[0]), parseFloat(routelatlnglist[1]));
-                                customstoproutepath.push(routelatlng);
+                            for (let i = 0; i < legs.length; i++) {
+                                let steps = legs[i].steps;
+                                for (let j = 0; j < steps.length; j++) {
+                                    let nextSegment = steps[j].path;
+                                    for (let k = 0; k < nextSegment.length; k++) {
+                                        polyline.getPath().push(nextSegment[k]);
+                                        bounds.extend(nextSegment[k]);
+                                        let routelatlnglist: any[] = nextSegment[k].toUrlValue(6).split(",")
+                                        let routelatlng = new GoogleMapsLatLng(parseFloat(routelatlnglist[0]), parseFloat(routelatlnglist[1]));
+                                        customstoproutepath.push(routelatlng);
+                                    }
+                                }
                             }
                         }
-                    }
-                }
-            });
-            setTimeout(this.showCustomStopRoute.bind(this, customstoproutepath, customstopposition, customstop), 2000);
+                    });
+                    setTimeout(this.showCustomStopRoute.bind(this, customstoproutepath, customstopposition, customstop), 2000);
+                });
+            }
         });
     }
 
     /**
-     * shows a polyline form own positiny to customstopposition
+     * shows a polyline form own position to customstopposition
      */
     showCustomStopRoute(customstoproutepath, customstopposition, customstop) {
         if (customstop[7] === 1) {

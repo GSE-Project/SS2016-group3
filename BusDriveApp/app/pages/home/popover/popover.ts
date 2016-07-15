@@ -10,8 +10,11 @@ import {AboutPage} from '../../../components/about/about'
     pipes: [TranslatePipe]
 })
 export class PopoverPage {
+    private isNotios: boolean = true;
     constructor(private platform: Platform, private nav: NavController, private viewCtrl: ViewController) {
-
+        if (this.platform.is('ios')) {
+            this.isNotios = false;
+        }
     }
 
     /**

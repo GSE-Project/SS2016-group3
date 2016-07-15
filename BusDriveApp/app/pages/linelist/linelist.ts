@@ -3,23 +3,20 @@ import {Component} from '@angular/core';
 import {TabsPage} from '../tabs/tabs';
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
 import {TranslatePipe} from "ng2-translate/ng2-translate";
+
 @Component({
     templateUrl: 'build/pages/linelist/linelist.html',
     pipes: [TranslatePipe]
 })
 
 export class LineListPage {
-    private nav;
     private linesInfos = [];
     private selectedbus;
 
-
-    constructor(nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface) {
-        this.nav = nav;
+    constructor(private nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface) {
         this.selectedbus = navParams.get("selectedbus")
 
         this.getLinesInfos();
-
     }
 
     /**
@@ -41,7 +38,6 @@ export class LineListPage {
                     selectedline: line[0],
                     selectedbus: this.selectedbus,
                 });
-
             }
         }
     }

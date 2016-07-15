@@ -20,6 +20,7 @@ export class Lines {
 
     /**
      * requests lines from server
+     * @returns promise
      */
     requestLines(serverURL) {
         return new Promise(resolve => {
@@ -31,7 +32,7 @@ export class Lines {
                 err => console.error('requestLines failed'),
                 () => console.log('requestLines completed')
             );
-        })
+        });
     }
 
     /**

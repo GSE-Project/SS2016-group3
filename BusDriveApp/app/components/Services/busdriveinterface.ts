@@ -13,21 +13,26 @@ import {SettingPage} from '../../components/setting/setting';
 export class BusDriveInterface {
     private serverURL;
 
-    constructor(private http: Http, private setting: SettingPage, public events: Events, private busses: Busses, private lines: Lines, private stops: Stops, private routes: Routes, private provider: Provider, private customstops: CustomStops) {
+    constructor(private setting: SettingPage, public events: Events, private busses: Busses, private lines: Lines, private stops: Stops, private routes: Routes, private provider: Provider, private customstops: CustomStops) {
         this.events.subscribe("newServerURL", (URL) => {
             this.serverURL = URL;
-        })
+        });
     }
 
+    /**
+     * clears recived lists
+     */
     clearLists() {
         this.busses.clearLists();
         this.lines.clearLists();
         this.stops.clearLists();
         this.routes.clearLists();
         this.customstops.clearLists();
-        console.log("lists cleared");
     }
 
+    /**
+     * @returns promise 
+     */
     getServerURL() {
         return new Promise(resolve => {
             this.setting.getServerURLFromStorage().then(() => {
@@ -39,6 +44,7 @@ export class BusDriveInterface {
 
     /**
      * requests busses from server
+     * @returns promise
      */
     requestBusses() {
         return this.busses.requestBusses(this.serverURL);
@@ -68,6 +74,7 @@ export class BusDriveInterface {
 
     /**
      * requests lines from server
+     * @returns promise
      */
     requestLines() {
         return this.lines.requestLines(this.serverURL);
@@ -89,6 +96,7 @@ export class BusDriveInterface {
 
     /**
      * requests stops from server
+     * @returns promise
      */
     requestStops() {
         return this.stops.requestStops(this.serverURL);
@@ -102,14 +110,14 @@ export class BusDriveInterface {
     }
     /**
      * @param LineId id of the selected line
-     * @retruns stops of the line
+     * @returns stops of the line
      */
     getLineStops(LineId) {
         return this.stops.getLineStops(LineId);
     }
 
     /**
-     * @retruns names of linestops
+     * @returns names of linestops
      */
     getLineStopsNames() {
         return this.stops.getLineStopsNames();
@@ -131,6 +139,7 @@ export class BusDriveInterface {
 
     /**
      * requests routes from server
+     * @returns promise
      */
     requestRoutes() {
         return this.routes.requestRoutes(this.serverURL);
@@ -144,21 +153,21 @@ export class BusDriveInterface {
     }
     /**
      * @param LineId id of the selected line
-     * @retruns route of the line
+     * @returns route of the line
      */
     getLineRoute(LineId) {
         return this.routes.getLineRoute(LineId);
     }
 
     /**
-     * @retruns route of the line
+     * @returns route of the line
      */
     getLineRouteCoordinates() {
         return this.routes.getLineRouteCoordinates();
     }
 
     /**
-     * @retruns coordinates of the lineroute
+     * @returns coordinates of the lineroute
      */
     getLineRouteCoordinatesNative() {
         return this.routes.getLineRouteCoordinatesNative();
@@ -167,6 +176,8 @@ export class BusDriveInterface {
     /**
      * requests linecustomstops from server 
      * @param LineId id of the selected line
+     * @param BusId id of the selected bus
+     * @returns customstops for a line and bus
      */
     requestLineCustomStops(LineId, BusId) {
         return this.customstops.requestLineCustomStops(this.serverURL, LineId, BusId);
@@ -248,7 +259,7 @@ export class BusDriveInterface {
 
     /**
      * posts CustomStopStatus
-     * @param customstopId ID of the customstop
+     * @param CustomstopId ID of the customstop
      * @param BusId ID of the customstop
      * @param status status of the customstop 
      */
