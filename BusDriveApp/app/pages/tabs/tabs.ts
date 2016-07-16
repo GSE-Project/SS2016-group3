@@ -18,6 +18,7 @@ export class TabsPage {
     private tab1Root = DrivePage;
     private tab2Root = NativeMapPage;
     private tab3Root = StopsPage;
+
     private sendintervalID;
     private requestintervalID;
 
@@ -29,31 +30,33 @@ export class TabsPage {
     private lat = 0;
     private lastSendTime = undefined;
     private passangerscounter = 0;
+
     private driveTrans;
     private mapTrans
     private stopsTrans
 
     constructor(private platform: Platform, private nav: NavController, private viewCtrl: ViewController, navParams: NavParams, private busdriveinterface: BusDriveInterface, public events: Events, private translate: TranslateService) {
-
         this.selectedbus = navParams.get("selectedbus");
         this.selectedline = navParams.get("selectedline");
         this.rootParams = [this.selectedbus, this.selectedline];
 
-        this.driveTrans = translate.instant("drive.title");
-        this.mapTrans = translate.instant("map.title");
-        this.stopsTrans = translate.instant("stops.title");
-        this.updateBusStatus();
-        this.getLineRoute();
-        this.getLineStops();
         this.requestintervalID = setInterval(this.requestLineCustomStops.bind(this), 5000);
         this.sendintervalID = setInterval(this.sendrealTimeData.bind(this), 5000);
 
+        this.updateBusStatus();
+        this.getLineRoute();
+        this.getLineStops();
+
         this.events.subscribe("EndTour", () => {
             this.endTour();
-        })
+        });
         this.events.subscribe("Passenger", (counter) => {
             this.passangerscounter = counter[0];
         });
+
+        this.driveTrans = translate.instant("drive.title");
+        this.mapTrans = translate.instant("map.title");
+        this.stopsTrans = translate.instant("stops.title");
     }
 
     /**
@@ -93,26 +96,23 @@ export class TabsPage {
     sendrealTimeData() {
         let currenTime = undefined;
         Diagnostic.isLocationEnabled().then((isEnabled) => {
-            if (isEnabled){
+            if (isEnabled) {
                 Geolocation.getCurrentPosition().then((resp) => {
-            let latitude = resp.coords.latitude;
-            let longitude = resp.coords.longitude;
-            let busspeed = resp.coords.speed;
-            if ((this.distance(this.lat, this.lng, latitude, longitude) > 75) || (currenTime - this.lastSendTime > 56000)) {
-                this.busdriveinterface.postRealTimeData(this.selectedbus, longitude, latitude, this.passangerscounter)
-                this.lat = latitude;
-                this.lng = longitude;
-                this.lastSendTime = new Date();
-            }
-        });
+                    let latitude = resp.coords.latitude;
+                    let longitude = resp.coords.longitude;
+                    let busspeed = resp.coords.speed;
+                    if ((this.distance(this.lat, this.lng, latitude, longitude) > 75) || (currenTime - this.lastSendTime > 56000)) {
+                        this.busdriveinterface.postRealTimeData(this.selectedbus, longitude, latitude, this.passangerscounter)
+                        this.lat = latitude;
+                        this.lng = longitude;
+                        this.lastSendTime = new Date();
+                    }
+                });
             }
             else {
                 console.log("GPS NOT ENABLED")
             }
         });
-        
-        
-        
         currenTime = new Date();
         console.log("passed time after last send: " + (currenTime - this.lastSendTime));
     }

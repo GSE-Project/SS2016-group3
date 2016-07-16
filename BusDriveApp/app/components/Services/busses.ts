@@ -11,7 +11,7 @@ export class Busses {
     }
 
     /**
-     * clears all lists
+     * clears busses
      */
     clearLists() {
         this.busses = [];
@@ -30,7 +30,7 @@ export class Busses {
                 err => console.error('requestBusses failed'),
                 () => console.log('requestBusses completed')
             );
-        })
+        });
     }
 
     /**

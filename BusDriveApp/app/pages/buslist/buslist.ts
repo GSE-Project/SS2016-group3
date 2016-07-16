@@ -10,15 +10,11 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 })
 
 export class BusListPage {
-    private nav;
     private bussesInfos = [];
 
 
-    constructor(nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface) {
-        this.nav = nav;
-        
+    constructor(private nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface) {        
         this.getBussesInfos();
-
     }
 
     /**
@@ -34,7 +30,7 @@ export class BusListPage {
      */
     selectBus(bus) {
         console.log("-> LineListPage");
-        for (var index = 0; index < this.bussesInfos.length; index++) {
+        for (let index = 0; index < this.bussesInfos.length; index++) {
             if (this.bussesInfos[index] == bus) {
                 this.nav.push(LineListPage, {
                     selectedbus: bus[0],

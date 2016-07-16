@@ -22,7 +22,8 @@ export class Stops {
     }
 
     /**
-      * requests stops from server 
+      * requests stops from serverURL
+      * @returns promise
       */
     requestStops(serverURL) {
         return new Promise(resolve => {
@@ -34,7 +35,7 @@ export class Stops {
                 err => console.error("requestStops failed"),
                 () => console.log('requestStops completed')
             );
-        })
+        });
     }
 
     /**
@@ -98,6 +99,5 @@ export class Stops {
             linestopsinfos.push([this.linestops[i].name, this.linestopsschedules[i]]);
         }
         return linestopsinfos;
-
     }
 }

@@ -5,14 +5,12 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 @Component({
   templateUrl: 'build/pages/stops/stops.html',
-    pipes: [TranslatePipe]
+  pipes: [TranslatePipe]
 })
 
 export class StopsPage {
   private linestopsinfos = [];
   private backbuttoncounter: number = 0;
-
-
 
   constructor(navParams: NavParams, private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events) {
     this.getLineStopsInfos();
@@ -20,8 +18,7 @@ export class StopsPage {
     this.platform.registerBackButtonAction(this.endTour.bind(this));
     this.events.subscribe("endTourAborted", () => {
       this.backbuttoncounter = 0;
-    })
-
+    });
   }
 
   /**

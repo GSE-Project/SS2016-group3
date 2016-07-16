@@ -14,7 +14,7 @@ export class AboutPage {
     constructor(private platform: Platform, private nav: NavController) {
     }
     /**
-     * opens a url in the system app if installed or in the browser
+     * opens the url with the system app if installed or in the browser
      * @param url url of the website
      */
     openURL(url) {
@@ -24,7 +24,7 @@ export class AboutPage {
     }
 
     /**
-     * opens a url in the system app if installed or in the browser
+     * opens the url with the system app if installed or in the browser
      * @param url url of the website
      */
     openTwitter(url) {
@@ -36,8 +36,7 @@ export class AboutPage {
             app = 'com.twitter.android';
         }
 
-        AppAvailability.check(app)
-            .then(
+        AppAvailability.check(app).then(
             function () {  // Success callback
                 open(url, '_system', 'location=no');
                 console.log('Twitter is available');
@@ -45,12 +44,11 @@ export class AboutPage {
             function () {  // Error callback
                 open(url, '_system', 'location=no');
                 console.log('Twitter is not available');
-            }
-            );
+            });
     }
 
     /**
-     * opens a url in the system app if installed or in the browser
+     * opens the url with the system app if installed or in the browser
      * @param url url of the website
      */
     openFacebook(url) {
@@ -62,8 +60,7 @@ export class AboutPage {
             app = 'com.facebook.katana';
         }
 
-        AppAvailability.check(app)
-            .then(
+        AppAvailability.check(app).then(
             function () {  // Success callback
                 open('fb://page/' + url, '_system', 'location=no');
                 console.log('Facebook is available');
@@ -71,12 +68,11 @@ export class AboutPage {
             function () {  // Error callback
                 open('https://www.facebook.com/' + url, '_system', 'location=no');
                 console.log('Facebook is not available');
-            }
-            );
+            });
     }
 
     /**
-     * opens a url in the system app if installed or in the browser
+     * opens the url with the system app if installed or in the browser
      * @param url url of the website
      */
     openYouTube(url) {
@@ -88,8 +84,7 @@ export class AboutPage {
             app = 'com.google.android.youtube';
         }
 
-        AppAvailability.check(app)
-            .then(
+        AppAvailability.check(app).then(
             function () {  // Success callback
                 open(url, '_system', 'location=no');
                 console.log('YouTube is available');
@@ -97,8 +92,7 @@ export class AboutPage {
             function () {  // Error callback
                 open(url, '_system', 'location=no');
                 console.log('YouTube is not available');
-            }
-            );
+            });
     }
 
     /**

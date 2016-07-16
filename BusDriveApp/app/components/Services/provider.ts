@@ -12,6 +12,8 @@ export class Provider {
      * @param busID ID of the selected bus
      * @param longitude Longitude of current position
      * @param latitude Latitude of current position
+     * @param passangerscounter number of passangers in the bus
+     * @param serverURL URL of the server
      */
     postRealTimeData(busID, longitude, latitude, passangerscounter, serverURL) {
         let timestamp = Date.now()
@@ -36,6 +38,7 @@ export class Provider {
      * posts updateBusStatus to server
      * @param busID ID of the selected bus
      * @param lineID ID of the selected line
+     * @param serverURL URL of the server
      */
     postBusStatus(busID, lineID, serverURL) {
         let busStatus = JSON.stringify(
@@ -55,6 +58,7 @@ export class Provider {
      * @param customstopID ID of the customstop
      * @param BusId ID of the selected bus
      * @param status status of the customstop 
+     * @param serverURL URL of the server
      */
     postCustomStopStatus(CustomstopId, BusId, status, serverURL) {
         let customStopStatus = JSON.stringify(

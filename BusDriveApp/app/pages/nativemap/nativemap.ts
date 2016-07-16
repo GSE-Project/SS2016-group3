@@ -13,7 +13,6 @@ import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 export class NativeMapPage {
     @ViewChild(NativeMap) nativemap: NativeMap;
-    private selectedline;
     private loading;
     private linestopscoordinates = [];
     private linestopsnames = [];

@@ -21,6 +21,7 @@ export class Routes {
 
     /**
      * requests routes from server
+     * @returns promise
      */
     requestRoutes(serverURL) {
         return new Promise(resolve => {
@@ -32,7 +33,7 @@ export class Routes {
                 err => console.error("requestRoute failed"),
                 () => console.log('requestRoute completed')
             );
-        })
+        });
     }
 
     /**
@@ -57,7 +58,7 @@ export class Routes {
      */
     getLineRouteCoordinates() {
         let lineroutecoordinates = [];
-        for (var index = 0; index < this.lineroute.length; index++) {
+        for (let index = 0; index < this.lineroute.length; index++) {
             lineroutecoordinates.push({
                 lat: this.lineroute[index][1],
                 lng: this.lineroute[index][0]
@@ -72,7 +73,7 @@ export class Routes {
      */
     getLineRouteCoordinatesNative() {
         let lineroutecoordinates = [];
-        for (var index = 0; index < this.lineroute.length; index++) {
+        for (let index = 0; index < this.lineroute.length; index++) {
             lineroutecoordinates.push([
                 this.lineroute[index][1],
                 this.lineroute[index][0]

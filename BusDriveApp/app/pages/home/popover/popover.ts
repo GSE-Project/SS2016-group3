@@ -11,7 +11,6 @@ import {AboutPage} from '../../../components/about/about'
 })
 export class PopoverPage {
     constructor(private platform: Platform, private nav: NavController, private viewCtrl: ViewController) {
-
     }
 
     /**

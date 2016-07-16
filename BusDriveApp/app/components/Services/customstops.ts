@@ -21,7 +21,7 @@ export class CustomStops {
      * @param serverURL URL of the server
      * @param LineId id of the selected line
      * @param BusId id of the selected bus
-     * @retruns list of customstops of the line
+     * @retruns promise
      */
     requestLineCustomStops(serverURL, LineId, BusId) {
         return new Promise(resolve => {
@@ -33,7 +33,7 @@ export class CustomStops {
                 err => console.error("requestLineCustomStops failed"),
                 () => console.log('requestLineCustomStops completed')
             );
-        })
+        });
     }
 
     /**
