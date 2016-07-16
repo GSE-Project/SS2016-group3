@@ -54,7 +54,8 @@
     "cordova-plugin-appavailability",
     {
       "variables": {
-        "API_KEY_FOR_ANDROID": "AIzaSyBuoI32XuVQR3B5e1F1Or4TQ0LA4739oSQ"
+        "API_KEY_FOR_ANDROID": "AIzaSyBuoI32XuVQR3B5e1F1Or4TQ0LA4739oSQ",
+        "API_KEY_FOR_IOS": "AIzaSyAX9CCffrBMaBUJf0Utdh6vzkl3zPc72eI"
       },
       "locator": "https://github.com/phonegap-googlemaps-plugin/cordova-plugin-googlemaps",
       "id": "cordova-plugin-googlemaps"

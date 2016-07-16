@@ -71,6 +71,5 @@ export class Provider {
         senddata.setRequestHeader("Content-Type", "application/json");
         senddata.send(customStopStatus);
         console.log("Senden: " + " CustomstopID: " + CustomstopId, "Status: " + status);
-        console.log("response: " + senddata.response, senddata.responseBody, senddata.responseText, senddata.responseText, senddata.responseType, senddata.responseXML)
     }
 }
