@@ -1,3 +1,5 @@
+'use strict';
+
 import {App, Platform, ionicBootstrap} from 'ionic-angular';
 import {StatusBar, Splashscreen} from 'ionic-native';
 import {Component, ViewChild} from '@angular/core';
@@ -19,7 +21,6 @@ import {TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader}
   template: '<ion-nav [root]="rootPage"></ion-nav>',
   providers: [BusDriveInterface, Busses, Lines, Stops, Routes, Provider, CustomStops, SettingPage]
 })
-
 export class MyApp {
   rootPage: any = HomePage;
 
@@ -37,11 +38,9 @@ export class MyApp {
     });
     this.settings.loadDefaultSettings();
   }
-}
+};
 
-ionicBootstrap(MyApp, [[provide(TranslateLoader, {
+ionicBootstrap(MyApp, [provide(TranslateLoader, {
   useFactory: (http: Http) => new TranslateStaticLoader(http, 'assets/i18n', '.json'),
   deps: [Http]
-}),
-  TranslateService]], {
-  });
+}), TranslateService], {});
