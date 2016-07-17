@@ -4,9 +4,7 @@ var gulp = require('gulp'),
   gulpWatch = require('gulp-watch'),
   del = require('del'),
   runSequence = require('run-sequence'),
-  argv = process.argv,
-  path = require('path');
-var Server = require('karma').Server;
+  argv = process.argv;
 
 const core = require('./gulp-core');
 const requireDir = require('require-dir');
@@ -19,27 +17,6 @@ console.log('mode =', core.getMode());
  */
 gulp.task('test', function (done) {
   runSequence('build-soft', 'test-npm-test', done);
-  //new Server({
-  //  configFile: path.resolve('./karma.conf.js'),
-  //  browsers: ['PhantomJS'],
-  //  singleRun: true,
-  //}, done()).start();
-});
-
-gulp.task('test:tdd', function (done) {
-  new Server({
-    configFile: path.resolve('./karma.conf.js'),
-    browsers: ['PhantomJS'],
-    singleRun: false,
-  }, done()).start();
-});
-
-gulp.task('test:debug', function (done) {
-  new Server({
-    configFile: path.resolve('./karma.conf.js'),
-    browsers: ['Chrome'],
-    singleRun: false,
-  }, done()).start();
 });
 
 /**
@@ -64,7 +41,6 @@ gulp.task('run:before', [shouldWatch ? 'watch' : 'build']);
  * changes, but you are of course welcome (and encouraged) to customize your
  * build however you see fit.
  */
-//var buildBrowserify = require('ionic-gulp-browserify-typescript');
 var buildSass = require('ionic-gulp-sass-build');
 var copyHTML = require('ionic-gulp-html-copy');
 var copyFonts = require('ionic-gulp-fonts-copy');
@@ -74,18 +50,16 @@ var copyScripts = require('ionic-gulp-scripts-copy');
 
 gulp.task('watch', ['clean'], function (done) {
   runSequence(
-    ['sass', 'html', 'fonts', 'scripts'],
-    function () {
+    ['sass', 'html', 'fonts', 'scripts']);
+   (() => {
       gulpWatch('app/**/*.scss', function () { gulp.start('sass'); });
       gulpWatch('app/**/*.html', function () { gulp.start('html'); });
-      //buildBrowserify({ watch: true }).on('end', done);
-    },
-    done
-  );
+    })();
+  done();
 });
 
 gulp.task('build', ['clean'], function (done) {
-  runSequence('sass', 'html', 'fonts', 'scripts', done);
+  runSequence('sass', 'html', 'fonts', 'scripts','build-soft', done);
 });
 
 gulp.task('sass', buildSass);
