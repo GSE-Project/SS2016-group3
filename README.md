@@ -1,6 +1,6 @@
 |  Branch	|  Build Status	|  Coverage	|
 |---------	|----------------------------------------------------------------------------------------------------------------------------------------	|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| tests 	| [![Build Status](https://travis-ci.org/GSE-Project/SS2016-group3.svg?branch=tests)](https://travis-ci.org/GSE-Project/SS2016-group3) 	| [![Coverage Status](https://coveralls.io/repos/GSE-Project/SS2016-group3/badge.svg?branch=tests)](https://coveralls.io/r/GSE-Project/SS2016-group3?branch=tests) 	|
+| tests 	| [![Build Status](https://travis-ci.org/GSE-Project/SS2016-group3.svg?branch=tests)](https://travis-ci.org/GSE-Project/SS2016-group3) 	| [![Coverage Status](https://coveralls.io/repos/github/GSE-Project/SS2016-group3/badge.svg?branch=master)](https://coveralls.io/github/GSE-Project/SS2016-group3?branch=master) 	|
 
 
 # [UNIT TEST BRANCH]
