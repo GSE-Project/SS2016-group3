@@ -3,7 +3,7 @@
 | tests 	| [![Build Status](https://travis-ci.org/GSE-Project/SS2016-group3.svg?branch=tests)](https://travis-ci.org/GSE-Project/SS2016-group3) 	
 
 
-# [UNIT TEST BRANCH]
+# UNIT TEST BRANCH
 
 To execute Unit Tests, run `gulp test`. Make sure that you are on Node 6.x (you can switch versions using nvm or nvmw)
 
