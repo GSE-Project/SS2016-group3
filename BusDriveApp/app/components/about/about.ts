@@ -1,8 +1,8 @@
 import {Page, Platform, NavController} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {AppAvailability} from 'ionic-native';
-import {LicensePage} from "../../components/about/license/license";
-import {TranslatePipe} from "ng2-translate/ng2-translate";
+import {LicensePage} from '../../components/about/license/license';
+import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 @Component({
     templateUrl: 'build/components/about/about.html',

@@ -1,7 +1,7 @@
 import {Page, Storage, SqlStorage, Events, Alert, App} from 'ionic-angular';
 import {Component} from '@angular/core';
 import {Insomnia, BackgroundMode} from 'ionic-native';
-import {TranslatePipe, TranslateService} from "ng2-translate/ng2-translate";
+import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 
 @Component({
   templateUrl: 'build/components//setting/setting.html',

@@ -3,7 +3,7 @@
   routes specs
 */
 
-import {Routes} from '../../app/components/Services/routes';
+import {Routes} from './routes';
 import {Http, ResponseOptions, Response} from '@angular/http';
 import {Observable} from 'rxjs/RX';
 
