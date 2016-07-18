@@ -26,7 +26,7 @@ describe("the process of getting available Bus entries from the Server",function
         picture: "http://littlebabybum.com/wp-content/uploads/2015/01/wheels-on-the-bus-red.png"
       }]};
     
-   let mockbackend: MockBackend, busses: Busses;
+   let mockbackend: MockBackend, bussesMock: Busses;
   console.log("busses setup spec")
   //setup
   beforeEachProviders(() => [
@@ -42,22 +42,34 @@ describe("the process of getting available Bus entries from the Server",function
 
   beforeEach(inject([MockBackend, Busses], (_mockbackend, _busses) => {
     mockbackend = _mockbackend;
-    busses = _busses;
+    bussesMock = _busses;
 
      console.log("busses create connection");
 
     mockbackend.connections.subscribe(connection => {
       connection.mockRespond(new Response(new ResponseOptions({body:response})));
     });
+
+     console.log("busses start request");
+     bussesMock.requestBusses('http://localhost:3000')
   }));
 
   console.log("busses finished setup");
  
   //specs
 	it('should load Bus entries',  () => {
-  console.log("busses start request");
-    busses.requestBusses('http://localhost:3000')
-    console.log("busses finished request")
-		expect(busses.getBusses()).not.toEqual([]);
+   
+		expect(bussesMock.getBusses()).not.toEqual([]);
 	});
+
+
+  it ('should return the right seats number' , () => {
+    //TBD
+  });
+
+  it ('should return the right Busses Info' , () => {
+    //TBD
+  });
+
+  
 });

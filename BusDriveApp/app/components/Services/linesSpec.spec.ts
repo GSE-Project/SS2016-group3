@@ -60,9 +60,13 @@ let mockbackend: MockBackend, linesMock: Lines;
        
         linesMock.requestLines("");
         console.log(linesMock.getLines());
-        expect(linesMock.getLines()).not.toEqual([]);
+        expect(linesMock.getLines()).not.toEqual([]); 
 
     })
+ 
 
+   it('should return the right Line Infos', function(){
+       // TBD
+    })
 })
 

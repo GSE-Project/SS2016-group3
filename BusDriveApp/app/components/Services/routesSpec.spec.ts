@@ -193,6 +193,8 @@ let testData = {routes: [
         mockbackend.connections.subscribe(connection => {
        connection.mockRespond(new Response(new ResponseOptions({body:testData})));
       });
+
+      routesMock.requestRoutes("");
     }));
 
     
@@ -201,8 +203,13 @@ let testData = {routes: [
     
     
     it('should be requested', function(){
-        routesMock.requestRoutes("");
+       
         console.log("routes: "+routesMock.getRoutes());
         expect(routesMock.getRoutes).not.toBe([]);        
     });
+
+     it('should return the right Line Route CoordinatesNative', function(){
+        // TBD        
+    });
+
 });

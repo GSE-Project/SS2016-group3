@@ -159,6 +159,8 @@ let mockbackend: MockBackend, stopsMock: Stops;
       mockbackend.connections.subscribe(connection => {
         connection.mockRespond(new Response(new ResponseOptions({body:testData})));
     });
+
+    stopsMock.requestStops("");
   }));
 
   
@@ -169,8 +171,6 @@ let mockbackend: MockBackend, stopsMock: Stops;
      */
     it('should be requested', function(){
 
-        stopsMock.requestStops("");
-        console.log("stops:" +stopsMock.getStops());
         expect(stopsMock.getStops).not.toBe([]);        
     });
 
@@ -178,8 +178,7 @@ let mockbackend: MockBackend, stopsMock: Stops;
      * tests if getLineStop() does not return an empty list
      */
     it('should not return an empty stops list', function(){
-        stopsMock.requestStops("");
-        console.log("stops:" +stopsMock.getLineStops(1));
+
         expect(stopsMock.getLineStops(1)).not.toBe([]);        
     });
 
@@ -187,8 +186,7 @@ let mockbackend: MockBackend, stopsMock: Stops;
      * tests if getLineStopsNames() does not return an empty list
      */
     it('should not return an empty list of the names of stops', function(){
-        stopsMock.requestStops("");
-        console.log("stops:" + stopsMock.getLineStopsNames());
+       
         expect(stopsMock.getLineStopsNames()).not.toBe([]);        
     });
 
@@ -196,9 +194,13 @@ let mockbackend: MockBackend, stopsMock: Stops;
      * tests if getLineStopsNames() does not return an empty list
      */
     it('should not return an empty list of the coordinates of stops', function(){
-    
-        stopsMock.requestStops("");
-        console.log("stops:" +stopsMock.getLineStopsCoordinates());
+       
         expect(stopsMock.getLineStopsCoordinates()).not.toBe([]);       
     });
+
+
+    it('should return the right line stop infos', function(){
+         //TBD
+    });
+    
 });
