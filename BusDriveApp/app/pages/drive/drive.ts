@@ -85,7 +85,7 @@ export class DrivePage {
 
     /**
      * gets customstops and creates a notification
-     * @param linecustomstopsall customstops of the lines
+     * @param linecustomstopsall customstops ( with all needed information) of the lines
      */
     getCustomStops(linecustomstopsall) {
         let newlinecustomstopsall = [];
@@ -135,7 +135,7 @@ export class DrivePage {
                 });
                 this.nav.present(Toast.create({
                     message: this.newcustomstopsnumber + " " + this.translate.instant("drive.newStopsTrans"),
-                    duration: 7000,
+                    duration: 5000,
                     position: "top",
                     showCloseButton: true,
                     closeButtonText: "Ok",
@@ -144,6 +144,7 @@ export class DrivePage {
             }
         }
         this.linecustomstopsall = newlinecustomstopsall;
+        this.newcustomstopsnumber = this.linecustomstopsall.length;
         for (let i = 0; i < this.acceptedcustomstops.length; i++) {
             for (let j = 0; j < linecustomstopsall.length; j++) {
                 if (this.acceptedcustomstops[i][0] === linecustomstopsall[j][0]) {
@@ -154,8 +155,8 @@ export class DrivePage {
     }
 
     /**
-     * @param customStop custom stop
      * accepts a customStop
+     * @param customStop custom stop
      */
     acceptCustomStop(customstop) {
         this.acceptedcustomstops.push(customstop);
@@ -172,8 +173,8 @@ export class DrivePage {
     }
 
     /**
-     * @param customStop custom stop
      * declines a customStop
+     * @param customStop custom stop
      */
     declineCustomStop(customstop) {
         let posnumber = this.linecustomstopsall.indexOf(customstop);
@@ -188,8 +189,8 @@ export class DrivePage {
     }
 
     /**
-     * @param customstops accepted customstops
      * completes a acceptedcustomstop with complete
+     * @param customstops accepted customstops
      */
     completeAcceptedCustomStop(customstop) {
         let posnumber = this.acceptedcustomstops.indexOf(customstop);
@@ -201,8 +202,8 @@ export class DrivePage {
     }
 
     /**
-     * @param acceptedcustomstops accepted customstops
      * completes a acceptedcustomstop with noshow
+     * @param customstop accepted customstops
      */
     noShowAcceptedCustomStop(customstop) {
         let posnumber = this.acceptedcustomstops.indexOf(customstop);
@@ -211,6 +212,17 @@ export class DrivePage {
         }
         this.busdriveinterface.postCustomStopStatus(customstop[0], this.selectedbusid, 5);
         this.events.publish("acceptedCustomStops", this.acceptedcustomstops);
+    }
+
+    /**
+     * deletes canceled customstop
+     * @param customstop accepted customstop which was canceled
+     */
+    deleteCanceledCustomStop(customstop) {
+        let posnumber = this.acceptedcustomstops.indexOf(customstop);
+        if (posnumber > -1) {
+            this.acceptedcustomstops.splice(posnumber, 1)
+        }
     }
 
     /**

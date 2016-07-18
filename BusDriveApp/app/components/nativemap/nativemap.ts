@@ -1,6 +1,7 @@
 import {Component, ElementRef, AfterViewInit, OnDestroy} from '@angular/core';
 import {Events} from 'ionic-angular';
 import {Geolocation, GoogleMap, GoogleMapsEvent, GoogleMapsMarker, GoogleMapsLatLng, GoogleMapsPolyline, Diagnostic} from 'ionic-native';
+import {TranslateService} from 'ng2-translate/ng2-translate';
 
 @Component({
     selector: 'nativemap',
@@ -20,7 +21,7 @@ export class NativeMap implements OnDestroy, AfterViewInit {
     private customstoppolyline: GoogleMapsPolyline;
     private customstoppositionmarker: GoogleMapsMarker;
 
-    constructor(private element: ElementRef, public events: Events) {
+    constructor(private element: ElementRef, public events: Events, private translate: TranslateService) {
         this.events.subscribe("endTourAborted", () => {
             this.enableInteraction();
         })
@@ -134,7 +135,7 @@ export class NativeMap implements OnDestroy, AfterViewInit {
                 'position': customstopLatLng,
                 'title': acceptedcustomstops[index][1],
                 'snippet':
-                'Abholzeit: ' + acceptedcustomstops[index][2] + '\nAnzahl: ' + acceptedcustomstops[index][3] + '\nAdresse: ' + acceptedcustomstops[index][4],
+                this.translate.instant("drive.time") + ': ' + acceptedcustomstops[index][2] + '\n' + this.translate.instant("drive.numberTrans") + ': ' + acceptedcustomstops[index][3] + '\n' + this.translate.instant("drive.addressTrans") + ': ' + acceptedcustomstops[index][4],
                 'icon': 'green'
             }).then((marker) => {
                 this.customstopsmarkers.push(marker);

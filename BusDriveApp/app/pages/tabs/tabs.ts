@@ -139,7 +139,7 @@ export class TabsPage {
     }
 
     /**
-     * alert when leaving, if you click "OK" GUI will change to HomePage and you will stop sending, if you click "Abbrechen" nothing will happen.
+     * creats an alert when user want to leave: "OK" GUI will change to HomePage and you will stop sending, "Abbrechen/Cancel" alert will be dismissed.
      */
     endTour() {
         let alert = ActionSheet.create({
@@ -152,6 +152,7 @@ export class TabsPage {
                         console.log('alert confirmed');
                         this.viewCtrl.dismiss().then(() => {
                             this.nav.popToRoot();
+                            window.location.reload();
                         })
                         this.events.publish("endTourConfirmed");
                         clearInterval(this.sendintervalID);
