@@ -30,7 +30,7 @@ export class CustomStops {
         return new Promise(resolve => {
             this.http.get(serverURL + "/customStops?lineId=" + LineId + "&busId=" + BusId).map(res => res.json()).subscribe(
                 data => {
-                    this.linecustomstops = data;
+                    this.linecustomstops = data["customstops"];
                     resolve(this.linecustomstops);
                 },
                 err => console.error("requestLineCustomStops failed"),
@@ -121,7 +121,7 @@ export class CustomStops {
      */
     getLineCustomStopsAll() {
         for (let i = 0; i < this.linecustomstops.length; i++) {
-            let picuptime = new Date(this.linecustomstops[i].pickUpTime)
+            let picuptime = new Date(this.linecustomstops[i].pickUpTime);
             let hours = this.addZero(picuptime.getHours());
             let minutes = this.addZero(picuptime.getMinutes());
             let day = this.addZero(picuptime.getDate());

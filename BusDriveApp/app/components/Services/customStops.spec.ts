@@ -14,27 +14,29 @@ describe("the process of getting available customsStops from the server",functio
       customstops: 
       [    
         {
-            "id": 1,
-            "lineId": 1,
-            "pickUpTime": 1500 , //1098174234000 
-            "location": {  "type": "Point",    "coordinates": [ 7.606974, 49.206611]  },
-            "numberOfPersons": 3,
-            "deviceID": 85757,
-            "state": 3, //follwoing standard s1 in server
-            "info": {
-                "name": "Sascha",
-                "address": "Uni Ost",
-                "assistance": [] //following standard s2 in server
-            }
-        },
+        "id":1,
+        "lineId": 1,
+        "acceptingBus": 1,
+        "pickUpTime": 1098174234000 , //1098174234000 
+        "location": {  "type": "Point",    "coordinates": [123.2 , 321.2]  },
+        "numberOfPersons": 5,
+        "deviceId": "asd",
+        "status": 1, //follwoing standard s1 in server
+        "info": {
+            "name": "string",
+            "address": "string",
+            "assistance": [1,2] //following standard s2 in server
+        }
+    },
 
         {
             "id": 2,
             "lineId": 1,
+            "acceptingBus": 1,
             "pickUpTime": 1200 , //1098174234000 
             "location": {  "type": "Point",    "coordinates": [ 7.603509, 49.207039]  },
             "numberOfPersons": 1,
-            "deviceID": 857547,
+            "deviceId": 857547,
             "state": 2, //follwoing standard s1 in server
             "info": {
                 "name": "Charel",
@@ -46,6 +48,7 @@ describe("the process of getting available customsStops from the server",functio
                 {
             "id": 3,
             "lineId": 1,
+            "acceptingBus": 1,
             "pickUpTime": 1430 , //1098174234000 
             "location": {  "type": "Point",    "coordinates": [ 7.600365, 49.209681]  },
             "numberOfPersons": 2,
@@ -84,22 +87,21 @@ describe("the process of getting available customsStops from the server",functio
         connection.mockRespond(new Response(new ResponseOptions({body:testData})));
        });
     
-    
+
+    console.log("customstops request data");
+    customStopsMock.requestLineCustomStops("", 1, 1);
+    //console.log("finished request. Got: "+ JSON.stringify(customStopsMock.get()));
   }));
   
   
   console.log("finished setup");
     
-  console.log("customstops start request");
-  customStopsMock.requestLineCustomStops("", 1, 1);
-  console.log("finished request. Got: "+ customStopsMock.get());
-  
     /**
      * testing if getLineCustomStopsIds() does not return an empty list
      */
     it('should load the IDs of linecustomstops', function(){ 
       
-      expect(customStopsMock.getLineCustomStopsIds()).not.toEqual([]);
+       expect(customStopsMock.getLineCustomStopsIds()).not.toEqual([]);
     });
 
     /**
