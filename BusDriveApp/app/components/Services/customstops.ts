@@ -17,6 +17,9 @@ export class CustomStops {
         this.linecustomstops = [];
     }
 
+    get(){
+        return this.linecustomstops;
+    }
     /**
      * @param serverURL URL of the server
      * @param LineId id of the selected line

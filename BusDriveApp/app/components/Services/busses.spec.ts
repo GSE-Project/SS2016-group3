@@ -12,30 +12,7 @@ import {provide} from '@angular/core';
 */
 
 describe("the process of getting available Bus entries from the Server",function(){
-	
-   let mockbackend: MockBackend, busses: Busses;
-  
-  //setup
-  beforeEachProviders(() => [
-    Busses,
-    MockBackend,
-    BaseRequestOptions,
-    provide(Http, {
-      useFactory: (backend, options) => new Http(backend, options), 
-      deps: [MockBackend, BaseRequestOptions]})
-  ]);
-  
-  beforeEach(inject([MockBackend, Busses], (_mockbackend, _busses) => {
-    mockbackend = _mockbackend;
-    busses = _busses;
-  }))
-
-  console.log("finished setup");
- 
-  //specs
-	it('should load Bus entries',  () => {
-      
-      //'{"x":5}'
+	//'{"x":5}'
       let response =   {busses:  [{
         id: 1,
         numberPlate: "KL-AB345",
@@ -49,15 +26,38 @@ describe("the process of getting available Bus entries from the Server",function
         picture: "http://littlebabybum.com/wp-content/uploads/2015/01/wheels-on-the-bus-red.png"
       }]};
     
-    console.log("create connection");
+   let mockbackend: MockBackend, busses: Busses;
+  console.log("busses setup spec")
+  //setup
+  beforeEachProviders(() => [
+    Busses,
+    MockBackend,
+    BaseRequestOptions,
+    provide(Http, {
+      useFactory: (backend, options) => new Http(backend, options), 
+      deps: [MockBackend, BaseRequestOptions]})
+  ]);
+  
+  console.log("busses beforeEachProviders done");
+
+  beforeEach(inject([MockBackend, Busses], (_mockbackend, _busses) => {
+    mockbackend = _mockbackend;
+    busses = _busses;
+
+     console.log("busses create connection");
 
     mockbackend.connections.subscribe(connection => {
       connection.mockRespond(new Response(new ResponseOptions({body:response})));
     });
+  }));
 
-    console.log("start request");
+  console.log("busses finished setup");
+ 
+  //specs
+	it('should load Bus entries',  () => {
+  console.log("busses start request");
     busses.requestBusses('http://localhost:3000')
-    console.log("finished request")
+    console.log("busses finished request")
 		expect(busses.getBusses()).not.toEqual([]);
 	});
 });

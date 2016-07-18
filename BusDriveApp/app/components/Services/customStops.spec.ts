@@ -1,18 +1,17 @@
 
 import {CustomStops} from './customstops';
-import {Http, Response, ResponseOptions, Headers} from '@angular/http';
-import {Observable} from 'rxjs/RX';
-
+import {it,inject,beforeEach, beforeEachProviders} from '@angular/core/testing';
+import {Http, Response, ResponseOptions, BaseRequestOptions, Headers,HTTP_PROVIDERS, XHRBackend} from '@angular/http';
+import {MockBackend, MockConnection} from '@angular/http/testing';
+import {provide} from '@angular/core';
 /** 
- * Created by Erik
- * Edited by Oliver
- *  
  * customstops.ts service test
 */
 
-describe("the process of getting available line entries from the server",function(){
-    let testData = 
-    {customstops: 
+describe("the process of getting available customsStops from the server",function(){
+  console.log("init customsstopsspec");
+    let testData = {
+      customstops: 
       [    
         {
             "id": 1,
@@ -61,31 +60,45 @@ describe("the process of getting available line entries from the server",functio
       ]
     };
 
+    let mockbackend: MockBackend, customStopsMock: CustomStops;
+    console.log("customstops setup");
+    //setup
+    beforeEachProviders(() => [
+      CustomStops,
+      MockBackend,
+      BaseRequestOptions,
+      provide(Http, {
+        useFactory: (backend, options) => new Http(backend, options), 
+        deps: [MockBackend, BaseRequestOptions]})
+    ]);
+  
+  console.log("customstops beforeEachProviders finished");
 
-    let http = <Http> {
-    get(url:string):Observable<Response>{
-			let response:Response = new Response(
-				new ResponseOptions({body:testData})
-			);
-			return Observable.of(response);
-        }
-     };
-
-    /**  
-        testing if the linecustomstops variable is not empty after getLineCustomStops()
-    */
-    it('should load customlinestops entries', function(){
-        let customStopsMock:CustomStops = new CustomStops(http);  //	TypeError: undefined is not a constructor
-        expect(customStopsMock.requestLineCustomStops("", 1, 1)).not.toEqual([]);
-
-    });
-
+  beforeEach(inject([MockBackend, CustomStops], (_mockbackend, _customStopsMock) => {
+    mockbackend = _mockbackend;
+    customStopsMock = _customStopsMock;
+    
+    
+    console.log("customstops create connection");
+      mockbackend.connections.subscribe(connection => {
+        connection.mockRespond(new Response(new ResponseOptions({body:testData})));
+       });
+    
+    
+  }));
+  
+  
+  console.log("finished setup");
+    
+  console.log("customstops start request");
+  customStopsMock.requestLineCustomStops("", 1, 1);
+  console.log("finished request. Got: "+ customStopsMock.get());
+  
     /**
      * testing if getLineCustomStopsIds() does not return an empty list
      */
-    it('should load the ID of linecustomstops', function(){
-      let customStopsMock:CustomStops = new CustomStops(http);
-      customStopsMock.requestLineCustomStops("", 1, 1);
+    it('should load the IDs of linecustomstops', function(){ 
+      
       expect(customStopsMock.getLineCustomStopsIds()).not.toEqual([]);
     });
 
@@ -93,7 +106,7 @@ describe("the process of getting available line entries from the server",functio
      * testing if getLineCustomStopsNames() does not return an empty list
      */
     it('should load the names of linecustomstops', function(){
-      let customStopsMock:CustomStops = new CustomStops(http);
+      
       expect(customStopsMock.getLineCustomStopsNames()).not.toEqual([]);
     });
 
@@ -101,8 +114,7 @@ describe("the process of getting available line entries from the server",functio
      * testing if getLineCustomStopPickUpTimes() does not return an empty list
      */
     it('should load the pickuptimes of linecustomstops', function(){
-      let customStopsMock:CustomStops = new CustomStops(http);
-      customStopsMock.requestLineCustomStops("", 1, 1);
+      
       expect(customStopsMock.getLineCustomStopPickUpTimes()).not.toEqual([]);
     });
 
@@ -110,8 +122,7 @@ describe("the process of getting available line entries from the server",functio
      * testing if getLineCustomStopsCoordinates() does not return an empty list
      */
     it('should load the coordinates of linecustomstops', function(){
-      let customStopsMock:CustomStops = new CustomStops(http);
-      customStopsMock.requestLineCustomStops("", 1, 1);
+      
       expect(customStopsMock.getLineCustomStopsCoordinates()).not.toEqual([]);
     });
 
@@ -119,8 +130,7 @@ describe("the process of getting available line entries from the server",functio
      * testing if getLineCustomStopsNumberOfPersons() does not return an empty list
      */
     it('should load the number of persons', function(){
-      let customStopsMock:CustomStops = new CustomStops(http);
-      customStopsMock.requestLineCustomStops("", 1, 1);
+    
       expect(customStopsMock.getLineCustomStopsNumberOfPersons()).not.toEqual([]);
     });
 
@@ -128,8 +138,7 @@ describe("the process of getting available line entries from the server",functio
      * testing if getLineCustomStopsAssistances() does not return an empty list
      */
     it('should load the adresses of linecustomstops', function(){
-      let customStopsMock:CustomStops = new CustomStops(http);
-      customStopsMock.requestLineCustomStops("", 1, 1);
+     
       expect(customStopsMock.getLineCustomStopsAddresses()).not.toEqual([]);
     });
 
@@ -137,8 +146,7 @@ describe("the process of getting available line entries from the server",functio
      * testing if getLineCustomStopsAssistances() does not return an empty list
      */
     it('should load the assistances of linecustomstops', function(){
-      let customStopsMock:CustomStops = new CustomStops(http);
-      customStopsMock.requestLineCustomStops("", 1, 1);
+   
       expect(customStopsMock.getLineCustomStopsAssistances()).not.toEqual([]);
     });
 
@@ -146,13 +154,12 @@ describe("the process of getting available line entries from the server",functio
      * testing if getLineCustomStopsAll() does not return an empty list
      */
     it('should load the list of linecustomstops containing all information', function(){
-      let customStopsMock:CustomStops = new CustomStops(http);
-      customStopsMock.requestLineCustomStops("", 1, 1);
+      
       expect(customStopsMock.getLineCustomStopsAll()).not.toEqual([]);
     });
 
     it('should add a zero to times < 10', function() {
-      let customStopsMock:CustomStops = new CustomStops(http);
+    
       expect(customStopsMock.addZero(3)).toEqual("03");
-    })
-})
+    });
+});

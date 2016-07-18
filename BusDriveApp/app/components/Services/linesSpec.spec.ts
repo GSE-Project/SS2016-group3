@@ -1,7 +1,9 @@
 
 import {Lines} from './lines';
-import {Http, Response, ResponseOptions, Headers} from '@angular/http';
-import {Observable} from 'rxjs/RX';
+import {it,inject,beforeEach, beforeEachProviders} from '@angular/core/testing';
+import {Http, Response, ResponseOptions, BaseRequestOptions, Headers,HTTP_PROVIDERS, XHRBackend} from '@angular/http';
+import {MockBackend, MockConnection} from '@angular/http/testing';
+import {provide} from '@angular/core';
 
 /**  
 *  lines.ts service test
@@ -26,21 +28,41 @@ describe("the process of getting available line entries from the server",functio
         ]
       }
     ]};
+let mockbackend: MockBackend, linesMock: Lines;
+    console.log("lines setup");
+    //setup
+    beforeEachProviders(() => [
+      Lines,
+      MockBackend,
+      BaseRequestOptions,
+      provide(Http, {
+        useFactory: (backend, options) => new Http(backend, options), 
+        deps: [MockBackend, BaseRequestOptions]})
+    ]);
+  
+  console.log("lines beforeEachProviders finished");
 
-    let http = <Http> {
-    get(url:string):Observable<Response>{
-			let response:Response = new Response(
-				new ResponseOptions({body:testData})
-			);
-			return Observable.of(response);
-        }
-     };
+  beforeEach(inject([MockBackend, Lines], (_mockbackend, _linesMock) => {
+    mockbackend = _mockbackend;
+    linesMock = _linesMock;
+    
+    console.log("lines create connection");
+      mockbackend.connections.subscribe(connection => {
+        connection.mockRespond(new Response(new ResponseOptions({body:testData})));
+     });
+  }));
+
+  
+  console.log("finished setup");
+
 
     it('should load Line entries', function(){
-        let linesMock:Lines = new Lines(http);  //	TypeError: undefined is not a constructor
+       
         linesMock.requestLines("");
+        console.log(linesMock.getLines());
         expect(linesMock.getLines()).not.toEqual([]);
 
     })
 
 })
+

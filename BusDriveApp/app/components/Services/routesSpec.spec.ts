@@ -1,11 +1,12 @@
 /**
-  Created by Oliver
   routes specs
 */
 
 import {Routes} from './routes';
-import {Http, ResponseOptions, Response} from '@angular/http';
-import {Observable} from 'rxjs/RX';
+import {it,inject,beforeEach, beforeEachProviders} from '@angular/core/testing';
+import {Http, Response, ResponseOptions, BaseRequestOptions, Headers,HTTP_PROVIDERS, XHRBackend} from '@angular/http';
+import {MockBackend, MockConnection} from '@angular/http/testing';
+import {provide} from '@angular/core';
 
 
 describe('Routes', function(){
@@ -170,20 +171,38 @@ let testData = {routes: [
     ]
   };
 
-    let http = <Http> { 
-            get(url:string):Observable<Response>{
-			let response:Response = new Response(
-				new ResponseOptions({body:testData})
-			);
-			return Observable.of(response);
-        }
-    };
+ let mockbackend: MockBackend, routesMock: Routes;
+    console.log("routes setup");
+    //setup
+    beforeEachProviders(() => [
+      Routes,
+      MockBackend,
+      BaseRequestOptions,
+      provide(Http, {
+        useFactory: (backend, options) => new Http(backend, options), 
+        deps: [MockBackend, BaseRequestOptions]})
+    ]);
+    
+    console.log("routes beforeEachProviders finished");
+
+    beforeEach(inject([MockBackend, Routes], (_mockbackend, _routesMock) => {
+      mockbackend = _mockbackend;
+      routesMock = _routesMock;
+      
+      console.log("routes create connection");
+        mockbackend.connections.subscribe(connection => {
+       connection.mockRespond(new Response(new ResponseOptions({body:testData})));
+      });
+    }));
+
+    
+    console.log("finished setup");
 
     
     
     it('should be requested', function(){
-        let routesMock = new Routes(http);
         routesMock.requestRoutes("");
-        expect(routesMock.getLineRoute(1)).toBe(testData);        
+        console.log("routes: "+routesMock.getRoutes());
+        expect(routesMock.getRoutes).not.toBe([]);        
     });
 });
