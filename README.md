@@ -2,6 +2,7 @@
 |---------	|----------------------------------------------------------------------------------------------------------------------------------------	|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
 | Develop 	| [![Build Status](https://travis-ci.org/GSE-Project/SS2016-group3.svg?branch=develop)](https://travis-ci.org/GSE-Project/SS2016-group3) 	| [![Coverage Status](https://coveralls.io/repos/GSE-Project/SS2016-group3/badge.svg?branch=develop)](https://coveralls.io/r/GSE-Project/SS2016-group3?branch=develop) 	|
 | Master 	| [![Build Status](https://travis-ci.org/GSE-Project/SS2016-group3.svg?branch=master)](https://travis-ci.org/GSE-Project/SS2016-group3) 	| [![Coverage Status](https://coveralls.io/repos/github/GSE-Project/SS2016-group3/badge.svg?branch=master)](https://coveralls.io/github/GSE-Project/SS2016-group3?branch=master) 	|
+| Tests 	| [![Build Status](https://travis-ci.org/GSE-Project/SS2016-group3.svg?branch=tests)](https://travis-ci.org/GSE-Project/SS2016-group3) 		
 
 # Digitale Dörfer - mobile people’s bus system
 
@@ -51,25 +52,12 @@ How to build the application
 
     `ionic serve`
 
-	
 7) The app will open in a browser.
 
-In order to see some data in the application, you'll need to start a mock server. 
----------------------------------------
-Please follow these steps:
-
-1) Go to [Json-Server](https://github.com/typicode/json-server) and follow the instructions.
-
-2) Download [json-data](https://github.com/GSE-Project/SS2016-group3/blob/master/TestServer-Json/TestServer.json)
-
-3) Open a command line in the directory where your json-data is saved and start the server
-
-    `json-serer -w TestServer.json`
-	
 
 If everything is already installed
 ---------------------------------------
-Just open [Start Server and Ionic.bat](https://github.com/GSE-Project/SS2016-group3/blob/master/Start%20Server%20and%20Ionic.bat) from the main directory.
-It will start the mock server and the integrated web server for you.
+Just open [Start Ionic.bat](https://github.com/GSE-Project/SS2016-group3/blob/master/Start%20Ionic.bat) from the main directory.
+It will start the integrated web server for you.
 
 
