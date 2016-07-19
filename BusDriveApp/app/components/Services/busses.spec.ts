@@ -50,7 +50,6 @@ describe("the process of getting available Bus entries from the Server",function
       connection.mockRespond(new Response(new ResponseOptions({body:response})));
     });
 
-     console.log("busses start request");
      bussesMock.requestBusses('http://localhost:3000')
   }));
 

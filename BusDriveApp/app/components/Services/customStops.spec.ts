@@ -18,13 +18,13 @@ describe("the process of getting available customsStops from the server",functio
         "lineId": 1,
         "acceptingBus": 1,
         "pickUpTime": 1098174234000 , //1098174234000 
-        "location": {  "type": "Point",    "coordinates": [123.2 , 321.2]  },
+        "location": {  "type": "Point",    "coordinates": [7.603509 , 48.207039]  },
         "numberOfPersons": 5,
         "deviceId": "asd",
         "status": 1, //follwoing standard s1 in server
         "info": {
-            "name": "string",
-            "address": "string",
+            "name": "Sascha",
+            "address": "asdStr. 5",
             "assistance": [1,2] //following standard s2 in server
         }
     },
@@ -37,10 +37,10 @@ describe("the process of getting available customsStops from the server",functio
             "location": {  "type": "Point",    "coordinates": [ 7.603509, 49.207039]  },
             "numberOfPersons": 1,
             "deviceId": 857547,
-            "state": 2, //follwoing standard s1 in server
+            "status": 2, //follwoing standard s1 in server
             "info": {
                 "name": "Charel",
-                "address": "Uni Sporthalle",
+                "address": "asdStr. 7",
                 "assistance": [2] //following standard s2 in server
             }
         },
@@ -50,13 +50,13 @@ describe("the process of getting available customsStops from the server",functio
             "lineId": 1,
             "acceptingBus": 1,
             "pickUpTime": 1430 , //1098174234000 
-            "location": {  "type": "Point",    "coordinates": [ 7.600365, 49.209681]  },
+            "location": {  "type": "Point",    "coordinates": [ 7.600365, 50.209681]  },
             "numberOfPersons": 2,
             "deviceID": 8578547,
-            "state": 1, //follwoing standard s1 in server
+            "status": 1, //follwoing standard s1 in server
             "info": {
                 "name": "Patrick",
-                "address": "Uni West",
+                "address": "asdStr. 8",
                 "assistance": [1] //following standard s2 in server
             }
         }
@@ -90,7 +90,7 @@ describe("the process of getting available customsStops from the server",functio
 
     console.log("customstops request data");
     customStopsMock.requestLineCustomStops("", 1, 1);
-    //console.log("finished request. Got: "+ JSON.stringify(customStopsMock.get()));
+    
   }));
   
   
@@ -100,68 +100,71 @@ describe("the process of getting available customsStops from the server",functio
      * testing if getLineCustomStopsIds() does not return an empty list
      */
     it('should load the IDs of linecustomstops', function(){ 
-      
-       expect(customStopsMock.getLineCustomStopsIds()).not.toEqual([]);
+       console.log("linecustomstopsids:"+customStopsMock.getLineCustomStopsIds());
+       expect(customStopsMock.getLineCustomStopsIds()).toEqual([1,2,3]);
     });
 
     /**
      * testing if getLineCustomStopsNames() does not return an empty list
      */
     it('should load the names of linecustomstops', function(){
-      
-      expect(customStopsMock.getLineCustomStopsNames()).not.toEqual([]);
+      console.log("linecustomstopsnames:"+customStopsMock.getLineCustomStopsNames());
+
+      expect(customStopsMock.getLineCustomStopsNames()).toEqual(["Sascha","Charel","Patrick"]);
     });
 
     /**
      * testing if getLineCustomStopPickUpTimes() does not return an empty list
      */
     it('should load the pickuptimes of linecustomstops', function(){
-      
-      expect(customStopsMock.getLineCustomStopPickUpTimes()).not.toEqual([]);
+      console.log("linecustomstoppickuptimes:"+customStopsMock.getLineCustomStopPickUpTimes());
+      expect(customStopsMock.getLineCustomStopPickUpTimes()).toEqual([1098174234000, 1200, 1430]);
     });
 
     /**
      * testing if getLineCustomStopsCoordinates() does not return an empty list
      */
     it('should load the coordinates of linecustomstops', function(){
-      
-      expect(customStopsMock.getLineCustomStopsCoordinates()).not.toEqual([]);
+      console.log("linecustomstopsCoordinated:"+customStopsMock.getLineCustomStopsCoordinates());
+      expect(customStopsMock.getLineCustomStopsCoordinates()).toEqual([ [ 7.603509, 48.207039 ], [ 7.603509, 49.207039 ], [ 7.600365, 50.209681 ] ]);
     });
 
     /**
      * testing if getLineCustomStopsNumberOfPersons() does not return an empty list
      */
     it('should load the number of persons', function(){
-    
-      expect(customStopsMock.getLineCustomStopsNumberOfPersons()).not.toEqual([]);
+      console.log("linecustomstopsnumberofpersonns:"+customStopsMock.getLineCustomStopsNumberOfPersons());
+
+      expect(customStopsMock.getLineCustomStopsNumberOfPersons()).toEqual([5,1,2]);
     });
 
     /**
      * testing if getLineCustomStopsAssistances() does not return an empty list
      */
     it('should load the adresses of linecustomstops', function(){
-     
-      expect(customStopsMock.getLineCustomStopsAddresses()).not.toEqual([]);
+      console.log("linecustomstopsAdresses:"+customStopsMock.getLineCustomStopsAddresses());
+   
+      expect(customStopsMock.getLineCustomStopsAddresses()).toEqual(["asdStr. 5","asdStr. 7","asdStr. 8"]);
     });
 
     /**
      * testing if getLineCustomStopsAssistances() does not return an empty list
      */
     it('should load the assistances of linecustomstops', function(){
-   
-      expect(customStopsMock.getLineCustomStopsAssistances()).not.toEqual([]);
+      console.log("linecustomstopsAssistances:"+customStopsMock.getLineCustomStopsAssistances());
+      expect(customStopsMock.getLineCustomStopsAssistances()).toEqual([[1,2],[2],[1]]);
     });
 
     /**
      * testing if getLineCustomStopsAll() does not return an empty list
      */
     it('should load the list of linecustomstops containing all information', function(){
-      
-      expect(customStopsMock.getLineCustomStopsAll()).not.toEqual([]);
+      console.log("linecustomstopsAll:"+String(customStopsMock.getLineCustomStopsAll()));
+      // not testable because of code structure.. Cast JSON in later iteration
     });
 
     it('should add a zero to times < 10', function() {
-    
+     
       expect(customStopsMock.addZero(3)).toEqual("03");
     });
 });
