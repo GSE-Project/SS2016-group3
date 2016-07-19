@@ -57,7 +57,7 @@ How to build the application
 
 If everything is already installed
 ---------------------------------------
-Just open [Start Ionic.bat](https://github.com/GSE-Project/SS2016-group3/blob/master/Start%20Ionic.bat) from the main directory.
+Just open [Start Ionic.bat](/Start%20Ionic.bat) from the main directory.
 It will start the integrated web server for you.
 
 
