@@ -144,7 +144,7 @@ export class DrivePage {
             }
         }
         this.linecustomstopsall = newlinecustomstopsall;
-        this.newcustomstopsnumber = this.linecustomstopsall.length;
+        this.newcustomstopscounter = this.linecustomstopsall.length;
         for (let i = 0; i < this.acceptedcustomstops.length; i++) {
             for (let j = 0; j < linecustomstopsall.length; j++) {
                 if (this.acceptedcustomstops[i][0] === linecustomstopsall[j][0]) {

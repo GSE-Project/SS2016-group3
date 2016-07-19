@@ -87,7 +87,7 @@
                         <h2>Name: {{item[1]}}</h2>
                         <p>{{"drive.time"|translate}}: {{item[2]}} </p>
                         <p>{{"drive.numberTrans"|translate}}: {{item[3]}}</p>
-                        <p>{{"drive.addressTrans"|translate}}: {{item[4]}} <ion-icon name="locate" (click)="showAcceptedCustomStop(item)"></ion-icon></p>
+                        <p (click)="showAcceptedCustomStop(item)">{{"drive.addressTrans"|translate}}: {{item[4]}}</p>
                         <p>
                             <img src="img/wheelchair.png" *ngIf="item[5][0]" width="10%" height="auto">
                             <img src="img/luggage.png" *ngIf="item[5][1]" width="10%" height="auto">
@@ -123,7 +123,7 @@
                     <h2>Name: {{item[1]}}</h2>
                     <p>{{"drive.time"|translate}}: {{item[2]}} </p>
                     <p>{{"drive.numberTrans"|translate}}: {{item[3]}}</p>
-                    <p>{{"drive.addressTrans"|translate}}: {{item[4]}} <ion-icon name="locate" (click)="showCustomStop(item)"></ion-icon></p>
+                    <p (click)="showCustomStop(item)">{{"drive.addressTrans"|translate}}: {{item[4]}}</p>
                     <p>
                         <img src="img/wheelchair.png" *ngIf="item[5][0]" width="10%" height="auto">
                         <img src="img/luggage.png" *ngIf="item[5][1]" width="10%" height="auto">

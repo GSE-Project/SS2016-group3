@@ -266,7 +266,8 @@ export class SettingPage {
     if (mode === true || mode === "true") {
       BackgroundMode.enable();
       BackgroundMode.setDefaults({
-        title: "BusDriveApp"
+        title: "BusDriveApp",
+        text: ""
       });
       console.log("BackgroundMode aktiviert");
     }

@@ -203,7 +203,7 @@ export class NativeMap implements OnDestroy, AfterViewInit {
                 'position': customstopposition,
                 'title': customstop[1],
                 'snippet':
-                'Abholzeit: ' + customstop[2] + '\nAnzahl: ' + customstop[3] + '\nAdresse: ' + customstop[4],
+                this.translate.instant("drive.time") + ': ' + customstop[2] + '\n' + this.translate.instant("drive.numberTrans") + ': ' + customstop[3] + '\n' + this.translate.instant("drive.addressTrans") + ': ' + customstop[4],
                 'icon': 'yellow'
             }).then((marker) => {
                 this.customstoppositionmarker = marker;
