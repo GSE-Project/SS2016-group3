@@ -1,17 +1,18 @@
 <ion-navbar primary *navbar>
     <ion-title>
-        {{title}}
+        {{"buslist.title"| translate}}
     </ion-title>
 </ion-navbar>
 
 <ion-content class="buslist">
     <ion-list>
-        <ion-item ion-item *ngFor="#item of buslist" (click)="navigate(item)"> 
+        <ion-item *ngFor="let item of bussesInfos" (click)="selectBus(item)">
             <ion-thumbnail item-left>
-                <ion-icon name="bus" style="font-size:100px" ></ion-icon>
+                <ion-icon name="bus" style="font-size:100px"></ion-icon>
             </ion-thumbnail>
-            <h2>Bus Nr. {{item.id.toString()}}</h2>
-            <p>{{numberplate}} {{item.numberPlate.toString()}}</p>           
+            <h2>Bus Nr. {{item[0]}}</h2>
+            <p>{{"buslist.numberplate"|translate}}: {{item[1]}}</p>
+            <p>{{"buslist.seatsTrans"|translate}}: {{item[2]}}</p>
         </ion-item>
     </ion-list>
 </ion-content>

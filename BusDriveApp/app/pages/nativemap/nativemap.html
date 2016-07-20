@@ -1,0 +1,14 @@
+<ion-navbar primary *navbar>
+    <ion-buttons left>
+        <button (click)="endTour()">
+      <ion-icon name="arrow-back" ></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-title>
+        {{"map.title" | translate}}
+    </ion-title>
+</ion-navbar>
+
+<ion-content class="nativemap">
+    <nativemap class="map" style="width: 100%; height: 100%; display: block;"></nativemap>
+</ion-content>

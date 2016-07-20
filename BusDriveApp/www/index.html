@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <title>Ionic</title>
+  <title>BusDriveApp</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="format-detection" content="telephone=no">
@@ -18,12 +18,13 @@
   <!-- cordova.js required for cordova apps -->
   <script src="cordova.js"></script>
   <!-- Google maps JS API -->
-  <script src="http://maps.google.com/maps/api/js"></script>
-  <script src="https://cdn.klokantech.com/maptilerlayer/v1/index.js"></script>
+  <!--script src="http://maps.google.com/maps/api/js?key=AIzaSyA3Lm7QBniLhs-m2ytGLOlqJdEFl3bWx5U"></scrip-->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3Lm7QBniLhs-m2ytGLOlqJdEFl3bWx5U&sensor=true" type="text/javascript"></script>
   <!-- Polyfill needed for platforms without Promise and Collection support -->
   <script src="build/js/es6-shim.min.js"></script>
   <!-- Zone.js and Reflect-metadata  -->
-  <script src="build/js/angular2-polyfills.js"></script>
+  <script src="build/js/Reflect.js"></script>
+  <script src="build/js/zone.js"></script>
   <!-- the bundle which is built from the app's source code -->
   <script src="build/js/app.bundle.js"></script>
 </body>

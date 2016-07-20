@@ -1,38 +1,74 @@
 {
   "dependencies": {
-    "angular2": "2.0.0-beta.15",
-    "es6-shim": "^0.35.0",
-    "ionic-angular": "2.0.0-beta.6",
-    "ionic-native": "^1.2.0",
-    "ionicons": "3.0.0-alpha.3",
-    "rxjs": "5.0.0-beta.2"
+    "@angular/common": "2.0.0-rc.1",
+    "@angular/compiler": "2.0.0-rc.1",
+    "@angular/core": "2.0.0-rc.1",
+    "@angular/http": "2.0.0-rc.1",
+    "@angular/platform-browser": "2.0.0-rc.1",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.1",
+    "@angular/router": "2.0.0-rc.1",
+    "es6-shim": "0.35.1",
+    "ionic-angular": "2.0.0-beta.9",
+    "ionic-native": "1.3.0",
+    "ionicons": "3.0.0",
+    "ng2-translate": "^2.2.2",
+    "node-sass": "^3.8.0",
+    "reflect-metadata": "0.1.3",
+    "rxjs": "5.0.0-beta.6",
+    "zone.js": "0.6.12"
   },
   "devDependencies": {
-    "browserify": "^13.0.1",
+    "browserify": "13.0.1",
+    "coveralls": "^2.11.9",
     "del": "2.2.0",
     "gulp": "3.9.1",
     "gulp-watch": "4.3.5",
-    "ionic-gulp-browserify-typescript": "^1.1.0",
-    "ionic-gulp-fonts-copy": "^1.0.0",
-    "ionic-gulp-html-copy": "^1.0.0",
-    "ionic-gulp-sass-build": "^1.0.0",
-    "ionic-gulp-scripts-copy": "^1.0.1",
-    "karma": "^0.13.22",
-    "karma-browserify": "^5.0.5",
-    "karma-firefox-launcher": "^1.0.0",
-    "karma-jasmine": "^1.0.2",
+    "ionic-gulp-browserify-typescript": "1.1.0",
+    "ionic-gulp-fonts-copy": "1.0.0",
+    "ionic-gulp-html-copy": "1.0.0",
+    "ionic-gulp-sass-build": "1.0.0",
+    "ionic-gulp-scripts-copy": "2.0.0",
+    "jasmine-core": "2.4.1",
+    "karma": "0.13.22",
+    "karma-browserify": "5.0.5",
+    "karma-firefox-launcher": "1.0.0",
+    "karma-jasmine": "1.0.2",
+    "karma-phantomjs-launcher": "1.0.0",
+    "phantomjs": "2.1.7",
+    "phantomjs-prebuilt": "2.1.7",
     "run-sequence": "1.1.5",
-    "watchify": "^3.7.0"
+    "traceur": "0.0.110",
+    "tsify": "0.16.0",
+    "watchify": "3.7.0"
   },
   "name": "busdriveapp",
-  "description": "BusDriveApp: An Ionic project",
+  "description": "BusDriveApp",
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
-    "ionic-plugin-keyboard"
+    "cordova-plugin-geolocation",
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-appavailability",
+    {
+      "variables": {
+        "API_KEY_FOR_ANDROID": "AIzaSyBuoI32XuVQR3B5e1F1Or4TQ0LA4739oSQ",
+        "API_KEY_FOR_IOS": "AIzaSyAX9CCffrBMaBUJf0Utdh6vzkl3zPc72eI"
+      },
+      "locator": "https://github.com/phonegap-googlemaps-plugin/cordova-plugin-googlemaps",
+      "id": "cordova-plugin-googlemaps"
+    },
+    "de.appplant.cordova.plugin.local-notification",
+    "cordova-plugin-insomnia",
+    "cordova-plugin-background-mode",
+    "cordova-plugin-compat",
+    "ionic-plugin-keyboard",
+    "cordova-plugin-app-event",
+    "cordova-plugin-network-information"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    "ios"
+  ]
 }

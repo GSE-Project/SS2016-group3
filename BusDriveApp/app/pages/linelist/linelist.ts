@@ -1,72 +1,51 @@
-import {Page, NavController, NavParams} from 'ionic-angular';
+import {Page, NavController, NavParams, MenuController} from 'ionic-angular';
+import {Component} from '@angular/core';
 import {TabsPage} from '../tabs/tabs';
-import {Lists} from '../../Services/lists';
-import {language} from "../../languages/languages";
+import {BusDriveInterface} from '../../components/Services/busdriveinterface';
+import {TranslatePipe} from "ng2-translate/ng2-translate";
 
-/*
-  Created by ttmher
-  Edited by saskl and Charel92
-*/
-
-@Page({
+@Component({
     templateUrl: 'build/pages/linelist/linelist.html',
-    providers: [Lists]
+    pipes: [TranslatePipe]
 })
 
 export class LineListPage {
-    private nav;
-    private linelist;
+    private linesInfos = [];
     private selectedbus;
-    private serverURL;
-    
-    public title;
 
-    constructor(nav:NavController, navParams:NavParams, private lists:Lists) {
-        this.nav = nav;
+    constructor(private nav: NavController, navParams: NavParams, private busdriveinterface: BusDriveInterface) {
         this.selectedbus = navParams.get("selectedbus")
-        this.serverURL = navParams.get("URL")
-                
-        this.title = language.lineTitle;
+
+        this.getLinesInfos();
     }
 
     /**
-     * DE: Holt die Lineliste vom Server    
-     * EN: gets the linelist from the server
+     * gets id and name of the lines as a list of tuples
      */
-    getLinelist() {
-        this.lists.getLines(this.serverURL).subscribe(
-            data => {
-                this.linelist = data.json();
-            },
-            err => console.error('getLines fehlgeschlagen/ getLines failed'),
-            () => console.log('getLines abgeschlossen/ getLines completed')
-        );
-    }
-    
-    /**
-     * DE: Aktualisiert die Lineliste, sobald man wieder auf LineListPage kommt
-     * EN: updates the linelist as soon as you get back on LineListPage
-     */    
-    onPageWillEnter(){
-        this.getLinelist();
+    getLinesInfos() {
+        this.linesInfos = this.busdriveinterface.getLinesInfos();
     }
 
     /**
-     * DE: Übergibt die gewählten Linie, den gewählten Bus und die URL des Servers an TabsPage und wechselt die GUI auf DrivePage
-     * EN: passes the selected line, the selected bus and the url of the server to TabsPage and switches the GUI to DrivePage
-     * DE: Eingabeparameter: Element von der Lineliste
-     * EN: Input parameters: element of the linelist
-     */    
-    navigate(line) {
+     * passes the selected line, the selected bus and the url of the server to TabsPage and switches the GUI to DrivePage
+     * @param line element of the linelist
+     */
+    selectLine(line) {
         console.log("-> DrivePage");
-        for (var index = 0; index < this.linelist.length; index++) {
-            if (this.linelist[index] == line) {
+        for (var index = 0; index < this.linesInfos.length; index++) {
+            if (this.linesInfos[index] == line) {
                 this.nav.push(TabsPage, {
-                    selectedline: line,
+                    selectedline: line[0],
                     selectedbus: this.selectedbus,
-                    URL: this.serverURL
                 });
             }
         }
+    }
+
+    /**
+     * hides LineListPage ( solves the bug with native map )
+     */
+    ionViewDidLeave() {
+        document.getElementById('linelist').style.visibility = 'hidden';
     }
 }

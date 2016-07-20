@@ -1,9 +1,14 @@
 <ion-navbar primary *navbar>
-  <ion-title>
-     {{title}}
-  </ion-title>
+    <ion-buttons left>
+        <button  (click)="endTour()">
+      <ion-icon name="arrow-back" ></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-title>
+        {{"map.title"|translate}}
+    </ion-title>      
 </ion-navbar>
 
 <ion-content class="map">
-  <div id="map"></div>
+    <map></map>
 </ion-content>

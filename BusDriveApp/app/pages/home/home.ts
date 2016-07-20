@@ -1,71 +1,116 @@
-import {Page, Platform, NavController} from 'ionic-angular';
+import {Page, Platform, NavController, Alert, Popover} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {TranslatePipe, TranslateService} from "ng2-translate/ng2-translate";
+import {BusDriveInterface} from '../../components/Services/busdriveinterface';
 import {BusListPage} from '../buslist/buslist';
-import {language, de, en} from "../../languages/languages";
+import {PopoverPage} from '../home/popover/Popover'
 
-/*
-  Created by ttmher
-  Edited by saskl and pardypaddy and Charel92
-*/
-
-@Page({
+@Component({
     templateUrl: 'build/pages/home/home.html',
+    pipes: [TranslatePipe]
 })
-export class HomePage {
-    private platform;
-    private nav;
-    private os;
-    public buttontext;
-    public serverURL;
 
-    constructor(platform:Platform, nav:NavController) {
-        this.platform = platform;
-        this.nav = nav;
-        this.serverURL = "http://localhost:3000";
-        
+export class HomePage {
+    private os;
+    private recievedalldata = [false, false, false, false];
+    private recieveddata = false;
+
+    constructor(private platform: Platform, private nav: NavController, private busdriveinterface: BusDriveInterface, private translate: TranslateService) {
         this.getMobileOperatingSystem();
-        
-        this.buttontext = language.name;
-              
     }
 
     /**
-     * DE: Wechselt die GUI auf BusListPage und übergibt die URL des Servers
-     * EN: switches the GUI on BusListPage and passes the url of the server
+     * opens the popover
+     * @param ev event
      */
-    navigate() {   
-        console.log("-> BusListPage");
-        this.nav.push(BusListPage, {
-            URL: this.serverURL
+    presentPopover(ev) {
+        let popover = Popover.create(PopoverPage, {
+        });
+        this.nav.present(popover, {
+            ev: ev
         });
     }
-    
+
     /**
-     * DE: Ändert die GUI-Sprache
-     * EN: changes the gui-language 
+     * requests data from server via services component
      */
-    changeLanguage() {
-        if (language === en) language = de; else language = en;
-        this.buttontext = language.name;
-        console.log("-> ChangeLanguage");
+    requestData() {
+        this.busdriveinterface.clearLists();
+        this.busdriveinterface.getServerURL().then(() => {
+            this.busdriveinterface.requestBusses().then(() => {
+                this.recievedalldata[0] = true;
+            });
+            this.busdriveinterface.requestLines().then(() => {
+                this.recievedalldata[1] = true;
+            });;
+            this.busdriveinterface.requestStops().then(() => {
+                this.recievedalldata[2] = true;
+            });;
+            this.busdriveinterface.requestRoutes().then(() => {
+                this.recievedalldata[3] = true;
+            });;
+        })
     }
-    
+
     /**
-     * DE: Ermittelt den OS
-     * EN: detects the OS
+     * switches the GUI on BusListPage and passes the url of the server
+     */
+    navigate() {
+        for (let i = 0; i < this.recievedalldata.length; i++) {
+            if (this.recievedalldata[i]) {
+                this.recieveddata = true;
+            }
+            else {
+                this.recieveddata = false;
+            }
+        }
+        if (this.recieveddata) {
+            console.log("-> BusListPage");
+            this.nav.push(BusListPage, {
+            });
+        }
+        else {
+            let alert = Alert.create({
+                title: this.translate.instant("home.noDataTrans"),
+                enableBackdropDismiss: false,
+                buttons: [
+                    {
+                        text: 'OK',
+                        handler: () => {
+                            console.log('alert confirmed');
+                            this.requestData();
+                        }
+                    }]
+            });
+            this.nav.present(alert);
+        }
+    }
+
+    /**
+     * detects the OS
      */
     getMobileOperatingSystem() {
-        var userAgent = navigator.userAgent || navigator.vendor;
-        if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) || userAgent.match(/iPod/i)) {
-            this.os = 'ios';
+        if (this.platform.is('ios')) {
+            this.os = 'iOS';
         }
-        else if (userAgent.match(/Android/i)) {
+        else if (this.platform.is('android')) {
             this.os = 'Android';
         }
         else {
             this.os = 'unknown';
         }
-        console.log("os detected: ", this.os);
+        console.log("current OS: " + this.os);
     }
-   
+
+    ionViewLoaded(){
+        setTimeout(this.requestData.bind(this), 500);
+    }
+
+    ionViewDidEnter() {
+        this.recievedalldata = [false, false, false, false];
+        this.recieveddata = false;
+        this.requestData();
+    }
 }
+
 

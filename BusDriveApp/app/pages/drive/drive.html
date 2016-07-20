@@ -1,29 +1,154 @@
 <ion-navbar primary *navbar>
-    <ion-title>{{title}}</ion-title>
+    <ion-buttons left>
+        <button (click)="endTour()">
+      <ion-icon name="arrow-back" ></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-title>
+        {{"drive.title"|translate}}
+    </ion-title>
 </ion-navbar>
 
-<ion-content class="drive" padding>
-    <center>
-        <table>
-            <tr>
-               <td >
-                   <div class="buttonleft">
-                    <button large (click)="decrease()">
-                        <ion-icon name="remove"></ion-icon>
-                    </button>
-                    </div>
-                </td>
-                <td class="text">
-                    <h2>{{passengers}}<br> {{counter}}</h2>
-                </td>     
-                <td > 
-                    <div class="buttonright">
-                    <button large (click)="increase()">
-                        <ion-icon name="add"></ion-icon>
-                    </button>
-                    </div>
-                </td>
-             </tr>
-        </table>
-    </center>
+<ion-pane primary class="drive" id="drivepage">
+
+    <table width="100%">
+        <colgroup>
+            <col width="20%">
+            <col width="60%">
+            <col width="20%">
+        </colgroup>
+        <tr>
+            <td align="left">
+                <div class="buttonleft">
+                    <button large (click)="decreasePassengers()" class="button_drive">
+                                    <ion-icon name="remove"></ion-icon>
+                                </button>
+                </div>
+            </td>
+            <td class="text">
+                <p>{{"drive.passengers"|translate}}</p>
+                <h2>{{counter}} / {{totalbusseats}}</h2>
+            </td>
+            <td align="right">
+                <div class="buttonright">
+                    <button large (click)="increasePassengers()" class="button_drive">
+                                     <ion-icon name="add"></ion-icon>
+                                </button>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td align="left">
+                <div class="buttonleft">
+                    <button large (click)="showPrevioustStop()" class="button_drive">
+                            <ion-icon name="arrow-back"></ion-icon>
+                     </button>
+                </div>
+            </td>
+            <td class="text">
+                <p>{{"drive.nextStopTrans"|translate}}
+                    <h2>{{nextStop}}</h2>
+            </td>
+            <td align="right">
+                <div class="buttonright">
+                    <button large (click)="showNextStop()" class="button_drive">
+                                    <ion-icon name="arrow-forward"></ion-icon>
+                                </button>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="text">
+                <ion-toolbar>
+                    <ion-segment [(ngModel)]="drive">
+                        <ion-segment-button value="customstops">
+                            {{"drive.acceptedStopsTrans"|translate}}
+                        </ion-segment-button>
+                        <ion-segment-button value="newcustomstops" (click)="clearLocalNotifications()">
+                            <ion-badge secondary>{{newcustomstopscounter}}</ion-badge>
+                            {{"drive.newStopsTrans"|translate}}
+                        </ion-segment-button>
+                    </ion-segment>
+                </ion-toolbar>
+            </td>
+        </tr>
+    </table>
+
+
+
+</ion-pane>
+<ion-content class="stops">
+    <div [ngSwitch]="drive">
+        <form *ngSwitchWhen="'customstops'">
+
+            <ion-list>
+                <ion-item-sliding *ngFor="let item of acceptedcustomstops">
+                    <ion-item>
+                        <h2>Name: {{item[1]}}</h2>
+                        <p>{{"drive.time"|translate}}: {{item[2]}} </p>
+                        <p>{{"drive.numberTrans"|translate}}: {{item[3]}}</p>
+                        <p (click)="showAcceptedCustomStop(item)">{{"drive.addressTrans"|translate}}: {{item[4]}}</p>
+                        <p>
+                            <img src="img/wheelchair.png" *ngIf="item[5][0]" width="10%" height="auto">
+                            <img src="img/luggage.png" *ngIf="item[5][1]" width="10%" height="auto">
+                            <img src="img/crutch.png" *ngIf="item[5][2]" width="10%" height="auto">
+                            <img src="img/baby.png" *ngIf="item[5][3]" width="10%" height="auto">
+                            <img src="img/child.png" *ngIf="item[5][4]" width="10%" height="auto">
+                        </p>
+                        <ion-thumbnail item-right>
+                            <ion-icon red name="close-circle" style="font-size:50px" *ngIf="item[7] === 6" (click)="deleteCanceledCustomStop(item)"></ion-icon>
+                            <ion-icon name="checkmark-circle" style="font-size:50px" *ngIf="item[7] === 2"></ion-icon>
+                        </ion-thumbnail>
+                    </ion-item>
+                    <ion-item-options side="right">
+                        <button primary (click)="completeAcceptedCustomStop(item)">
+                            <ion-icon name="done-all"></ion-icon>
+                               <br>  {{"drive.done"|translate}}
+                        </button>
+                    </ion-item-options>
+                    <ion-item-options side="left">
+                        <button primary (click)="noShowAcceptedCustomStop(item)">
+                            <ion-icon name="sad"></ion-icon>
+                                <br> {{"drive.noAppearance"|translate}}
+                        </button>
+                    </ion-item-options>
+                </ion-item-sliding>
+            </ion-list>
+
+        </form>
+
+        <ion-list *ngSwitchWhen="'newcustomstops'">
+            <ion-item-sliding *ngFor="let item of linecustomstopsall">
+                <ion-item>
+                    <h2>Name: {{item[1]}}</h2>
+                    <p>{{"drive.time"|translate}}: {{item[2]}} </p>
+                    <p>{{"drive.numberTrans"|translate}}: {{item[3]}}</p>
+                    <p (click)="showCustomStop(item)">{{"drive.addressTrans"|translate}}: {{item[4]}}</p>
+                    <p>
+                        <img src="img/wheelchair.png" *ngIf="item[5][0]" width="10%" height="auto">
+                        <img src="img/luggage.png" *ngIf="item[5][1]" width="10%" height="auto">
+                        <img src="img/crutch.png" *ngIf="item[5][2]" width="10%" height="auto">
+                        <img src="img/baby.png" *ngIf="item[5][3]" width="10%" height="auto">
+                        <img src="img/child.png" *ngIf="item[5][4]" width="10%" height="auto">
+                    </p>
+                    <ion-thumbnail item-right>
+                        <ion-icon red name="close-circle" style="font-size:50px" *ngIf="item[7] === 6" (click)="deleteCanceledCustomStop(item)"></ion-icon>
+                        <ion-icon name="checkmark-circle" style="font-size:50px" *ngIf="item[7] === 2"></ion-icon>
+                    </ion-thumbnail>
+                </ion-item>
+                <ion-item-options side="right">
+                    <button primary (click)="acceptCustomStop(item)">
+                            <ion-icon name="checkmark"></ion-icon>
+                                 <br> {{"drive.accept"|translate}}
+                        </button>
+                </ion-item-options>
+                <ion-item-options side="left">
+                    <button primary (click)="declineCustomStop(item)">
+                            <ion-icon name="close"></ion-icon>
+                               <br>  {{"drive.decline"|translate}}
+                        </button>
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-list>
+    </div>
 </ion-content>

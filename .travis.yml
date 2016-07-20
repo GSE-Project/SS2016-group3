@@ -3,10 +3,6 @@ node_js: 4
 env:
  global:
   - CXX=g++-4.8
- matrix:
-  - JOB=unit
-  - JOB=lint
-  - JOB=build-web
 addons:
  apt:
   sources:
@@ -31,8 +27,4 @@ install:
 script: 
  - gulp test
 after_script:
- - cat ./test/reports/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-#after_success:
-# - coveralls
-#deploy:
-# skip_cleanup: true
+ - cat ./coverage/lcov.info | BusDriveApp/node_modules/coveralls/bin/coveralls.js

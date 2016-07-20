@@ -1,23 +1,40 @@
-import {Page, NavParams, Platform} from 'ionic-angular';
-import {language} from "../../languages/languages";
-import {Lists} from '../../Services/lists';
+import {Page, NavParams, Platform, Events} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {BusDriveInterface} from '../../components/Services/busdriveinterface';
+import {TranslatePipe} from "ng2-translate/ng2-translate";
 
-/*
-  Created by ttmher
-  Edited by saskl
-*/
-
-@Page({
+@Component({
   templateUrl: 'build/pages/stops/stops.html',
-  providers: [Lists]
+  pipes: [TranslatePipe]
 })
 
 export class StopsPage {
-  private LineStops = [];
-  public title;
-  
-  constructor(navParams: NavParams, private lists:Lists, platform : Platform) {
-    this.LineStops = navParams.data[0];
-    this.title=language.stopTitle;
-  } 
+  private linestopsinfos = [];
+  private backbuttoncounter: number = 0;
+
+  constructor(navParams: NavParams, private busdriveinterface: BusDriveInterface, private platform: Platform, public events: Events) {
+    this.getLineStopsInfos();
+
+    this.platform.registerBackButtonAction(this.endTour.bind(this));
+    this.events.subscribe("endTourAborted", () => {
+      this.backbuttoncounter = 0;
+    });
+  }
+
+  /**
+   * gets the names and the schedules of linestops
+   */
+  getLineStopsInfos() {
+    this.linestopsinfos = this.busdriveinterface.getLineStopsInfos();
+  }
+
+  /**
+   * ends the tour if confirmed
+   */
+  endTour() {
+    if (this.backbuttoncounter === 0) {
+      this.events.publish("EndTour");
+    }
+    this.backbuttoncounter = 1;
+  }
 }

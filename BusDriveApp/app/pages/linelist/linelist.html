@@ -1,17 +1,17 @@
 <ion-navbar primary *navbar>
     <ion-title>
-        {{title}}
+        {{"linelist.title"|translate}}
     </ion-title>
 </ion-navbar>
 
-<ion-content class="linelist">
+<ion-content class="linelist" id="linelist">
     <ion-list>
-        <ion-item ion-item *ngFor="#item of linelist" (click)="navigate(item)"> 
+        <ion-item *ngFor="let item of linesInfos" (click)="selectLine(item)">
             <ion-thumbnail item-left>
-                <ion-icon name="git-compare" style="font-size:90px" ></ion-icon>
+                <ion-icon name="git-compare" style="font-size:90px"></ion-icon>
             </ion-thumbnail>
-            <h2>{{Line}} {{item.id.toString()}}</h2>
-            <p>{{item.name.toString()}}</p>           
+            <h2>{{"linelist.lineName"|translate}} {{item[0]}}</h2>
+            <p>{{item[1]}}</p>
         </ion-item>
     </ion-list>
 </ion-content>

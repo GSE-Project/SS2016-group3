@@ -1,15 +1,18 @@
-<ion-content class="home" padding>
-    <div class="spacer" style="width: 283px; height: 75px;"></div>
-    <div>
-        <img src="img/dd.png" width="80%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
-    </div>
-    <div class="spacer" style="width: 283px; height: 100px;"></div>
-    <button large class="button button-block" (click)="navigate()">Start App</button>
-    <div class="spacer" style="width: 283px; height: 50px;"></div>
-    <button class="languageButton" (click)="changeLanguage()"> {{buttontext}} </button>
-    <ion-item>
-        <ion-label>Server IP: </ion-label>
-        <ion-input [(ngModel)]="serverURL" type="url" id="serverURL" placeholder="http://localhost:3000">http</ion-input>
-    </ion-item>
-</ion-content>
+<ion-navbar primary *navbar>
+  <ion-title>Tour</ion-title>
+  <ion-buttons end>
+    <button (click)="presentPopover($event)">
+        <ion-icon name="more"></ion-icon>
+      </button>
+  </ion-buttons>
+</ion-navbar>
 
+<ion-content class="home" padding>
+  <div class="spacer" style="width: 283px; height: 75px;"></div>
+  <div>
+    <img src="img/dd.png" width="80%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+  </div>
+  <div class="spacer" style="width: 283px; height: 100px;"></div>
+  <button large class="button button-block" (click)="navigate()">{{"home.beginTour" | translate}}</button>
+  <div class="spacer" style="width: 283px; height: 50px;"></div>
+</ion-content>
