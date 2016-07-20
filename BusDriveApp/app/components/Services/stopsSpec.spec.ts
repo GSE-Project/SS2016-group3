@@ -30,16 +30,19 @@ let testData = {"stops": {
         },
         "schedule": [
           {
+            "lineName": "Line Two",
             "lineId": 2,
-            "time": "12:00"
+            "arrivingTime": "12:00:00"
           },
           {
+            "lineName": "Line Two",
             "lineId": 2,
-            "time": "13:00"
+            "arrivingTime": "13:00:00"
           },
           {
+            "lineName": "Line Two",
             "lineId": 2,
-            "time": "9:00"
+            "arrivingTime": "9:00:00"
           }
         ]
       },
@@ -60,16 +63,19 @@ let testData = {"stops": {
         },
         "schedule": [
           {
+            "lineName": "Line Two",
             "lineId": 2,
-            "time": "12:00"
+            "arrivingTime": "12:00:00"
           },
           {
+            "lineName": "Line Two",
             "lineId": 2,
-            "time": "13:00"
+            "arrivingTime": "13:00:00"
           },
           {
+            "lineName": "Line Two",
             "lineId": 2,
-            "time": "9:00"
+            "arrivingTime": "9:00:00"
           }
         ]
       },
@@ -90,16 +96,19 @@ let testData = {"stops": {
         },
         "schedule": [
           {
+            "lineName": "Line Two",
             "lineId": 2,
-            "time": "12:00"
+            "arrivingTime": "12:00:00"
           },
           {
+            "lineName": "Line Two",
             "lineId": 2,
-            "time": "13:00"
+            "arrivingTime": "13:00:00"
           },
           {
+            "lineName": "Line Two",
             "lineId": 2,
-            "time": "9:00"
+            "arrivingTime": "9:00:00"
           }
         ]
       },
@@ -120,16 +129,19 @@ let testData = {"stops": {
         },
         "schedule": [
           {
+            "lineName": "Line Two",
             "lineId": 2,
-            "time": "12:00"
+            "arrivingTime": "12:00:00"
           },
           {
+            "lineName": "Line Two",
             "lineId": 2,
-            "time": "13:00"
+            "arrivingTime": "13:00:00"
           },
           {
+            "lineName": "Line Two",
             "lineId": 2,
-            "time": "9:00"
+            "arrivingTime": "9:00:00"
           }
         ]
       }
@@ -170,37 +182,50 @@ let mockbackend: MockBackend, stopsMock: Stops;
      * tests if requestStops() returns testData 
      */
     it('should be requested', function(){
-
-        expect(stopsMock.getStops).not.toBe([]);        
+        stopsMock.requestStops("");
+        expect(stopsMock.getStops()).toEqual(           
+          Object({ 
+            stops: [ Object({ id: 5, name: 'Uni West', lines: [ Object({ id: '2' }) ], 
+            location: Object({ type: 'Point', coordinates: [ 7.749317, 49.424822 ] }), 
+            schedule: [ Object({ lineName: 'Line Two', lineId: 2, arrivingTime: '12:00:00' }), Object({ lineName: 'Line Two', lineId: 2, arrivingTime: '13:00:00' }), Object({ lineName: 'Line Two', lineId: 2, arrivingTime: '9:00:00' }) ] }), Object({ id: 6, name: 'Uni Süd', lines: [ Object({ id: '2' }) ],
+            location: Object({ type: 'Point', coordinates: [ 7.750694, 49.423046 ] }), 
+            schedule: [ Object({ lineName: 'Line Two', lineId: 2, arrivingTime: '12:00:00'}), Object({ lineName: 'Line Two', lineId: 2, arrivingTime: '13:00:00' }), Object({ lineName: 'Line Two', lineId: 2, arrivingTime: '9:00:00' }) ] }), Object({ id: 7, name: 'Uni Ost', lines: [ Object({ id: '2' }) ], 
+            location: Object({ type: 'Point', coordinates: [ 7.754991, 49.423989 ] }), 
+            schedule: [ Object({ lineName: 'Line Two', lineId: 2, arrivingTime: '12:00:00' }), Object({ lineName: 'Line Two', lineId: 2, arrivingTime: '13:00:00' }), Object({ lineName: 'Line Two', lineId: 2, arrivingTime: '9:00:00' }) ] }), Object({ id: 8, name: 'Uni Sporthalle', lines: [ Object({ id: '2' }) ], 
+          location: Object({ type: 'Point', coordinates: [ 7.750936, 49.425893 ] }), 
+          schedule: [ Object({ lineName: 'Line Two', lineId: 2, arrivingTime: '12:00:00' }), Object({ lineName: 'Line Two', lineId: 2, arrivingTime: '13:00:00' }), Object({ lineName: 'Line Two', lineId: 2, arrivingTime: '9:00:00' }) ] }) ], 
+          timestamp: 2 })          
+        );        
     });
 
     /**
      * tests if getLineStop() does not return an empty list
      */
-    it('should not return an empty stops list', function(){
-
-        expect(stopsMock.getLineStops(1)).not.toBe([]);        
+    it('should the right stops list', function(){
+        stopsMock.requestStops("");
+        expect(stopsMock.getLineStops('2')).toEqual([]);        
     });
 
     /**
      * tests if getLineStopsNames() does not return an empty list
      */
-    it('should not return an empty list of the names of stops', function(){
-       
-        expect(stopsMock.getLineStopsNames()).not.toBe([]);        
+    it('should return the right list of the names of stops', function(){
+        stopsMock.requestStops("");
+        expect(stopsMock.getLineStopsNames()).toEqual([]);        
     });
 
     /**
      * tests if getLineStopsNames() does not return an empty list
      */
-    it('should not return an empty list of the coordinates of stops', function(){
-       
-        expect(stopsMock.getLineStopsCoordinates()).not.toBe([]);       
+    it('should return the right list of the coordinates of stops', function(){
+        stopsMock.requestStops("");
+        expect(stopsMock.getLineStopsCoordinates()).toEqual([]);       
     });
 
 
     it('should return the right line stop infos', function(){
-         //TBD
+         stopsMock.requestStops("");
+         expect(stopsMock.getLineStopsInfos()).toEqual([])
     });
     
 });
