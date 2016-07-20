@@ -60,13 +60,27 @@ let mockbackend: MockBackend, linesMock: Lines;
        
         linesMock.requestLines("");
         console.log(linesMock.getLines());
-        expect(linesMock.getLines()).not.toEqual([]); 
+        expect(linesMock.getLines()).toEqual(
+          [ Object({ id: 1, name: 'Pirmasens', routeRef: 1, busses: [ 1 ] }), 
+          Object({ id: 2, name: 'Uni', routeRef: 2, busses: [ 2 ] }) ]
+        ); 
 
     })
  
 
    it('should return the right Line Infos', function(){
-       // TBD
+       linesMock.requestLines("");
+       expect(linesMock.getLines()).toEqual(
+         [ Object({ id: 1, name: 'Pirmasens', routeRef: 1, busses: [ 1 ] }), 
+         Object({ id: 2, name: 'Uni', routeRef: 2, busses: [ 2 ] }) ]
+       );
     })
+
+    it('should return the right id and name of the lines as a list of tuples', function(){
+        linesMock.requestLines("");
+        expect(linesMock.getLinesInfos()).toEqual(
+          [ [ 1, 'Pirmasens' ], [ 2, 'Uni' ] ]
+        );
+    });
 })
 

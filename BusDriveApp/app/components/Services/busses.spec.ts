@@ -16,14 +16,18 @@ describe("the process of getting available Bus entries from the Server",function
       let response =   {busses:  [{
         id: 1,
         numberPlate: "KL-AB345",
+        lineID: 1,//ZAHL
         color: "green",
-        picture: "http://www.tm4.com/wp-content/uploads/2014/08/Foton-bus-12-m-e1407525133477.png"
+        picture: "http://www.tm4.com/wp-content/uploads/2014/08/Foton-bus-12-m-e1407525133477.png",
+        totalSeats: 7
          },
         {
         id: 2,
         numberPlate: "KL-CD678",
+        lineID: 2,
         color: "red",
-        picture: "http://littlebabybum.com/wp-content/uploads/2015/01/wheels-on-the-bus-red.png"
+        picture: "http://littlebabybum.com/wp-content/uploads/2015/01/wheels-on-the-bus-red.png",
+        totalSeats: 9
       }]};
     
    let mockbackend: MockBackend, bussesMock: Busses;
@@ -57,17 +61,25 @@ describe("the process of getting available Bus entries from the Server",function
  
   //specs
 	it('should load Bus entries',  () => {
-   
-		expect(bussesMock.getBusses()).not.toEqual([]);
+    bussesMock.requestBusses("");
+		expect(bussesMock.getBusses()).toEqual(
+      [ Object({ id: 1, numberPlate: 'KL-AB345', lineID: 1, color: 'green', picture: 'http://www.tm4.com/wp-content/uploads/2014/08/Foton-bus-12-m-e1407525133477.png', totalSeats: 7 }), 
+      Object({ id: 2, numberPlate: 'KL-CD678', lineID: 2, color: 'red', picture: 'http://littlebabybum.com/wp-content/uploads/2015/01/wheels-on-the-bus-red.png', totalSeats: 9 }) ]
+    );
 	});
 
 
   it ('should return the right seats number' , () => {
-    //TBD
+    bussesMock.requestBusses("");
+    expect(bussesMock.getBusSeatsNumber(1)).toEqual(7);
+    expect(bussesMock.getBusSeatsNumber(2)).toEqual(9);
   });
 
   it ('should return the right Busses Info' , () => {
-    //TBD
+    bussesMock.requestBusses("");
+    expect(bussesMock.getBussesInfos()).toEqual(
+      [ [ 1, 'KL-AB345', 7 ], [ 2, 'KL-CD678', 9 ] ]
+    );
   });
 
   
