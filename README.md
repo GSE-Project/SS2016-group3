@@ -20,7 +20,7 @@ The application is written in [TypeScript](https://github.com/Microsoft/TypeScri
 
 
 Requirements documentation:
-- [Bürgerbus Concept](/Doc/Requirements/B%C3%BCrgerbus%20Concept%20Document.pdf)
+- [Bürgerbus Concept](Doc/Requirements/Bürgerbus Concept Document.pdf)
 - [Tracebility Matrix](/Doc/Requirements/tracebility%20matrix.pdf)
 
 Design documentation: 
