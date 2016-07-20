@@ -11,7 +11,7 @@ import {provide} from '@angular/core';
 
 describe('Stops', function(){
     
-let testData = {"stops": {
+let testData = {
     stops: [
       {
         "id": 5,
@@ -147,7 +147,7 @@ let testData = {"stops": {
       }
     ],
     "timestamp": 2
-  }};
+  };
 
 let mockbackend: MockBackend, stopsMock: Stops;
     console.log("lines setup");
@@ -183,8 +183,8 @@ let mockbackend: MockBackend, stopsMock: Stops;
      */
     it('should be requested', function(){
         stopsMock.requestStops("");
-        expect(stopsMock.getStops()).toEqual(           
-          Object({ 
+        expect(stopsMock.getStops()).toEqual(  
+         Object({ 
             stops: [ Object({ id: 5, name: 'Uni West', lines: [ Object({ id: '2' }) ], 
             location: Object({ type: 'Point', coordinates: [ 7.749317, 49.424822 ] }), 
             schedule: [ Object({ lineName: 'Line Two', lineId: 2, arrivingTime: '12:00:00' }), Object({ lineName: 'Line Two', lineId: 2, arrivingTime: '13:00:00' }), Object({ lineName: 'Line Two', lineId: 2, arrivingTime: '9:00:00' }) ] }), Object({ id: 6, name: 'Uni Süd', lines: [ Object({ id: '2' }) ],
