@@ -20,7 +20,7 @@ The application is written in [TypeScript](https://github.com/Microsoft/TypeScri
 
 
 Requirements documentation:
-- [Bürgerbus Concept](/Doc/Requirements/B%C3%BCrgerbus%20Concept%20Document.pdf)
+- [Bürgerbus Concept](Doc/Requirements/Bürgerbus Concept Document.pdf)
 - [Tracebility Matrix](/Doc/Requirements/tracebility%20matrix.pdf)
 
 Design documentation: 
@@ -30,6 +30,8 @@ Design documentation:
 Quality Assurance:
 - [Sytem test cases Iteration 1](Doc/Quality%20Assurance/System%20test%20cases%20It1%20[RESULTS]%20.pdf)
 - [Sytem test cases Iteration 2](Doc/Quality%20Assurance/System%20test%20cases%20It2%20[RESULTS]%20.pdf)
+- [Sytem test cases Iteration 3](/Doc/Quality Assurance/System test cases It3.pdf)
+- [Sytem test cases Iteration 4(Final version)](Doc/Quality Assurance/FINAL System test Cases.pdf)
 
 How to build the application
 ---------------------------------------
