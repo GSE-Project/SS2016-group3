@@ -173,6 +173,8 @@ let mockbackend: MockBackend, stopsMock: Stops;
     });
 
     stopsMock.requestStops("");
+    console.log(stopsMock.getStops());
+
   }));
 
   
@@ -182,7 +184,7 @@ let mockbackend: MockBackend, stopsMock: Stops;
      * tests if requestStops() returns testData 
      */
     it('should be requested', function(){
-        stopsMock.requestStops("");
+       
         expect(stopsMock.getStops()).toEqual(  
          Object({ 
             stops: [ Object({ id: 5, name: 'Uni West', lines: [ Object({ id: '2' }) ], 
@@ -201,31 +203,31 @@ let mockbackend: MockBackend, stopsMock: Stops;
     /**
      * tests if getLineStop() does not return an empty list
      */
-    it('should the right stops list', function(){
-        stopsMock.requestStops("");
-        expect(stopsMock.getLineStops('2')).toEqual([]);        
+    it('should return the right stops list', function(){
+       console.log(stopsMock.getLineStops('2'));
+        expect(stopsMock.getLineStops('2')).not.toEqual([]);        
     });
 
     /**
      * tests if getLineStopsNames() does not return an empty list
      */
     it('should return the right list of the names of stops', function(){
-        stopsMock.requestStops("");
-        expect(stopsMock.getLineStopsNames()).toEqual([]);        
+        console.log(stopsMock.getLineStopsNames());
+        expect(stopsMock.getLineStopsNames()).not.toEqual([]);        
     });
 
     /**
      * tests if getLineStopsNames() does not return an empty list
      */
     it('should return the right list of the coordinates of stops', function(){
-        stopsMock.requestStops("");
-        expect(stopsMock.getLineStopsCoordinates()).toEqual([]);       
+        console.log(stopsMock.getLineStopsCoordinates());
+        expect(stopsMock.getLineStopsCoordinates()).not.toEqual([]);       
     });
 
 
     it('should return the right line stop infos', function(){
-         stopsMock.requestStops("");
-         expect(stopsMock.getLineStopsInfos()).toEqual([])
+         console.log(stopsMock.getLineStopsInfos());
+         expect(stopsMock.getLineStopsInfos()).not.toEqual([])
     });
     
 });
