@@ -173,7 +173,6 @@ let mockbackend: MockBackend, stopsMock: Stops;
     });
 
     stopsMock.requestStops("");
-    console.log(stopsMock.getStops());
 
   }));
 
@@ -227,7 +226,7 @@ let mockbackend: MockBackend, stopsMock: Stops;
 
     it('should return the right line stop infos', function(){
          console.log(stopsMock.getLineStopsInfos());
-         expect(stopsMock.getLineStopsInfos()).not.toEqual([])
+         expect(stopsMock.getLineStopsInfos()).not.toEqual([]);
     });
     
 });
