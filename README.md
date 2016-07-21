@@ -5,8 +5,9 @@
 
 # UNIT TEST BRANCH
 
-To execute Unit Tests, run `gulp test`. Make sure that you are on Node 6.x (you can switch versions using nvm or nvmw)
+**DON'T MERGE INTO DEVELOP OR MASTER, UNLESS YOU ARE SURE IT OPERATES PROPERLY**
 
+To execute the Unit Tests, run `gulp test`. Make sure that you are on Node 6.x (you can switch versions using nvm or nvmw) and to `npm install` after nvm installation.
 
 The application is written in [TypeScript](https://github.com/Microsoft/TypeScript) and utilizes the beta version of the cross-platform development framework [Ionic](https://github.com/driftyco/ionic/tree/2.0).
 
