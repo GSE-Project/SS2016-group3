@@ -1,10 +1,9 @@
 BusDriveApp/.idea/
 BusDriveApp/.vscode/
+BusDriveApp/build
+BusDriveApp/coverage
 TestServer-Json/TestServer.json
 .idea/modules.xml
 .idea/SS2016-group3.iml
 .idea/vcs.xml
 .idea/workspace.xml
-BusDriveApp/app/components/Services/testService.ts
-
-BusDriveApp/test/ServiceTests/testSpec.ts

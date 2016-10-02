@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, ViewController, Platform} from 'ionic-angular';
 import {LocalNotifications} from 'ionic-native';
-import {TranslatePipe} from "ng2-translate/ng2-translate";
+import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {SettingPage} from '../../../components/setting/setting';
 import {AboutPage} from '../../../components/about/about'
 

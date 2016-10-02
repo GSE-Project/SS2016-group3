@@ -4,7 +4,7 @@
   stops specs
 */
 
-import {Stops} from '../../app/components/Services/stops';
+import {Stops} from './stops';
 import {Http, ResponseOptions, Response} from '@angular/http';
 import {Observable} from 'rxjs/RX';
 

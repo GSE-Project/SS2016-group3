@@ -1,5 +1,5 @@
 
-import {Lines} from '../../app/components/Services/lines';
+import {Lines} from './lines';
 import {Http, Response, ResponseOptions, Headers} from '@angular/http';
 import {Observable} from 'rxjs/RX';
 
@@ -36,12 +36,11 @@ describe("the process of getting available line entries from the server",functio
         }
      };
 
-    it('should load Line entries', function(done){
+    it('should load Line entries', function(){
         let linesMock:Lines = new Lines(http);  //	TypeError: undefined is not a constructor
         linesMock.requestLines("");
         expect(linesMock.getLines()).not.toEqual([]);
 
     })
-
 
 })

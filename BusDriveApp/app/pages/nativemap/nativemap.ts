@@ -3,7 +3,7 @@ import {Component, ViewChild} from  '@angular/core';
 import {GoogleMapsLatLng} from 'ionic-native';
 import {NativeMap} from '../../components/nativemap/nativemap';
 import {BusDriveInterface} from '../../components/Services/busdriveinterface';
-import {TranslatePipe} from "ng2-translate/ng2-translate";
+import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 @Component({
     templateUrl: 'build/pages/nativemap/nativemap.html',
